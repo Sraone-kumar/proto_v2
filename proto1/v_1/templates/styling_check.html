@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+
+{% endblock style %}
+
+{% block content %}
+
+
+
+<div class = "container" >
+    <h2>department</h2>
+
+    
+
+    <div class="select-box" >
+        
+        <div class="options-container department">
+            
+        </div>
+        <div class = "selected" id = "department">
+            <input type="hidden" value="">
+            select department
+        </div>
+
+    </div>
+
+    <h2>branch</h2>
+    <div class="select-box" >
+        
+        <div class="options-container branch">
+            
+        </div>
+        <div class = "selected" id = "branch">
+            <input type="hidden" value="">
+            select branch
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+{% endblock content %}
+
+
+{% block javascript %}
+
+<script>
+const department = document.querySelector("#department");
+const branch = document.querySelector("#branch");
+
+const optionsContainer = document.querySelector(".options-container");
+const branch_container = document.querySelector(".branch");
+var loaded = false;
+var loaded_branch = false;
+
+department.addEventListener("click",()=>{
+    var options;
+    if(!loaded){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action:"scroll_list"},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.department').append(
+                        `<div class= "option">
+                        <input type="radio" class="radio" value="${e.department_id}" name="category">
+                        <label for="${e.department_id}">${e.department_name}</label>
+                        </div>
+                        `
+                    )
+                    
+                })
+
+                loaded = true;
+                options = document.querySelectorAll(".option")
+                options.forEach(o=>{
+                    o.addEventListener("click",()=>{
+                        department.innerHTML = o.querySelector('label').innerHTML;
+                        console.log(o.querySelector('input').value)
+                        $('.selected').append(
+                            `<input type="hidden" value = "${o.querySelector('input').value}" >`
+                        )
+
+                        //console.log($('.selected').children('input').values)
+                        optionsContainer.classList.remove("active");
+                    })
+                })
+                
+            }
+
+        })
+    }
+    optionsContainer.classList.toggle("active")
+    
+
+
+})
+
+branch.addEventListener("click",()=>{
+    var options;
+    if(!loaded_branch){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action:'scroll_list_branch'},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.branch').append(
+                        `<div class= "option">
+                        <input type="radio" class="radio" value="${e.branch_id}" name="category">
+                        <label for="${e.branch_id}">${e.branch_name}</label>
+                        </div>
+                        `
+                    )
+                    
+                })
+
+                loaded_branch = true;
+                options = document.querySelectorAll(".branch .option")
+                options.forEach(o=>{
+                    o.addEventListener("click",()=>{
+                        branch.innerHTML = o.querySelector('label').innerHTML;
+                        console.log(o.querySelector('input').value)
+                        $('.selected').append(
+                            `<input type="hidden" value = "${o.querySelector('input').value}" >`
+                        )
+
+                        //console.log($('.selected').children('input').values)
+                        branch_container.classList.remove("active");
+                    })
+                })
+                
+            }
+
+        })
+    }
+    branch_container.classList.toggle("active")
+})
+
+</script>
+   
+<script>
+
+
+</script>
+{% load static %}
+<script src="{% static 'v_1/some.js' %}"></script>
+
+{% endblock javascript %}
+
+

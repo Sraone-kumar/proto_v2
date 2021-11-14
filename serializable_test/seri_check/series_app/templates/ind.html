@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<input type="text" id = "department_id" placeholder="enter id">
+
+<div id="display"></div>
+
+{% endblock content %}
+
+{% block javascript %}
+<script>
+
+
+$('#department_id').change(function(){
+    $.ajax({
+        type: 'GET',
+        url: "{% url 'department_view' %}",
+        data: {id:$(this).val()},
+        success: function(response){
+            response.forEach(function(e){
+                $('#display').append(
+                    `<span>${e['id']}<span>
+                     <span>${e['department_name']}<span>
+                     <span>${e['designation']['designation_name']}<span>
+                    `
+                )
+            })
+        }
+    })
+})
+
+</script>
+
+
+
+{% endblock javascript %}
+
+

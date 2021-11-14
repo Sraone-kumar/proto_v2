@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class = "input">
+<input type="text" id = "branch" name = "branch" placeholder = "Enter branch">
+<input type="text" id = "semester" name = "semester" placeholder= "Enter semester">
+<input type="text" id = "room" name = "room" placeholder = "Enter Room">
+<select id = "scroll">
+<option>select department</option>
+</select>
+<button id="click">Generate</button>
+</div>
+
+
+
+
+<div class = "row">
+<div class = "column"> <table class= 'table'>
+        <thead>
+            <tr>
+                <th></th>
+                <th>9:30 - 10:30</th>
+                <th>10:30 - 11:20</th>
+                <th>11:20-12:10</th>
+                <th>12:10-1:00</th>
+                <th>lunch break</th>
+                <th>2:00-2:50</th>
+                <th>2:50-3:40</th>
+                <th>3:40-4:30</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Monday</th>
+                <td id="td2" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Tuesday</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Wednesday</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Thursday</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Friday</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Saturday</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+
+
+</table></div>
+<div class = "column">
+<table class= 'table' id = "fac_table">
+        <thead>
+            <tr>
+                <th>Faculty Id</th>
+                <th>Faculty Name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% comment %} <tr>
+                <td id="td1" ondrop="drop(event)" ondragover="allowDrop(event)" ><p draggable="true" ondragstart="drag(event)" id = "drag1"></p> </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr> {% endcomment %}
+
+        </tbody>
+</table></div>
+</div>
+
+<table class = 'table' id="sub_table">
+    <thead>
+        <tr>
+            <td>Subject code</td>
+            <td>Subject name</td>
+            <td>Subject Credits</td>
+            <td>Elective type</td>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div id = "test"></div>
+
+
+{% endblock content %}
+
+
+{% block javascript %}
+    <script>
+
+    function allowDrop(ev){
+        ev.preventDefault();
+    }
+
+    function drag(ev){
+        ev.dataTransfer.setData("text",ev.target.id);
+    }
+
+    function drop(ev){
+        event.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+    </script>
+
+    <script>
+
+
+    $("#scroll").click(function(){
+        //alert("hello");
+        $(this).off('click');
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: { action : "scroll_list" },
+
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('#scroll').append(
+                        `<option value = "${e.department_id}">${e.department_name}</option>`
+                    )
+                })
+            }
+        })
+
+    })
+    
+    $('#click').click(function()
+    {   
+        $('#fac_table tbody').empty()
+        $('#sub_table tbody').empty()
+        //alert("working")
+        //var branch_val = $("#branch").val();
+        //var semester = $("#semester").val();
+        //var room = $("#room").val();
+        //console.log(branch_val);
+        //console.log(semester);
+        //console.log(room);
+
+        var department = $('#scroll').val();
+        console.log(department)
+
+        $.ajax({
+
+
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+
+            data: {
+                action : "faculty_and_subject",
+                department_id : department
+            },
+
+            success: function(data){
+                data.faculty.forEach(function(e){
+                    $('#fac_table tbody').prepend(
+                        `<tr>
+                        <td>${e.faculty_id}</td>
+                        <td>${e.faculty_name}</td>
+                        </tr>`
+                    )
+                })
+
+                data.subjects.forEach(function(e){
+                    $("#sub_table tbody").prepend(
+                        `<tr>
+                        <td>${e.subject_code}</td>
+                        <td>${e.subject_name}</td>
+                        <td>${e.subject_credits}</td>
+                        <td>${e.Elective_type}</td>
+                        </tr>`
+                    )
+                })
+            }
+
+        })
+    })
+
+
+    </script>
+
+{% endblock javascript %}

@@ -1,0 +1,117 @@
+* {
+    margin:0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Roboto",sans-serif;
+    background: #f7f6ff;
+}
+
+h2{
+    margin: 16px;
+}
+.container{
+    margin-top: 10px;
+    padding: 32px;
+}
+
+.select-box{
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+}
+
+.select-box .options-container{
+    /* background: #2f3640; */
+    background: #b5e7ff;
+    /* color: #f5f6fa; */
+    color:rgb(36, 43, 61);
+    width: 100%;
+    max-height: 0;
+    transition: all 0.4s;
+    opacity: 0;
+    border-radius: 8px;
+    overflow: hidden;
+
+    order: 1;
+}
+
+
+.select-box .option, .selected{
+    padding: 12px 24px;
+    cursor: pointer;
+}
+
+.select-box .option:hover{
+    /* background: #414b57; */
+    background: rgb(46, 167, 197);
+    color: white;
+
+}
+
+.select-box label{
+    cursor: pointer;
+}
+
+
+.select-box .option .radio{
+    display: none;
+}
+
+.select-box .options-container.active{
+    max-height: 240px;
+    opacity: 1;
+    overflow-y: scroll;
+}
+
+.select-box .options-container::-webkit-scrollbar{
+    width: 8px;
+    background: #a7bad8;
+    border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb{
+    /* background: #525861; */
+    background: rgb(46, 167, 197);
+    border-radius: 0 8px 8px 0;
+
+}
+
+
+.selected{
+    /* background: #2f3640; */
+    background: rgb(46, 167, 197);
+    border-radius: 20px;
+    margin-bottom: 5px;
+    color: #f5f6fa;
+    position: relative;
+    order: 0;
+}
+
+.selected::after{
+    content: " ";
+    background: url("https://dealerimages.dealereprocess.com/image/upload/v1575488119/1/ferrari/preview.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 100%;
+    width: 18px;
+    right: 15px;
+    top: 17px;
+
+    fill: white;
+
+    transition: all 0.4s;
+}
+
+.select-box .options-container.active + .selected::after{
+    transform: rotateX(180deg);
+    top: -17px;
+    width: 18px;
+
+}
+
+
+
+

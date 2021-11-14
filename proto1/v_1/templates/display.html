@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<select name="department" id="department">
+<option value="">select department</option>
+</select>
+
+<select name="faculty" id="faculty">
+<option value="">select faculty</option>
+</select>
+
+<button id = "generate">Generate</button>
+
+<table class = 'table' id='display_fac_table'>
+    <thead>
+        <th>date/time</th>
+        <th>9:30 - 10:30</th>
+        <th>10:30 - 11:20</th>
+        <th>11:20 - 12:10</th>
+        <th>12:10 - 1:00</th>
+        <th>Lunch_break</th>
+        <th>2:00 - 2:50</th>
+        <th>2:50 - 3:40</th>
+        <th>3:40 - 4:30</th>
+    </thead>
+
+    <tbody>
+    <tr>
+        
+        <th class = "day" id="day_{{days.0.week_id}}"> Monday  </th>
+        <td class ="{{timings.0.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+        <span></span><span></span><span></span><br>
+        <span class="subject"></span>
+        </td>
+        <td class ="{{timings.1.timing_id}}"  ondrop = "drop(event)" ondragover="allowDrop(event)" >
+           <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class ="{{timings.0.timing_id}}" id = "day_{{days.1.week_id}}">Tuesday </th>
+        <td class ="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+           <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class ="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class = "day" id = "day_{{days.2.week_id}}">wednesday </th>
+        <td class="{{timings.0.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+        <td class="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+           <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+           <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+        </td>
+    </tr>
+    <tr>
+        <th class = "day" id = "day_{{days.3.week_id}}">Thursday  </th>
+        <td class="{{timings.0.timing_id}}"  ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+           <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+    </tr>
+    <tr>
+        <th class = "day" id="day_{{days.4.week_id}}">Friday <input type="hidden" value = {{days.4.week_id}}></th>
+        <td class="{{timings.0.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+    </tr>
+    <tr>
+        <th class = "day" id="day_{{days.5.week_id}}">Saturday </th>
+        <td class="{{timings.0.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+           <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+        <td class="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <span></span><span></span><span></span><br>
+            <span class="subject"></span>
+
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+</table>
+
+
+{% endblock content %}
+
+
+{% block javascript %}
+
+<script>
+
+$('#department').click(function(){
+    $(this).off('click');
+
+    $.ajax({
+        type: "GET",
+        url: "{% url 'submit_info' %}",
+        data: {action: "scroll_list"},
+        success: function(response){
+            response.values.forEach(function(e){
+                $('#department').append(
+                    `<option value = "${e.department_id}">${e.department_name}</option>`
+                )
+                
+            })
+        }
+    })
+
+    $(this).change(function(){
+        $('#faculty').empty();
+        $('#faculty').append(
+            `<option>select faculty</option>`
+        )
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action: "faculty_and_subject",
+                    department_id:$(this).val()
+                    },
+            success: function(res){
+                res.faculty.forEach(function(e){
+                    $('#faculty').append(
+                        `<option value="${e.id}">${e.faculty_name}</option>`
+                    )
+                })
+            }
+        })
+    })
+
+})
+
+$('#generate').click(function(){
+    $(".table tbody tr td span").empty();
+    $.ajax({
+
+        type: "GET",
+        url: "{% url 'check_view' %}",
+        data:{
+            action: "display_fac_table",
+            department: $('#department').val(),
+            faculty: $('#faculty').val()
+        },
+
+        success: function(response){
+            response.forEach(function(e){
+                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[0].innerHTML = e['semester']+"-"
+                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[1].innerHTML = e['branch']['branch_name']
+                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[2].innerHTML = "-"+e['section']
+                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[4].innerHTML = e['subject_id']['subject_name']
+                //console.log(e.weekday_id_id)
+
+            })
+        }
+
+
+    })
+})
+
+
+</script>
+
+
+{% endblock javascript %}
