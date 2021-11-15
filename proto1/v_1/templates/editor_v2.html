@@ -1,12 +1,40 @@
 {% extends 'base.html' %}
 
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+
+
+{% endblock style %}
+
 
 {% block content %}
 
 
-<select name="branch" id="branch_choose">
+{% comment %} <select name="branch" id="branch_choose">
 <option>select branch</option>
-</select>
+</select> {% endcomment %}
+
+<div class= "container" >
+
+<h4>Branch</h4>
+
+<div class="select-box" >
+        
+        <div class="options-container branch">
+            
+        </div>
+        <div class = "selected" id = "branch">
+            <input type="hidden" value="">
+            select branch
+        </div>
+
+    </div>
+
+
+</div>
+
+
 <input type="text" placeholder = "enter semester" id = "semester">
 <select name="block" id="block_choose"><option >choose block</option></select>
 <select name="room" id="room_number"><option>select room number</option></select>
@@ -466,30 +494,6 @@
 <div><button id = "save">save</button></div>
 
 
-<select name="department" id="department_choose">
-<option >select department</option>
-</select>
-<button id = "Generate">Generate</button>
-
-<table class= 'table' id = "sub_table">
-    <thead>
-    <th>subject_id</th>
-    <th>subject_name</th>
-    <th>Elective_type</th>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-
-<table class="table" id="fac_table">
-    <thead>
-        <th>faculty id</th>
-        <th>faculty name</th>
-    </thead>
-    <tbody></tbody>
-</table>
-
-
 
 {% endblock content %}
 
@@ -523,7 +527,7 @@ $('#department_choose').click(function(){
 
 })
 
-$("#branch_choose").click(function(){
+{% comment %} $("#branch_choose").click(function(){
     $(this).off('click');
     $.ajax({
 
@@ -543,7 +547,55 @@ $("#branch_choose").click(function(){
 
 
     })
+}) {% endcomment %}
+
+const branch = document.querySelector("#branch");
+const branch_container = document.querySelector(".branch");
+var loaded_branch = false;
+
+
+branch.addEventListener("click",()=>{
+    var options;
+    if(!loaded_branch){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action:'scroll_list_branch'},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.branch').append(
+                        `<div class= "option">
+                        <input type="radio" class="radio" value="${e.branch_id}" name="category">
+                        <label for="${e.branch_id}">${e.branch_name}</label>
+                        </div>
+                        `
+                    )
+                    
+                })
+
+                loaded_branch = true;
+                options = document.querySelectorAll(".branch .option")
+                options.forEach(o=>{
+                    o.addEventListener("click",()=>{
+                        branch.innerHTML = o.querySelector('label').innerHTML;
+                        console.log(o.querySelector('input').value)
+                        $('.selected').append(
+                            `<input type="hidden" value = "${o.querySelector('input').value}" >`
+                        )
+
+                        //console.log($('.selected').children('input').values)
+                        branch_container.classList.remove("active");
+                    })
+                })
+                
+            }
+
+        })
+    }
+    branch_container.classList.toggle("active")
 })
+
+
 
 $('#block_choose').click(function(){
 

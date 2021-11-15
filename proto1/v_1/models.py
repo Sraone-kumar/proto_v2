@@ -6,6 +6,9 @@ from django.utils import tree
 
 # Create your models here.
 #independent tables................
+
+
+
 class Timings_table(models.Model):
     timing_id  = IntegerField(primary_key=True)
     timing_space = CharField(max_length=255)
@@ -14,6 +17,18 @@ class Timings_table(models.Model):
         return self.timing_space
 
 
+class section_table(models.Model):
+    section_id = AutoField(primary_key=True)
+    section_number = IntegerField()
+    def __str__(self) -> str:
+        return self.section_number
+
+class semester_table(models.Model):
+    semester_id = AutoField(primary_key=True)
+    semester_number = IntegerField()
+
+    def __str__(self) -> str:
+        return self.semester_number
 
 class Block_table(models.Model):
     block_id = IntegerField(primary_key=True)
@@ -74,7 +89,7 @@ class subjects_table(models.Model):
     subject_name = CharField(max_length=200)
     subject_credits = IntegerField()
     Elective_type = CharField(max_length=50)
-    semester_taught = IntegerField()
+    semester_taught = ForeignKey(semester_table,on_delete=True)
     department_id = ForeignKey(department_table,on_delete=CASCADE)
 
     def __str__(self) -> str:
