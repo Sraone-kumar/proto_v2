@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from v_1 import views_2
 from v_1 import views
 
 urlpatterns = [
@@ -23,10 +24,14 @@ urlpatterns = [
     path('get/ajax/submit_info', view=views.sumbit_info,name="submit_info"),
     path('testCheck/',views.testCheck),
     # path('get/ajax/check',views.some,name='some'),
-    path('display/',views.display_tables),
+    path('display/',views.display_tables,name = 'display'),
     path('test/',views.testing),
     path('get/ajax/test',views.testing,name='test'),
     path('check_view/',views.check_view,name = 'check_view'),
     path('styling/',views.styling_check),
-    path('editor-2/',views.editor_v2)
+    path('editor-2/',views.editor_v2),
+    path('sub_fac/',views_2.sub_fac),
+    path('get/ajax/get_info',views_2.get_info,name='get_info'),
+    path('get/ajax/get_info_back',views_2.get_info_back,name='get_info_back'),
+    path('check/',views_2.check)
 ]

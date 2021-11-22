@@ -15,18 +15,42 @@
 <option>select branch</option>
 </select> {% endcomment %}
 
+<div class="navbar">
+
+<a href="#Editor">Editor</a>
+<a href="{% url 'display'%}">Faculty</a>
+<a href="#students">Student</a>
+<a href="#upload">Upload</a>
+
+</div>
+
+
+<div class="inputs">
 <div class= "container" >
 
-<h4>Branch</h4>
+        <h4>branch: </h4>
 
-<div class="select-box" >
+    <div class="select-box" >
         
-        <div class="options-container branch">
-            
-        </div>
+        <div class="options-container branch"></div>
         <div class = "selected" id = "branch">
-            <input type="hidden" value="">
             select branch
+        </div>
+
+    </div>
+    
+</div>
+
+
+<div class="container">
+
+    <h4>semester: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container semester"></div>
+        <div class = "selected" id = "semester">
+            select semester
         </div>
 
     </div>
@@ -34,12 +58,78 @@
 
 </div>
 
+<div class="container">
 
-<input type="text" placeholder = "enter semester" id = "semester">
+    <h4>section: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container section"></div>
+        <div class = "selected" id = "section">
+            select section
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="container">
+
+    <h4>block: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container block"></div>
+        <div class = "selected" id = "block">
+            select block
+        </div>
+
+    </div>
+
+
+</div>
+<div class="container">
+
+    <h4>room: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container room"></div>
+        <div class = "selected" id = "room">
+            room number
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="container" id = 'department'>
+
+    <h4>department: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container department"></div>
+        <div class = "selected" id = "room_select">
+            select department
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- <input type="text" placeholder = "enter semester" id = "semester">
 <select name="block" id="block_choose"><option >choose block</option></select>
 <select name="room" id="room_number"><option>select room number</option></select>
-<input type="text" placeholder="enter section" id = "section">
-
+<input type="text" placeholder="enter section" id = "section"> -->
+<div class="table_div row">
+<div class="column">
 <table class = 'table' id='class_time_table'>
     <thead>
         <th>date/time</th>
@@ -99,6 +189,7 @@
         </td>
         <td id='r_1_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
             <input type="hidden" value = "" >
+            <input type="hidden" value = "">
             <input type="hidden" value = "">
             <input type="hidden" value = "{{timings.5.timing_id}}" class = ".timing">
             <span class="sub"></span>
@@ -488,11 +579,28 @@
     </tr>
     </tbody>
 
-</table>
+</table></div>
+<div class="column">
+    <table class="table relate_table">
+        <thead>
+            <th>course</th>
+            <th>faculty</th>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
+</div>
 
-
+<div>
 <div><button id = "save">save</button></div>
+<div><button class='edit'>edit</button></div>
+</div>
 
+
+
+  
 
 
 {% endblock content %}
@@ -502,52 +610,8 @@
 
 <script>
 
-$('#department_choose').click(function(){
-    $(this).off('click');
-
-    $.ajax({
-
-        type: "GET",
-        url : "{% url 'submit_info' %}",
-        data: {
-            action : "scroll_list"
-        },
-
-        success: function(res){
-                res.values.forEach(function(e){
-                    $('#department_choose').append(
-                        `<option value = "${e.department_id}">${e.department_name}</option>`
-                    )
-                })
-            }
 
 
-    })
-
-
-})
-
-{% comment %} $("#branch_choose").click(function(){
-    $(this).off('click');
-    $.ajax({
-
-        type: "GET",
-        url : "{% url 'submit_info' %}",
-        data: {
-            action : "scroll_list_branch"
-        },
-
-        success: function(res){
-                res.values.forEach(function(e){
-                    $('#branch_choose').append(
-                        `<option value = "${e.branch_id}">${e.branch_name}</option>`
-                    )
-                })
-            }
-
-
-    })
-}) {% endcomment %}
 
 const branch = document.querySelector("#branch");
 const branch_container = document.querySelector(".branch");
@@ -578,10 +642,12 @@ branch.addEventListener("click",()=>{
                 options.forEach(o=>{
                     o.addEventListener("click",()=>{
                         branch.innerHTML = o.querySelector('label').innerHTML;
-                        console.log(o.querySelector('input').value)
-                        $('.selected').append(
+                        //console.log(o.querySelector('input').value)
+                        $('#branch').append(
                             `<input type="hidden" value = "${o.querySelector('input').value}" >`
                         )
+                        //$('#branch input').value = o.querySelector('input').value;
+                        //console.log($('#branch input').value)
 
                         //console.log($('.selected').children('input').values)
                         branch_container.classList.remove("active");
@@ -595,11 +661,55 @@ branch.addEventListener("click",()=>{
     branch_container.classList.toggle("active")
 })
 
+var loaded_semester = false;
 
 
-$('#block_choose').click(function(){
+$('#semester').click(function(){
+    var options;
+    if(!loaded_semester){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action: 'scroll_list_semester'},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.semester').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.semester_id}" name="category">
+                        <label for="${e.semester_id}">${e.semester_number}</label>
+                        </div>
+                        `
+                    )
+                })
+                loaded_semester = true;
+                $('.semester').addClass('active')
+                $('.semester .option').click(function(){
+                    document.querySelector("#semester").innerHTML = $(this).children('label').html()
+                    $('#semester').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    $('.semester').removeClass('active')
+                })
 
-    $(this).off('click');
+                
+                
+            }
+        })
+    }
+    //console.log("its is here")
+    $('.semester').toggleClass('active')
+})
+
+
+var block_value;
+var loaded_block = false;
+loaded_room = false;
+
+
+$('#block').click(function(){
+
+    if(!loaded_block){
 
     $.ajax({
 
@@ -611,35 +721,26 @@ $('#block_choose').click(function(){
 
         success: function(res){
             res.values.forEach(function(e){
-                $('#block_choose').append(
-                    `<option value = "${e.block_id}">${e.block_name}</option>`
-                )
+                $('.block').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.block_id}" name="category">
+                        <label for="${e.block_id}">${e.block_name}</label>
+                        </div>
+                        `
+                    )
             })
 
-            $('#block_choose').change(function(){
-                val = $(this).val()
-                console.log(val)
-                $.ajax({
-                    type: "GET",
-                    url : "{% url 'submit_info' %}",
-                    data: {
-                        action : "scroll_list_room",
-                        block_id : val
-                    },
-
-                    success: function(data){
-                        $('#room_number').empty();
-                        $('#room_number').append(
-                            `<option>select room number</option>`
-                        )
-                        data.values.forEach(function(e){
-                            $('#room_number').append(
-                                `<option value = "${e.room_id}">${e.class_number}</option>`
-                            )
-                        })
-                    }
-
-                })
+            loaded_block = true;
+            $('.block').addClass('active')
+            $('.block .option').click(function(){
+                loaded_room = false;
+                document.querySelector("#block").innerHTML = $(this).children('label').html()
+                $('#block').append(     
+                    `<input type="hidden" value = "${$(this).children('input').val()}">`
+                )
+                block_value = $(this).children('input').val();
+                $('.block').removeClass('active')
             })
 
         }
@@ -647,7 +748,110 @@ $('#block_choose').click(function(){
 
     })
 
+    }
+
+    $('.block').toggleClass('active')
+
 })
+
+
+
+$('#room').click(function(){
+    
+    if(block_value == ''){
+        alert("choose block");
+        return
+    }
+
+    if(!loaded_room){
+        $('.room').empty();
+    
+    $.ajax({
+        type: "GET",
+        url: "{% url 'submit_info'%}",
+        data: {
+                action : "scroll_list_room",
+                block_id : block_value
+        },
+
+        success: function(res){
+            res.values.forEach(function(e){
+                $('.room').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.room_id}" name="category">
+                        <label for="${e.room_id}">${e.class_number}</label>
+                        </div>
+                        `
+                    )
+            })
+
+            loaded_room = true;
+            $('.room').addClass('active')
+            $('.room .option').click(function(){
+                document.querySelector("#room").innerHTML = $(this).children('label').html()
+                $('#room').append(     
+                    `<input type="hidden" value = "${$(this).children('input').val()}">`
+                )
+                $('.room').removeClass('active')
+            })
+        }
+
+
+
+    })
+    }
+    $('.room').toggleClass('active')
+
+})
+
+loaded_section = false;
+$('#section').click(function(){
+
+    if(!loaded_section){
+        $.ajax({
+
+            type: "GET",
+            url:"{% url 'submit_info' %}",
+            data: {
+                action: 'scroll_list_section',
+            },
+
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.section').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.section_id}" name="category">
+                        <label for="${e.section_id}">${e.section_number}</label>
+                        </div>
+                        `
+                    )
+                })
+
+                loaded_section = true;
+                $('.section').addClass('active')
+                $('.section .option').click(function(){
+                    loaded_room = false;
+                    document.querySelector("#section").innerHTML = $(this).children('label').html()
+                    $('#section').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    block_value = $(this).children('input').val();
+                    $('.section').removeClass('active')
+                })
+            }
+
+
+        })
+    }
+
+    $('.section').toggleClass('active');
+})
+
+
+
+
 
 
 $('#Generate').click(function(){
@@ -696,12 +900,49 @@ $('#Generate').click(function(){
 
 
 
+$('.edit').click(function(){
+
+    branch_get = $('#branch input').val()
+    semester = $('#semester input').val()
+    section = $('#section input').val()
+
+    console.log(branch_get+","+semester+","+section)
+    $.ajax({
+        type: 'GET',
+        url: "{% url 'get_info_back' %}",
+        data:{
+            action: 'get_fac_relation',
+            branch : branch_get,
+            semester : semester,
+            section : section,
+        },
+
+        success: function(res){
+            res.forEach(function(e){
+                $('.relate_table').append(
+                    `<tr draggable = "true" ondragstart="drag(event)" id = "drag_${e['faculty']['id']}">
+                        <td>${e['subject']['subject_name']}
+                            <input type = 'hidden' value = "${e['subject']['subject_id']}"
+                            </td>
+                        <td>${e['faculty']['faculty_name']}
+                            <input type = 'hidden' value = "${e['faculty']['id']}"
+                            </td>
+                        </tr>`
+                )
+            })
+        }
+    })
+
+
+})
+
 $('#save').click(function(){
-    branch = $('#branch_choose').val();
-    semester = $('#semester').val();
-    block = $("#block_choose").val();
-    room = $("#room_number").val();
-    section = $("#section").val();
+
+    branche = $('#branch input').val();
+    semester = $('#semester input').val();
+    block = $("#block input").val();
+    room = $("#room input").val();
+    section = $("#section input").val();
 
     //row = $('#class_time_table tbody').children().length
     //column = $('#class_time_table tbody tr').children().length
@@ -709,7 +950,7 @@ $('#save').click(function(){
     //console.log("row: "+row)
     //console.log("column: "+column)
 
-    console.log(semester+", "+section)
+    console.log("branch: "+branche+" semester: "+semester+" block: "+block+" room: "+ room+" section: "+section)
     $('#class_time_table tbody tr').each(function(){
         day = $('th input',this).val()
         $('td',this).each(function(){
@@ -720,7 +961,7 @@ $('#save').click(function(){
                     url: "{% url 'submit_info' %}",
                     data: {
                         action : 'insert',
-                        branch : branch,
+                        branch : branche,
                         semester : semester,
                         block : block,
                         room : room,
@@ -729,7 +970,11 @@ $('#save').click(function(){
                         subject : inputs[1].value,
                         faculty : inputs[2].value,
                         timing : inputs[3].value
-                    }
+                    },
+
+                    success: function(res){
+                        alert("succesfuly updated")
+                    } 
                 })
             }
         })
@@ -760,23 +1005,19 @@ function drag(ev){
 function drop(ev){
     event.preventDefault();
     id =  ev.dataTransfer.getData("one")
-    parent_val = $('#'+id).parent().parent().attr('id')
+    //parent_val = $('#'+id).parent().parent().attr('id')
     lis = $('#'+ev.target.id).children()
     lis_get = $('#'+id).children();
+    console.log(lis_get[0])
 
     lis[0].value = "edited"
     //$('#'+ev.target.id).text(lis_get[1].innerHTML)
     
-    if(parent_val === 'sub_table'){
-        lis[1].value = lis_get[0].innerHTML
-        lis[4].innerHTML = lis_get[1].innerHTML 
+        lis[1].value = lis_get[0].childNodes[1].value
+        lis[4].innerHTML = lis_get[0].innerHTML 
 
-    }
-
-    if(parent_val === 'fac_table'){
-        lis[2].value = lis_get[0].innerHTML
+        lis[2].value = lis_get[1].childNodes[1].value
         lis[5].innerHTML = lis_get[1].innerHTML
-    }
 
     
     //console.log(lis_get)

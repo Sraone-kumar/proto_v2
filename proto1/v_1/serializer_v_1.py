@@ -1,7 +1,7 @@
-from django.db.models import fields
-from django.db.models.base import Model
 from rest_framework import serializers
-from .models import Block_table,Designation_table,department_table,class_time_table,Branch_table,subjects_table
+
+from .sub_fac_model import sub_fac_relation
+from .models import Block_table,Designation_table,department_table,class_time_table,Branch_table,faculty_table,subjects_table
 
 
 class BlockSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class BranchSerializer(serializers.ModelSerializer):
 class SubjectsSerializer(serializers.ModelSerializer):
     class Meta:
         model = subjects_table
-        fields = ('subject_name',)
+        fields = ('subject_id','subject_name',)
 
 class ClassTableSerializer(serializers.ModelSerializer):
     branch = BranchSerializer()
@@ -28,3 +28,16 @@ class ClassTableSerializer(serializers.ModelSerializer):
     class Meta:
         model = class_time_table
         fields = ('weekday_id','timing_id','semester','branch','section','subject_id')
+
+
+class facultySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = faculty_table
+        fields = ('id','faculty_name')
+
+class fac_relationSerializer(serializers.ModelSerializer):
+    subject = SubjectsSerializer()
+    faculty = facultySerializer()
+    class Meta:
+        model = sub_fac_relation
+        fields = ('subject','faculty')

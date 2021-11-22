@@ -1,0 +1,250 @@
+{% extends 'base.html'%}
+
+
+{% block content  %}
+
+<select name="department" id="department">
+    <option value="">select department</option>
+</select>
+
+<select name="branch" id="branch">
+    <option value="">select branch</option>
+</select>
+
+<select name="semester" id="semester">
+    <option value="">select semester</option>
+</select>
+
+<select name="section" id="section">
+    <option value="">select section</option>
+</select>
+
+<button id = "generate">generate</button>
+
+
+<div class = "row">
+    <div class = "column">
+        <table class = "table subject">
+            <thead>
+                <th>subject</th>
+                <th>faculty</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div class = "column">
+         <table class="table faculty">
+            <thead><th>faculty</th></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+<button id= "save">save</button>
+
+
+
+{% endblock content%}
+
+{% block javascript %}
+
+<script>
+
+$('#branch').click(function(){
+    $(this).off('click');
+    $.ajax({
+        type: 'GET',
+        url: "{% url 'submit_info' %}",
+        data: {
+            action: "scroll_list_branch"
+        },
+
+        success: function(res){
+            res.values.forEach(function(e){
+                $('#branch').append(
+                    `<option value = "${e.branch_id}">${e.branch_name}</option>`
+
+                )
+            })
+        }
+    })
+})
+
+$('#department').click(function(){
+    $(this).off('click');
+    $.ajax({
+        type: 'GET',
+        url: "{% url 'submit_info' %}",
+        data: {
+            action: "scroll_list"
+        },
+
+        success: function(res){
+            res.values.forEach(function(e){
+                $('#department').append(
+                    `<option value = "${e.department_id}">${e.department_name}</option>`
+
+                )
+            })
+        }
+    })
+})
+
+$('#semester').click(function(){
+    $(this).off('click');
+    $.ajax({
+        type: 'GET',
+        url: "{% url 'submit_info' %}",
+        data: {
+            action: "scroll_list_semester"
+        },
+
+        success: function(res){
+            res.values.forEach(function(e){
+                $('#semester').append(
+                    `<option value = "${e.semester_id}">${e.semester_number}</option>`
+
+                )
+            })
+        }
+    })
+})
+
+$('#section').click(function(){
+    $(this).off('click');
+    $.ajax({
+        type: 'GET',
+        url: "{% url 'submit_info' %}",
+        data: {
+            action: "scroll_list_section"
+        },
+
+        success: function(res){
+            res.values.forEach(function(e){
+                $('#section').append(
+                    `<option value = "${e.section_id}">${e.section_number}</option>`
+
+                )
+            })
+        }
+    })
+})
+
+
+
+
+
+
+$('#generate').click(function(){
+    $.ajax({
+
+        type: "GET",
+        url: "{% url 'get_info' %}",
+        data: {
+            action: "info",
+            department: $('#department').val(),
+            semester: $('#semester').val(),
+        },
+
+        success: function(res){
+            res.values_1.forEach(function(e){
+                $('.faculty tbody').append(
+                    `<tr draggable = "true" ondragstart="drag(event)" id="fac_${e.id}">
+                        <td>${e.faculty_name}
+                            <input type="hidden"  value = "${e.id}">
+                            </td>
+                        </tr>
+                    `
+                )
+            })
+
+
+            res.values_2.forEach(function(e){
+                $('.subject tbody').append(
+                    `<tr>
+                        <td>${e.subject_name}
+                            <input type="hidden" value = "${e.subject_id}"></td>
+                        <td ondrop="drop(event)" ondragover="allowDrop(event)" id = "sub_${e.subject_id}">
+                            <input type="hidden">
+                            </td>
+                    </tr>
+                    `
+                )
+            })
+        }
+        
+        //faculty-->department, branch,semester,section
+        //subjects-->department,semester if semester == 1,2,3-->maths & p&h also to be shown
+    })
+})
+   
+
+$('#save').click(function(){
+    branch = $('#branch').val();
+    section = $("#section").val();
+    semester = $("#semester").val();
+    console.log(branch+","+section+","+semester);
+    $('.subject tbody tr').each(function(){
+        subject = $(this).children()[0].childNodes[1].value
+        faculty = $(this).children()[1].childNodes[1].value
+        //faculty = $('td ').children()
+        // console.log(subject.childNodes[1].value)
+        // console.log(faculty.childNodes[1].value)
+
+        console.log(subject)
+        console.log(faculty)
+
+        $.ajax({
+            type: "GET",
+            url: "{% url 'get_info' %}",
+            data: {
+                action: 'submit',
+                branch: branch,
+                section: section,
+                semester: semester,
+                subject: subject,
+                faculty: faculty
+            },
+
+            success: function(e){
+                alert('succesfully inserted')
+            }
+
+        })
+
+       // console.log(faculty)
+    })
+
+})
+
+
+</script>
+
+
+<script>
+
+    function allowDrop(ev){
+        ev.preventDefault();
+    }
+
+    function drag(ev){
+        ev.dataTransfer.setData("text",ev.target.id);
+    }
+
+    function drop(ev){
+        event.preventDefault();
+        data = ev.dataTransfer.getData("text");
+        console.log(data)
+        //$('#'+ev.target.id).children('input').val( $('#'+data).find('input').val())
+        $('#'+ev.target.id).html($("#"+data).text())
+        $('#'+ev.target.id).append(`<input type="hidden" value = ${$('#'+data).find('input').val()} > `)
+        
+        //ev.target.innerText = data
+        
+    }
+    </script>
+
+{% endblock javascript %}

@@ -2,7 +2,7 @@ from django.db.models.fields import NullBooleanField
 from django.http import response
 from django.http.response import JsonResponse
 from django.shortcuts import render
-from .models import Block_table, Branch_table, Room_table, Timings_table, Week_table, class_time_table, department_table, faculty_table, subjects_table
+from .models import Block_table, Branch_table, Room_table, Timings_table, Week_table, class_time_table, department_table, faculty_table, section_table, semester_table, subjects_table
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -54,7 +54,15 @@ def sumbit_info(request):
     if request.method == "GET" and request.GET.get('action') == 'scroll_list_room':
         lis = generate_room_scroll_list(request.GET.get('block_id'))
         return JsonResponse({"values": lis})
+    if request.method == "GET" and request.GET.get('action') == 'scroll_list_semester':
+        lis = generate_semester_scroll_list()
+        return JsonResponse({"values": lis})
+    if request.method == "GET" and request.GET.get('action') == 'scroll_list_section':
+        lis = generate_section_scroll_list()
+        return JsonResponse({"values": lis})
     return JsonResponse({"timings": "something"})
+
+    
 
 
 
@@ -70,6 +78,12 @@ def generate_faculty_and_subjects(request):
 
 
 #-------------scroll functions............................................................................
+
+def generate_semester_scroll_list():
+    return list(semester_table.objects.all().values())
+
+def generate_section_scroll_list():
+    return list(section_table.objects.all().values())
 
 def generate_branch_scroll_list():
     return list(Branch_table.objects.all().values())
@@ -141,7 +155,7 @@ def editor_v2(request):
     days = Week_table.objects.all().values()
     #print(timings)
     val = {"timings":timings,"days":days}
-    return render(request,'editor_v2.html');
+    return render(request,'editor_v2.html',val);
 
 
 

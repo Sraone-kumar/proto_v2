@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import AutoField, CharField, IntegerField
 from django.db.models.fields.related import ForeignKey
-from django.utils import tree
 
 # Create your models here.
 #independent tables................
@@ -21,14 +20,14 @@ class section_table(models.Model):
     section_id = AutoField(primary_key=True)
     section_number = IntegerField()
     def __str__(self) -> str:
-        return self.section_number
+        return str(self.section_number)
 
 class semester_table(models.Model):
     semester_id = AutoField(primary_key=True)
     semester_number = IntegerField()
 
     def __str__(self) -> str:
-        return self.semester_number
+        return str(self.semester_number)
 
 class Block_table(models.Model):
     block_id = IntegerField(primary_key=True)
@@ -89,7 +88,7 @@ class subjects_table(models.Model):
     subject_name = CharField(max_length=200)
     subject_credits = IntegerField()
     Elective_type = CharField(max_length=50)
-    semester_taught = ForeignKey(semester_table,on_delete=True)
+    semester_taught = ForeignKey(semester_table,on_delete=CASCADE)
     department_id = ForeignKey(department_table,on_delete=CASCADE)
 
     def __str__(self) -> str:
