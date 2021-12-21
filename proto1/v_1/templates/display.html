@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+
+
+{% endblock style %}
+
 
 {% block content %}
+
+
+<div class="navbar">
+
+    <a href="{% url 'editor_v2' %}">Editor</a>
+    <a class = "current" href="{% url 'display'%}">Faculty</a>
+    <a href="#students">Student</a>
+    <a href="#upload">Upload</a>
+    
+</div>
 
 <select name="department" id="department">
 <option value="">select department</option>

@@ -29,9 +29,12 @@ urlpatterns = [
     path('get/ajax/test',views.testing,name='test'),
     path('check_view/',views.check_view,name = 'check_view'),
     path('styling/',views.styling_check),
-    path('editor-2/',views.editor_v2),
+    path('editor-2/',views.editor_v2,name = 'editor_v2'),
     path('sub_fac/',views_2.sub_fac),
     path('get/ajax/get_info',views_2.get_info,name='get_info'),
     path('get/ajax/get_info_back',views_2.get_info_back,name='get_info_back'),
-    path('check/',views_2.check)
+    path('check/',views_2.check),
+    path('script/',views_2.total_script),
+    path('runer/',views_2.runer),
+    path('lab_editor/',views.lab_editor,name='lab_editor')
 ]

@@ -1,14 +1,15 @@
+from django.db.models import manager
 from django.http import response
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .serializer_v_1 import fac_relationSerializer, facultySerializer
+from .serializer_v_1 import BranchSerializer, ClassTableSerializer, SubjectsSerializer, fac_relationSerializer, facultySerializer
 
 from .sub_fac_model import sub_fac_relation
 
-from .models import faculty_table, subjects_table
+from .models import Branch_table, Timings_table, Week_table, class_time_table, faculty_table, lab_information_table, subjects_table
 
 def sub_fac(request):
     return render(request,'sub_fac_editor.html')
@@ -56,12 +57,36 @@ def get_info_back(request):
         section = request.GET.get('section')
         print(branch,semester_get,section)
         tasks = sub_fac_relation.objects.filter(branch_id_id = branch,section_id = section,semester_id = semester_get)
+        classquery = class_time_table.objects.filter(branch_id = branch,section = section,semester= semester_get)
+        department_id = list(Branch_table.objects.filter(branch_id=branch).values('department_id'))
+        print("department_id:",department_id[0]['department_id'])
+        labQuery = list(lab_information_table.objects.filter(lab_department_id = department_id[0]['department_id'] ).values('lab_id','lab_name'))
+        print("lab_query: ",labQuery)
         print(tasks)
+        print(classquery)
         serialize = fac_relationSerializer(tasks,many = True)
-        return Response(serialize.data)  
+        serialize_class = ClassTableSerializer(classquery,many = True)
+        return Response({'sub_fac':serialize.data,'class':serialize_class.data,'lab':labQuery})  
+
 
 @api_view(['GET'])
 def check(request):
     query = faculty_table.objects.all()
     serialize = facultySerializer(query,many = True)
     return Response(serialize.data)
+
+
+def total_script(request):
+    time = list(Timings_table.objects.all().values());
+    weekdays = list(Week_table.objects.all().values());
+    return render(request,'total_script.html',{'time':time,'week':weekdays})
+
+
+@api_view(['GET'])
+def runer(request):
+    query = Branch_table.objects.all()
+    subjects = subjects_table.objects.all()
+    serialize_1 = BranchSerializer(query,many = True)
+    serialize_2 = SubjectsSerializer(subjects,many=True)
+    return Response({'branch':serialize_1.data,'faculty':serialize_2.data})
+

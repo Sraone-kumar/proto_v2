@@ -157,6 +157,14 @@ def editor_v2(request):
     val = {"timings":timings,"days":days}
     return render(request,'editor_v2.html',val);
 
+def lab_editor(request):
+    timings = Timings_table.objects.all().values()
+    days = Week_table.objects.all().values()
+    #print(timings)
+    val = {"timings":timings,"days":days}
+    return render(request,'lab_editor.html',val);
+
+
 
 
 def display_tables(request):

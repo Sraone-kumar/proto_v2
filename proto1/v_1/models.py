@@ -60,7 +60,7 @@ class department_table(models.Model):
 
 
 
-#independent tables ---------------------------------------
+#independent tables close---------------------------------------
 
 
 
@@ -122,6 +122,31 @@ class class_time_table(models.Model):
 
 
 
+
+class lab_information_table(models.Model):
+    lab_id = AutoField(primary_key=True)
+    lab_name = CharField(max_length=300)
+    lab_incharge = ForeignKey(faculty_table,on_delete=CASCADE)
+    lab_assistant = ForeignKey(faculty_table,on_delete=CASCADE,related_name='lab_assistant')
+    lab_department = ForeignKey(department_table,on_delete=CASCADE)
+    lab_block = ForeignKey(Room_table,on_delete=CASCADE)
+
+    def __str__(self) -> str:
+        return self.lab_name
+
+class lab_time_table(models.Model):
+    id = AutoField(primary_key=True)
+    lab = ForeignKey(lab_information_table,on_delete=CASCADE)
+    lab_course = ForeignKey(subjects_table,on_delete=CASCADE)
+    week = ForeignKey(Week_table,on_delete=CASCADE)
+    time = ForeignKey(Timings_table,on_delete=CASCADE)
+    branch = ForeignKey(Branch_table,on_delete=CASCADE)
+    section = ForeignKey(section_table,on_delete=CASCADE)
+    semester = ForeignKey(semester_table,on_delete=CASCADE)
+    no_of_hours = IntegerField(null=True)
+
+    def __str__(self) -> str:
+        return self.lab
 
 
 

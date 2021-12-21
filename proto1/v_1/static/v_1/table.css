@@ -10,6 +10,7 @@
 
 .table thead tr,.table tbody th {
     background-color: rgb(46, 167, 197);
+    /* background-color: red; */
     color: white;
     text-align: left;
     
@@ -34,5 +35,13 @@
   }
 
 
+span{
+    font-size: 0.8em;
+}
+
+
+.selectunit{
+    background: rgb(170, 225, 241);
+}
 
 

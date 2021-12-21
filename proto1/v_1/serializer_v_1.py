@@ -1,3 +1,4 @@
+from django.db.models import fields
 from rest_framework import serializers
 
 from .sub_fac_model import sub_fac_relation
@@ -22,18 +23,22 @@ class SubjectsSerializer(serializers.ModelSerializer):
         model = subjects_table
         fields = ('subject_id','subject_name',)
 
-class ClassTableSerializer(serializers.ModelSerializer):
-    branch = BranchSerializer()
-    subject_id = SubjectsSerializer()
-    class Meta:
-        model = class_time_table
-        fields = ('weekday_id','timing_id','semester','branch','section','subject_id')
-
 
 class facultySerializer(serializers.ModelSerializer):
     class Meta:
         model = faculty_table
         fields = ('id','faculty_name')
+
+class ClassTableSerializer(serializers.ModelSerializer):
+    branch = BranchSerializer()
+    subject_id = SubjectsSerializer()
+    faculty_id = facultySerializer()
+    class Meta:
+        model = class_time_table
+        fields = ('weekday_id','timing_id','semester','branch','section','subject_id','faculty_id')
+
+
+
 
 class fac_relationSerializer(serializers.ModelSerializer):
     subject = SubjectsSerializer()

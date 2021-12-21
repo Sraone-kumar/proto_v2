@@ -586,8 +586,16 @@
             <th>course</th>
             <th>faculty</th>
         </thead>
-        <tbody>
-            
+        <tbody>           
+        </tbody>
+    </table>
+</div>
+<div class="column">
+    <table class="table lab_table">
+        <thead>
+            <th>laboratory</th>
+        </thead>
+        <tbody>           
         </tbody>
     </table>
 </div>
@@ -871,7 +879,7 @@ $('.edit').click(function(){
 
         success: function(res){
             res.sub_fac.forEach(function(e){
-                $('.relate_table').append(
+                $('.relate_table tbody').append(
                     `<tr draggable = "true" ondragstart="drag(event)" id = "drag_${e['faculty']['id']}">
                         <td>${e['subject']['subject_name']}
                             <input type = 'hidden' value = "${e['subject']['subject_id']}"
@@ -887,17 +895,37 @@ $('.edit').click(function(){
 
             res.class.forEach(function(e){
                 $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_name'])
-                $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_name'])
+                //$("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_name'])
 
             })
 
+            res.lab.forEach(function(e){
+                console.log(e)
+                $('.lab_table tbody').append(
+                    `<tr>
+                        <td>${e.lab_name}</td>    
+                    </tr>`
+                )
+            })
+
+
+            $('.lab_table tbody tr td').click(function(){
+                firstElement.attr('colspan',count);
+                firstElement.prevAll().slice(0,count-1).remove()
+                console.log(firstElement.children('.sub'))
+                console.log($(this).html())
+                //firstElement.children('.sub').html($(this).html())
+                firstElement.append(
+                    `<span class = 'lab'>${$(this).html()}</span>`
+                )
+                firstElement.removeClass('selectunit')
+            })
 
 
         }
 
         
     })
-
 
 })
 
@@ -1019,6 +1047,41 @@ function dragstart_handler(ev){
 }
 
 
+</script>
+<script>
+    var isRow = false;
+    var row;
+    var firstElement;
+    var count = 0;
+    $('#class_time_table tbody tr td').click(function(){
+        
+        if(firstElement == null){
+            firstElement = $(this);
+            console.log(firstElement.index())
+            firstElement.addClass('selectunit');
+            count++;
+            console.log(count)
+        }else{
+            if(firstElement.parent().index() === $(this).parent().index() && $(this).index() === firstElement.index()+1 && count<3){
+                console.log($(this).index())
+                console.log(firstElement.index()+1)
+
+                count++;
+                firstElement = $(this);
+                firstElement.addClass('selectunit');
+
+            }else{
+                $('.table').find('.selectunit').removeClass('selectunit');
+                firstElement = $(this);
+                count = 1;
+                firstElement.addClass('selectunit');
+            }
+        }
+        
+
+    })
+   
+   
 </script>
 
 {% endblock javascript %}

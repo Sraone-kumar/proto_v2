@@ -170,7 +170,7 @@ h4{
 } */
 
 /* save button */
-#save,.edit{
+#save,.edit,#check{
     border-style: none;
     width: 70px;
     height: 30px;
@@ -202,6 +202,13 @@ h4{
 .relate_table{
     margin-top: 18px;
     margin-left: 80px;
+}
+
+
+
+.navbar .current{
+    background-color: white;
+    color: #3585aa;
 }
 
 

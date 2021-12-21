@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<select name="department" id="department">
+    <option value="">select department</option>
+</select>
+
+<table class="table">
+<thead>
+    <th>day/time</th>
+    {% for i in time %}
+    <th>{{i.timing_space}}</th>
+    {% endfor %}
+</thead>
+    <tbody>
+        {% for i in week %}
+        <tr>
+            <th>{{i.week_name}}</th>
+            {% for i in time %}
+            <td></td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+
+</table>
+
+<button id = 'edit'>Edit</button>
+
+<table class="table">
+<thead>
+    <th>lab name</th>
+    
+</thead>
+</table>
+
+
+
+
+
+
+
+{% endblock content%}
+
+{% block javascript  %}
+{% load static %}
+<script>
+    data = "{{time|safe}}";
+    console.log(data)
+</script>
+<script src="{% static 'v_1/some.js' %}"></script>
+{% endblock javascript %}
