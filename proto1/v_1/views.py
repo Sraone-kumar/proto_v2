@@ -171,8 +171,8 @@ def display_tables(request):
     timings = Timings_table.objects.all().values()
     days = Week_table.objects.all().values()
     val = {"timings":timings,"days":days}
-    if request.is_ajax():
-        return sumbit_info(request)
+    # if request.is_ajax():
+    #     return sumbit_info(request)
     return render(request,'display.html',val)
 
 
