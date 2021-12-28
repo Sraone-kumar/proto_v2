@@ -36,5 +36,7 @@ urlpatterns = [
     path('check/',views_2.check),
     path('script/',views_2.total_script),
     path('runer/',views_2.runer),
-    path('lab_editor/',views.lab_editor,name='lab_editor')
+    path('lab_editor/',views.lab_editor,name='lab_editor'),
+    path('upload/',views_2.upload,name = 'upload'),
+    path('upload_submit',views_2.upload_submit,name='upload_submit')
 ]

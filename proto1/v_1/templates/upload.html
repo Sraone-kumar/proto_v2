@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form action="{% url 'upload_submit' %}" enctype="multipart/form-data">
+    <input type="text" name ="val">
+    <input type="file" name="file_upload">
+    <input type="submit">
+</form>
+
+
+{% endblock content %}

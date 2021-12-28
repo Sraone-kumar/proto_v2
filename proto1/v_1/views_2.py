@@ -4,6 +4,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from v_1 import data_loader
 
 from .serializer_v_1 import BranchSerializer, ClassTableSerializer, SubjectsSerializer, fac_relationSerializer, facultySerializer
 
@@ -21,7 +22,7 @@ def get_info(request):
         semester  = request.GET.get('semester')
         faculty = list(faculty_table.objects.filter(Department_id_id = department).values('id','faculty_name'))
         #There should be condition for 1,2,3 semester subjects--which can be from
-        #different departments
+        #different departments-
         courses = list(subjects_table.objects.filter(semester_taught_id = semester).values('subject_id','subject_name'))
         print(faculty)
         print(courses)
@@ -89,4 +90,12 @@ def runer(request):
     serialize_1 = BranchSerializer(query,many = True)
     serialize_2 = SubjectsSerializer(subjects,many=True)
     return Response({'branch':serialize_1.data,'faculty':serialize_2.data})
+
+def upload(request):
+    return render(request,'upload.html')
+
+def upload_submit(request):
+    print(request.GET.get('val'))
+    data_loader.loader(request)
+    return render(request,'upload.html')
 
