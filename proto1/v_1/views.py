@@ -5,7 +5,7 @@ from django.shortcuts import render
 from .models import Block_table, Branch_table, Room_table, Timings_table, Week_table, class_time_table, department_table, faculty_table, section_table, semester_table, subjects_table
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+from v_1 import models
 from .serializer_v_1 import ClassTableSerializer
 
 
@@ -184,6 +184,9 @@ def testing(request):
         return JsonResponse({'data':query})
     return render(request,'testing_serialization.html')
 
+def facsort(request):
+    return render(request,'facsort.html')
+
 
 
 @api_view(['GET'])
@@ -197,3 +200,13 @@ def check_view(request):
 
 def styling_check(request):
     return render(request,'styling_check.html')
+
+def facsortaja(request):
+    branch = request.GET.get('branch')
+    print('branch is: ',branch)
+    query = list(Branch_table.objects.filter(branch_id = branch).values('department_id'))
+    # print(list(query))
+    facquery = list(faculty_table.objects.filter(Department_id_id = query[0].get('department_id') ).values('id','faculty_name','No_hrs_per_week'))
+    print(facquery)
+   #queryset=
+    return JsonResponse({"values":facquery})

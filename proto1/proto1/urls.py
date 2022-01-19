@@ -38,5 +38,8 @@ urlpatterns = [
     path('runer/',views_2.runer),
     path('lab_editor/',views.lab_editor,name='lab_editor'),
     path('upload/',views_2.upload,name = 'upload'),
-    path('upload_submit',views_2.upload_submit,name='upload_submit')
+    path('upload_submit',views_2.upload_submit,name='upload_submit'),
+    path('facsort/',views.facsort,name='facsort'),
+    path('ajax/facsortaja',views.facsortaja,name='facsortaja')
+    
 ]

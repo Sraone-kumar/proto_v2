@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+
+
+{% endblock style %}
+
+
+{% block content %}
+
+
+<div class="navbar">
+
+    <a href="{% url 'editor_v2' %}">Editor</a>
+    <a href="{% url 'display'%}">Faculty</a>
+    <a class="current" href="{% url 'facsort' %}">facsort</a>
+    <a href="#students">Student</a>
+    <a href="#upload">Upload</a>
+  
+    
+</div>
+
+<div class="inputs">
+    <div class= "container" >
+    
+            <h4>branch: </h4>
+    
+        <div class="select-box" >
+            
+            <div class="options-container branch">
+
+                <!-- opitions load here -->
+            </div>
+            <div class = "selected" id = "branch">
+                select branch
+                <!-- name -->
+                <!-- input tag val = branch_id -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <button class="getFac asc">ASC</button>
+        <button class="getFac dsc">DESC</button>
+    </div>
+</div>
+<div class="table_div row">
+    <div class="column">
+        <table class = 'table' id='fac_sort_table'>
+        <thead>
+          <tr>
+            <th scope="col">faculty name</th>
+            <th scope="col">no of hours</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+{% block javascript %}
+
+<script>
+    
+const branch = document.querySelector("#branch");
+const branch_container = document.querySelector(".branch");
+var loaded_branch = false;
+
+
+branch.addEventListener("click",()=>{
+    var options;
+    if(!loaded_branch){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action:'scroll_list_branch'}, //<!--$('#branch').children[0].val()-->
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.branch').append(
+                        `<div class= "option">
+                        <input type="radio" class="radio" value="${e.branch_id}" name="category">
+                        <label for="${e.branch_id}">${e.branch_name}</label>
+                        </div>
+                        `
+                    )
+                    
+                })
+
+                loaded_branch = true;
+                options = document.querySelectorAll(".branch .option")
+                options.forEach(o=>{
+                    o.addEventListener("click",()=>{
+                        branch.innerHTML = o.querySelector('label').innerHTML;
+                        //console.log(o.querySelector('input').value)
+                        $('#branch').append(
+                            `<input type="hidden" value = "${o.querySelector('input').value}" >`
+                        )
+                        //$('#branch input').value = o.querySelector('input').value;
+                        //console.log($('#branch input').value)
+
+                        //console.log($('.selected').children('input').values)
+                        branch_container.classList.remove("active");
+                    })
+                })
+                
+            }
+
+        })
+    }
+    branch_container.classList.toggle("active")
+})
+$('.asc').click(function(){
+    $(".table tbody").empty();
+    $.ajax({
+
+        type: "GET",
+        url: "{% url 'facsortaja' %}",
+        data:{
+            action: "display_fac_table",
+            branch: $('#branch input').val()
+        },
+
+        success: function(response){
+                // response.values ---[{'facutly_id':value,"faculty_name":value,"no_of_hours":value},{dict},....]
+            
+            response.values.forEach(function(e){
+                //function(e)....return [{}]...val
+                $('#fac_sort_table tbody').append(
+                    `<tr>
+                        <td>${e.faculty_name}</td>    
+                        <td>${e.No_hrs_per_week}</td>    
+                    </tr>`
+                )
+                })
+        }
+
+
+    })
+})
+</script>
+{% endblock javascript %}

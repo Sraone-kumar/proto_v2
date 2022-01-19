@@ -99,3 +99,9 @@ def upload_submit(request):
     data_loader.loader(request)
     return render(request,'upload.html')
 
+def returnUploadVal(request):
+
+    
+    return JsonResponse({'data':data})
+
+
