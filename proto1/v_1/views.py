@@ -203,7 +203,7 @@ def styling_check(request):
 
 def facsortaja(request):
     branch = request.GET.get('branch')
-    print('branch is: ',branch)
+    #print('branch is: ',branch)
     query = list(Branch_table.objects.filter(branch_id = branch).values('department_id'))
     # print(list(query))
     facquery = list(faculty_table.objects.filter(Department_id_id = query[0].get('department_id') ).values('id','faculty_name','No_hrs_per_week'))

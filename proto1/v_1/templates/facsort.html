@@ -51,7 +51,7 @@
         <thead>
           <tr>
             <th scope="col">faculty name</th>
-            <th scope="col">no of hours</th>
+            <th scope="col">No of hours</th>
           </tr>
         </thead>
         <tbody>
@@ -128,8 +128,50 @@ $('.asc').click(function(){
 
         success: function(response){
                 // response.values ---[{'facutly_id':value,"faculty_name":value,"no_of_hours":value},{dict},....]
-            
-            response.values.forEach(function(e){
+            //    response.values.sort(compareFunction);
+
+            const tabVal=response.values
+            tabVal.sort((a,b) =>{
+                return a.No_hrs_per_week - b.No_hrs_per_week;
+            });
+
+            //console.log(tabVal);
+            tabVal.forEach(function(e){
+                //function(e)....return [{}]...val
+                $('#fac_sort_table tbody').append(
+                    `<tr>
+                        <td>${e.faculty_name}</td>    
+                        <td>${e.No_hrs_per_week}</td>    
+                    </tr>`
+                )
+                })
+        }
+
+
+    })
+})
+$('.dsc').click(function(){
+    $(".table tbody").empty();
+    $.ajax({
+
+        type: "GET",
+        url: "{% url 'facsortaja' %}",
+        data:{
+            action: "display_fac_table",
+            branch: $('#branch input').val()
+        },
+
+        success: function(response){
+                // response.values ---[{'facutly_id':value,"faculty_name":value,"no_of_hours":value},{dict},....]
+            //    response.values.sort(compareFunction);
+
+            const tabVal=response.values
+            tabVal.sort((a,b) =>{
+                return b.No_hrs_per_week - a.No_hrs_per_week;
+            });
+
+            //console.log(tabVal);
+            tabVal.forEach(function(e){
                 //function(e)....return [{}]...val
                 $('#fac_sort_table tbody').append(
                     `<tr>

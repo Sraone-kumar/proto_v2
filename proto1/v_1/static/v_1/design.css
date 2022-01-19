@@ -170,7 +170,7 @@ h4{
 } */
 
 /* save button */
-#save,.edit,#check{
+#save,.edit,#check,.asc,.dsc{
     border-style: none;
     width: 70px;
     height: 30px;
@@ -182,7 +182,7 @@ h4{
     float: left;
 }
 
-#save:hover,.edit:hover{
+#save:hover,.edit:hover,.asc,.dsc{
     background-color: #b5e7ff;
     color: black;
 }
