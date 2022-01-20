@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from v_1 import debugy
 from v_1 import views_2
 from v_1 import views
 
@@ -38,5 +39,12 @@ urlpatterns = [
     path('runer/',views_2.runer),
     path('lab_editor/',views.lab_editor,name='lab_editor'),
     path('upload/',views_2.upload,name = 'upload'),
-    path('upload_submit',views_2.upload_submit,name='upload_submit')
+    path('upload_submit',views_2.upload_submit,name='upload_submit'),
+    path('student/',views.student_display,name='student'),
+    path('login',views.login,name = 'login'),
+    path('logout',views.logout,name = 'logout'),
+
+
+    #testing urls.......
+    path('goo/',debugy.check_fac)
 ]

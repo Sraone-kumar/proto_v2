@@ -6,11 +6,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from v_1 import data_loader
 
-from .serializer_v_1 import BranchSerializer, ClassTableSerializer, SubjectsSerializer, fac_relationSerializer, facultySerializer
+from .serializer_v_1 import BranchSerializer, ClassTableSerializer, LabTableSerializer, SubjectsSerializer, fac_relationSerializer, facultySerializer
 
 from .sub_fac_model import sub_fac_relation
 
-from .models import Branch_table, Timings_table, Week_table, class_time_table, faculty_table, lab_information_table, subjects_table
+from .models import Branch_table, Timings_table, Week_table, class_time_table, faculty_table, lab_information_table, lab_time_table, subjects_table
 
 def sub_fac(request):
     return render(request,'sub_fac_editor.html')
@@ -56,18 +56,20 @@ def get_info_back(request):
         branch = request.GET.get('branch')
         semester_get = request.GET.get('semester')
         section = request.GET.get('section')
-        print(branch,semester_get,section)
+        #print(branch,semester_get,section)
         tasks = sub_fac_relation.objects.filter(branch_id_id = branch,section_id = section,semester_id = semester_get)
         classquery = class_time_table.objects.filter(branch_id = branch,section = section,semester= semester_get)
         department_id = list(Branch_table.objects.filter(branch_id=branch).values('department_id'))
-        print("department_id:",department_id[0]['department_id'])
+        labTimeTable = lab_time_table.objects.filter(branch_id = branch,semester_id = semester_get,section_id = section)
+       #print("department_id:",department_id[0]['department_id'])
         labQuery = list(lab_information_table.objects.filter(lab_department_id = department_id[0]['department_id'] ).values('lab_id','lab_name'))
-        print("lab_query: ",labQuery)
-        print(tasks)
-        print(classquery)
+        #print("lab_query: ",labQuery)
+        #print(tasks)
+        #print(classquery)
         serialize = fac_relationSerializer(tasks,many = True)
         serialize_class = ClassTableSerializer(classquery,many = True)
-        return Response({'sub_fac':serialize.data,'class':serialize_class.data,'lab':labQuery})  
+        serialize_lab = LabTableSerializer(labTimeTable,many =True)
+        return Response({'sub_fac':serialize.data,'class':serialize_class.data,'lab':labQuery,'lab_time_table':serialize_lab.data})  
 
 
 @api_view(['GET'])

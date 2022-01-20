@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'v_1/LoginStyle.css'%}">
+    <link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+    <link rel="stylesheet" href="{% static 'v_1/table.css' %}">
+
+</head>
+<body>
+    <div class="back">
+        <div class="navbar">
+            <a href="{% url 'student' %}">Student</a>
+        </div>
+        <div class="Circle">
+            <div  class="form">
+                <!-- <p>CnoteXD</p> -->
+                <form method=POST >
+                    {% csrf_token %}
+                    <input type="text" id="uname" name="username" class="input" placeholder="Username"><br>
+                    <input type="password" id="password" name="password" class="input" placeholder="Password"><br>
+                    <input type="submit" value="login" name="login" id="login">
+                </form>
+            </div>
+        </div>
+        <div id="ender"> <span id="end">@kitsw-2020</span></div>
+    </div>
+    
+</body>
+</html>

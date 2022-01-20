@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import AutoField, CharField, IntegerField
@@ -138,6 +139,7 @@ class lab_time_table(models.Model):
     id = AutoField(primary_key=True)
     lab = ForeignKey(lab_information_table,on_delete=CASCADE)
     lab_course = ForeignKey(subjects_table,on_delete=CASCADE)
+    lab_faculty = ForeignKey(faculty_table,on_delete=CASCADE,null=True)
     week = ForeignKey(Week_table,on_delete=CASCADE)
     time = ForeignKey(Timings_table,on_delete=CASCADE)
     branch = ForeignKey(Branch_table,on_delete=CASCADE)
@@ -145,11 +147,11 @@ class lab_time_table(models.Model):
     semester = ForeignKey(semester_table,on_delete=CASCADE)
     no_of_hours = IntegerField(null=True)
 
-    def __str__(self) -> str:
-        return self.lab
 
-
-
+class Editors(models.Model):
+    id = AutoField(primary_key=True)
+    user = ForeignKey(faculty_table,on_delete=CASCADE)
+    password = CharField(max_length=300)
 
 
 

@@ -2,7 +2,7 @@ from django.db.models import fields
 from rest_framework import serializers
 
 from .sub_fac_model import sub_fac_relation
-from .models import Block_table,Designation_table,department_table,class_time_table,Branch_table,faculty_table,subjects_table
+from .models import Block_table,Designation_table,department_table,class_time_table,Branch_table,faculty_table,subjects_table,lab_information_table,lab_time_table
 
 
 class BlockSerializer(serializers.ModelSerializer):
@@ -46,3 +46,17 @@ class fac_relationSerializer(serializers.ModelSerializer):
     class Meta:
         model = sub_fac_relation
         fields = ('subject','faculty')
+
+class Lab_infoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = lab_information_table
+        fields = ('lab_id','lab_name')
+
+
+class LabTableSerializer(serializers.ModelSerializer):
+    lab = Lab_infoSerializer()
+    lab_course = SubjectsSerializer()
+    lab_faculty = facultySerializer()
+    class Meta:
+        model = lab_time_table
+        fields = ('id','lab','lab_course','lab_faculty','no_of_hours','time','week')
