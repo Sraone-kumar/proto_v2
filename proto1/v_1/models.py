@@ -96,7 +96,7 @@ class subjects_table(models.Model):
 
 
 class faculty_table(models.Model):
-    id = AutoField(primary_key=True)
+    id = IntegerField(primary_key=True)
     faculty_id = IntegerField(unique=True)
     faculty_name = CharField(max_length=100)
     No_hrs_per_week = IntegerField()
