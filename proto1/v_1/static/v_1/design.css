@@ -173,7 +173,7 @@ h4{
 } */
 
 /* save button */
-#save,.edit,#check,#delete,#generate{
+#save,.edit,#check,#delete,#generate,#saver{
     border-style: none;
     width: 70px;
     height: 30px;
@@ -186,13 +186,14 @@ h4{
     box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
 
-#generate{
+/* saver is from faculty_assing page save button */
+#generate,#saver{  
     width: 100px;
     margin-top: 25px;
     height: 32px;
 }
 
-#save:hover,.edit:hover,#delete:hover,#generate:hover{
+#save:hover,.edit:hover,#delete:hover,#generate:hover,#saver:hover{
     background-color: #b5e7ff;
     color: black;
     

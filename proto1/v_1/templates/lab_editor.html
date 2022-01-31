@@ -19,7 +19,9 @@
 <a class="current" href="{% url 'lab_editor' %}">Editor</a>
 <a  href="{% url 'display'%}">Faculty</a>
 <a href="{% url 'student' %}">Student</a>
-<a href="#upload">Upload</a>
+<a href="{% url 'sub_fac' %}">Faculty Assigner</a>
+
+<a href="{% url 'admin:index' %}">dashboard</a>
 <a id = "logout" href="{% url 'logout' %}">logout</a>
 
 </div>
@@ -151,7 +153,7 @@
                 <input type="hidden" value = "" >  
                 <input type="hidden" value = "" >
                 <input type="hidden" value = "">
-                <input type="hidden" value = "{{timings.0.timing_id}}" class = ".timing">
+                <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
                 <span class="sub"></span><br>
                 <span class="fac"></span><br>
                 </td>
@@ -159,7 +161,7 @@
                     <input type="hidden" value = "" > 
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.1.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -167,7 +169,7 @@
                     <input type="hidden" value = "" > 
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.2.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -175,7 +177,7 @@
                     <input type="hidden" value = "" > 
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.3.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -183,7 +185,7 @@
                     <input type="hidden" value = "" > 
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.4.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -191,7 +193,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.5.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -199,7 +201,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.6.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -207,7 +209,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.7.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -218,7 +220,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.0.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -226,7 +228,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.1.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -234,7 +236,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.2.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -242,7 +244,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.3.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -250,7 +252,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.4.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -258,7 +260,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.5.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -266,7 +268,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.6.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -274,7 +276,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.7.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -285,7 +287,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.0.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -293,7 +295,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.1.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -302,7 +304,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.2.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -311,7 +313,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.3.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -320,7 +322,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.4.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -329,7 +331,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.5.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -338,7 +340,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.6.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -347,7 +349,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.7.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
                 </td>
@@ -358,7 +360,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.0.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -367,7 +369,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.1.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -376,7 +378,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.2.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -385,7 +387,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.3.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -394,7 +396,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.4.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -403,7 +405,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.5.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -412,7 +414,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.6.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -421,7 +423,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.7.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -433,7 +435,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.0.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -442,7 +444,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.1.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -451,7 +453,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.2.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -460,7 +462,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.3.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -469,7 +471,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.4.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -478,7 +480,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.5.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -487,7 +489,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.6.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -496,7 +498,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.7.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -508,7 +510,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.0.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -517,7 +519,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.1.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -526,7 +528,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.2.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -535,7 +537,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.3.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -544,7 +546,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.4.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -553,7 +555,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.5.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -562,7 +564,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.6.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -571,7 +573,7 @@
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "" >
                     <input type="hidden" value = "">
-                    <input type="hidden" value = "{{timings.7.timing_id}}" class = ".timing">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
                     <span class="sub"></span><br>
                     <span class="fac"></span><br>
 
@@ -600,6 +602,17 @@
             </tbody>
         </table>
     </div>
+    <div class="table-box-3">
+        <table class="table fac_sort_table">
+            <thead>
+                <th id="fac_head">facutly</th>
+                <th id="fac_class_head">no of classes</th>
+            </thead>
+            <tbody>           
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <div class="table-container-3">
@@ -864,17 +877,45 @@ $('#section').click(function(){
 
 
 $('.edit').click(function(){
-    // $('#class_time_table tbody tr td').show();
-    // $('.class_time_table tbody tr td').find('td').attr('colspan',1);
+    $('#class_time_table tbody tr td').show();
+    $('#class_time_table tbody tr').find('td').attr('colspan',1);
     $('#class_time_table tbody tr td').find('.lab').remove()
+    $('#class_time_table tbody tr td').find('.fac').empty()
+    $('#class_time_table tbody tr td').find('.sub').empty()
+
+
     // $('#class_time_table tbody').remove();
     // $('#class_time_table').append(table_store);
     $('.relate_table tbody').empty();
     $('.lab_table tbody').empty();
+    $('.fac_sort_table tbody').empty();
 
     branch_get = $('#branch input').val()
     semester = $('#semester input').val()
     section = $('#section input').val()
+
+
+    $.ajax({
+        type:'GET',
+        url:"{% url 'get_info' %}",
+        data:{
+            action:"fac_sort_info",
+            branch:branch_get,
+        },
+        success:function(res){
+            res.values.forEach(function(e){
+                    $('.fac_sort_table tbody').append(
+                    `
+                    <tr>
+                        <td>${e.faculty_name}</td>
+                        <td>${e.No_hrs_per_week}</td>
+                        </tr>
+                    `
+                )
+            })
+            
+        }
+    })
 
     console.log(branch_get+","+semester+","+section)
     $.ajax({
@@ -888,6 +929,8 @@ $('.edit').click(function(){
         },
 
         success: function(res){
+
+
             
             res.sub_fac.forEach(function(e){
                 $('.relate_table tbody').append(
@@ -905,12 +948,17 @@ $('.edit').click(function(){
             })
 
             res.class.forEach(function(e){
-                $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_name'])
-                //$("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_name'])
+                // console.log(e['subject_id']['subject_name'])
+                if(e['subject_id']!=null){
+                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_name'])
+                    // $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_name'])
+                }
+                
 
             })
 
             res.lab_time_table.forEach(function(e){
+                console.log(e['lab_course']['subject_name'])
                 $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
                 $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
                 $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_name'])
@@ -951,6 +999,8 @@ $('.edit').click(function(){
         
     })
 
+    //ajax call to load fac_sort
+   
 })
 
 $('#save').click(function(){
@@ -970,6 +1020,7 @@ $('#save').click(function(){
     console.log("branch: "+branche+" semester: "+semester+" block: "+block+" room: "+ room+" section: "+section)
     $('#class_time_table tbody tr').each(function(){
         day = $('th input',this).val()
+        let lab = "null";
         $('td',this).each(function(){
             if($(this).attr('colspan')>1){
                 action = 'insert_lab';
@@ -977,6 +1028,8 @@ $('#save').click(function(){
                 no_of_hours = $(this).attr('colspan')
             }else{
                 action = 'insert';
+                no_of_hours = $(this).attr('colspan')
+
             }
             inputs = $(this).children()
             if(inputs[0].value === "edited"){
@@ -1047,36 +1100,6 @@ function drop(ev){
         lis[6].innerHTML = lis_get[1].innerHTML
 
     
-    //console.log(lis_get)
-    //console.log(lis_get[0].innerHTML)
-    //console.log(lis_get[1].innerHTML)
-    //console.log(lis_get[2].innerHTML)
-
-    //ids of dragging elements
-    //val_id = $('#'+id).children()[0].id
-    //val_name = $('#'+id).children()[1].id
-    //val_val = $('#'+id).children()[2].id
-    //ids of input elements...
-    
-    //input_id_id = lis[0].id
-    //input_name_id = lis[1].id
-    //input_val_id = lis[2].id
-    //tranfer of data using ids
-    //$('#'+input_id_id).val($('#'+val_id).text())
-    //$('#'+input_name_id).val($('#'+val_name).text())
-    //$('#'+input_val_id).val($('#'+val_val).text())
-    //$('#'+ev.target.id).text($('#'+val_name).text())
-
-
-
-    
-    //console.log($('#'+id).children()[1].id)
-    //console.log($('#'+val).text())
-    
-    //console.log(lis[0])
-    //console.log(lis[1])
-    //console.log(lis[2])
-
 
 }
 
@@ -1133,21 +1156,111 @@ function dragstart_handler(ev){
 <script>
 //delete script
 $('#delete').click(function(){
+    res = window.confirm("Selected will be deleted permantely, select ok to delete");
     console.log("colspan"+firstElement.prop('colSpan'))
-    if(firstElement.prop('colSpan') === 1){
-        firstElement.find('.sub').empty()
-        // firstElement.find('.lab').remove();
-    }else{
-        firstElement.prevAll().slice(0,firstElement.attr('colspan')-1).show();
-        firstElement.find('.sub').empty();
-        firstElement.find('.fac').empty();
-        firstElement.attr('colspan',1);
-        firstElement.find('.lab').remove();
+    if(res){
+        if(firstElement.prop('colSpan') === 1){
+            firstElement.find('.sub').empty()
+            firstElement.find('.fac').empty()
+            $.ajax({
+                type: "GET",
+                url: "{% url 'delete' %}",
+                data: {
+                    action: "delete_class",
+                    time: firstElement.children('.timing').val(),
+                    week: firstElement.siblings('th').children('input').val(),
+                    branch: branch_get,
+                    semester: semester,
+                    section: section,
+                },
 
+                success: function(e){
+                    alert("succesfully deleted")
+                }
+            })
+
+            
+            // firstElement.find('.lab').remove();
+        }else{
+
+            $.ajax({
+                type: "GET",
+                url: "{% url 'delete' %}",
+                data: {
+                    action: "delete_lab",
+                    time: firstElement.children('.timing').val(),
+                    week: firstElement.siblings('th').children('input').val(),
+                    branch: branch_get,
+                    semester: semester,
+                    section: section,
+                },
+
+                success: function(e){
+                    alert("succesfully deleted")
+                }
+            })
+            
+
+            firstElement.prevAll().slice(0,firstElement.attr('colspan')-1).show();
+            firstElement.find('.sub').empty();
+            firstElement.find('.fac').empty();
+            firstElement.attr('colspan',1);
+            firstElement.find('.lab').remove();
+
+        }
+    }else{
+        console.log("do nothing");
     }
+    
     console.log(firstElement.prop('colSpan'));
 })
 
 </script>
+
+<!-- sort script... -->
+<script>
+    function sortTable(f,n){
+	var rows = $('.fac_sort_table tbody  tr').get();
+
+	rows.sort(function(a, b) {
+
+		var A = getVal(a);
+		var B = getVal(b);
+
+		if(A < B) {
+			return -1*f;
+		}
+		if(A > B) {
+			return 1*f;
+		}
+		return 0;
+	});
+
+	function getVal(elm){
+		var v = $(elm).children('td').eq(n).text().toUpperCase();
+		if($.isNumeric(v)){
+			v = parseInt(v,10);
+		}
+		return v;
+	}
+
+	$.each(rows, function(index, row) {
+		$('.fac_sort_table').children('tbody').append(row);
+	});
+}
+var f_sl = 1;
+var f_nm = 1;
+$("#fac_head").click(function(){
+    f_sl *= -1;
+    var n = $(this).prevAll().length;
+    sortTable(f_sl,n);
+});
+$("#fac_class_head").click(function(){
+    f_nm *= -1;
+    var n = $(this).prevAll().length;
+    sortTable(f_nm,n);
+});
+</script>
+
 
 {% endblock javascript %}

@@ -20,7 +20,7 @@ from v_1 import views_2
 from v_1 import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls,name='admin'),
     path('index/',views.index),
     path('get/ajax/submit_info', view=views.sumbit_info,name="submit_info"),
     path('testCheck/',views.testCheck),
@@ -31,20 +31,22 @@ urlpatterns = [
     path('check_view/',views.check_view,name = 'check_view'),
     path('styling/',views.styling_check),
     path('editor-2/',views.editor_v2,name = 'editor_v2'),
-    path('sub_fac/',views_2.sub_fac),
+    path('sub_fac/',views_2.sub_fac,name = 'sub_fac'),
     path('get/ajax/get_info',views_2.get_info,name='get_info'),
     path('get/ajax/get_info_back',views_2.get_info_back,name='get_info_back'),
     path('check/',views_2.check),
     path('script/',views_2.total_script),
-    path('runer/',views_2.runer),
     path('lab_editor/',views.lab_editor,name='lab_editor'),
     path('upload/',views_2.upload,name = 'upload'),
     path('upload_submit',views_2.upload_submit,name='upload_submit'),
     path('student/',views.student_display,name='student'),
-    path('login',views.login,name = 'login'),
+    path('',views.login,name = 'login'),
     path('logout',views.logout,name = 'logout'),
+    path('delete/',views.delete,name = 'delete'),
+    path('lab_display',views.lab_display,name="lab_display"),
 
 
     #testing urls.......
-    path('goo/',debugy.check_fac)
+    path('goo/',debugy.check_fac),
+    path('runer/',views_2.runer),
 ]

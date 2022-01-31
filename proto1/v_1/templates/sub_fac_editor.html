@@ -1,49 +1,111 @@
 {% extends 'base.html'%}
 
 
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+
+
+{% endblock style %}
+
 {% block content  %}
 
-<select name="department" id="department">
-    <option value="">select department</option>
-</select>
 
-<select name="branch" id="branch">
-    <option value="">select branch</option>
-</select>
+<div class="navbar">
 
-<select name="semester" id="semester">
-    <option value="">select semester</option>
-</select>
+    <a href="{% url 'lab_editor' %}">Editor</a>
+    <a  href="{% url 'display'%}">Faculty</a>
+    <a  href="{% url 'student' %}">Student</a>
+    <a class = "current" href="{% url 'sub_fac' %}">Faculty Assigner</a>
+    <a href="{% url 'admin:index' %}">dashboard</a>
+    <a id = "logout" href="{% url 'logout' %}">logout</a>
 
-<select name="section" id="section">
-    <option value="">select section</option>
-</select>
-
-<button id = "generate">generate</button>
+    
+</div>
 
 
-<div class = "row">
-    <div class = "column">
+
+
+<div class="inputs">
+    <div class= "container" >
+    
+            <h4>branch: </h4>
+    
+        <div class="select-box" >
+            
+            <div class="options-container branch"></div>
+            <div class = "selected" id = "branch">
+                select branch
+            </div>
+    
+        </div>
+        
+    </div>
+    
+    
+    <div class="container">
+    
+        <h4>semester: </h4>
+    
+        <div class="select-box" >
+            
+            <div class="options-container semester"></div>
+            <div class = "selected" id = "semester">
+                select semester
+            </div>
+    
+        </div>
+    
+    
+    </div>
+    
+    <div class="container">
+    
+        <h4>section: </h4>
+    
+        <div class="select-box" >
+            
+            <div class="options-container section"></div>
+            <div class = "selected" id = "section">
+                select section
+            </div>
+    
+        </div>
+    
+    
+    </div>
+
+    <div class="container"><button id = "generate" >generate</button></div>
+    <div class="container"> <button id= "saver">save</button>  </div>
+      
+</div>
+
+<div class="table_div" >
+
+    
+
+    <div>
         <table class = "table subject">
             <thead>
                 <th>subject</th>
-                <th>faculty</th>
+                <th>faculty assigned</th>
             </thead>
             <tbody>
 
             </tbody>
         </table>
     </div>
-    <div class = "column">
+    <div>
          <table class="table faculty">
-            <thead><th>faculty</th></thead>
+            <thead><th>Assign faculty</th></thead>
             <tbody></tbody>
         </table>
     </div>
 </div>
 
 
-<button id= "save">save</button>
+
+
 
 
 
@@ -53,86 +115,141 @@
 
 <script>
 
-$('#branch').click(function(){
-    $(this).off('click');
-    $.ajax({
-        type: 'GET',
-        url: "{% url 'submit_info' %}",
-        data: {
-            action: "scroll_list_branch"
-        },
+const branch = document.querySelector("#branch");
+const branch_container = document.querySelector(".branch");
+var loaded_branch = false;
 
-        success: function(res){
-            res.values.forEach(function(e){
-                $('#branch').append(
-                    `<option value = "${e.branch_id}">${e.branch_name}</option>`
 
-                )
-            })
-        }
-    })
+branch.addEventListener("click",()=>{
+    var options;
+    if(!loaded_branch){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action:'scroll_list_branch'},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.branch').append(
+                        `<div class= "option">
+                        <input type="radio" class="radio" value="${e.branch_id}" name="category">
+                        <label for="${e.branch_id}">${e.branch_name}</label>
+                        </div>
+                        `
+                    )
+                    
+                })
+
+                loaded_branch = true;
+                options = document.querySelectorAll(".branch .option")
+                options.forEach(o=>{
+                    o.addEventListener("click",()=>{
+                        branch.innerHTML = o.querySelector('label').innerHTML;
+                        //console.log(o.querySelector('input').value)
+                        $('#branch').append(
+                            `<input type="hidden" value = "${o.querySelector('input').value}" >`
+                        )
+                        //$('#branch input').value = o.querySelector('input').value;
+                        //console.log($('#branch input').value)
+
+                        //console.log($('.selected').children('input').values)
+                        branch_container.classList.remove("active");
+                    })
+                })
+                
+            }
+
+        })
+    }
+    branch_container.classList.toggle("active")
 })
+  
+var loaded_semester = false;
 
-$('#department').click(function(){
-    $(this).off('click');
-    $.ajax({
-        type: 'GET',
-        url: "{% url 'submit_info' %}",
-        data: {
-            action: "scroll_list"
-        },
-
-        success: function(res){
-            res.values.forEach(function(e){
-                $('#department').append(
-                    `<option value = "${e.department_id}">${e.department_name}</option>`
-
-                )
-            })
-        }
-    })
-})
 
 $('#semester').click(function(){
-    $(this).off('click');
-    $.ajax({
-        type: 'GET',
-        url: "{% url 'submit_info' %}",
-        data: {
-            action: "scroll_list_semester"
-        },
+    if(!loaded_semester){
 
-        success: function(res){
-            res.values.forEach(function(e){
-                $('#semester').append(
-                    `<option value = "${e.semester_id}">${e.semester_number}</option>`
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action: 'scroll_list_semester'},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.semester').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.semester_id}" name="category">
+                        <label for="${e.semester_id}">${e.semester_number}</label>
+                        </div>
+                        `
+                    )
+                })
+                loaded_semester = true;
+                $('.semester').addClass('active')
+                $('.semester .option').click(function(){
+                    document.querySelector("#semester").innerHTML = $(this).children('label').html()
+                    $('#semester').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    $('.semester').removeClass('active')
+                })
 
-                )
-            })
-        }
-    })
+                
+                
+            }
+        })
+    }
+
+    console.log("its is here")
+    $('.semester').toggleClass('active')
+    
+    
 })
 
+
+loaded_section = false;
 $('#section').click(function(){
-    $(this).off('click');
-    $.ajax({
-        type: 'GET',
-        url: "{% url 'submit_info' %}",
-        data: {
-            action: "scroll_list_section"
-        },
 
-        success: function(res){
-            res.values.forEach(function(e){
-                $('#section').append(
-                    `<option value = "${e.section_id}">${e.section_number}</option>`
+    if(!loaded_section){
+        $.ajax({
 
-                )
-            })
-        }
-    })
+            type: "GET",
+            url:"{% url 'submit_info' %}",
+            data: {
+                action: 'scroll_list_section',
+            },
+
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.section').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.section_id}" name="category">
+                        <label for="${e.section_id}">${e.section_number}</label>
+                        </div>
+                        `
+                    )
+                })
+
+                loaded_section = true;
+                $('.section').addClass('active')
+                $('.section .option').click(function(){
+                    loaded_room = false;
+                    document.querySelector("#section").innerHTML = $(this).children('label').html()
+                    $('#section').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    block_value = $(this).children('input').val();
+                    $('.section').removeClass('active')
+                })
+            }
+
+
+        })
+    }
+
+    $('.section').toggleClass('active');
 })
-
 
 
 
@@ -145,35 +262,74 @@ $('#generate').click(function(){
         url: "{% url 'get_info' %}",
         data: {
             action: "info",
-            department: $('#department').val(),
-            semester: $('#semester').val(),
+            branch: $('#branch input').val(),
+            semester: $('#semester input').val(),
+            section: $('#section input').val(),
         },
 
         success: function(res){
-            res.values_1.forEach(function(e){
-                $('.faculty tbody').append(
-                    `<tr draggable = "true" ondragstart="drag(event)" id="fac_${e.id}">
-                        <td>${e.faculty_name}
-                            <input type="hidden"  value = "${e.id}">
-                            </td>
+            console.log(res.values_1)
+            console.log(res.values_2)
+            console.log(res.sub_fac)
+
+
+            if(res.values_id !== undefined){
+                    res.values_1.forEach(function(e){
+                    $('.faculty tbody').append(
+                        `<tr draggable = "true" ondragstart="drag(event)" id="fac_${e.id}">
+                            <td>${e.faculty_name}
+                                <input type="hidden"  value = "${e.id}">
+                                </td>
+                            </tr>
+                        `
+                    )
+                })
+                
+                    res.values_2.forEach(function(e){
+                    $('.subject tbody').append(
+                        `<tr>
+                            <td>${e.subject_name}
+                                <input type="hidden" value = "${e.subject_id}"></td>
+                            <td ondrop="drop(event)" ondragover="allowDrop(event)" id = "sub_${e.subject_id}">
+                                <input type="hidden">
+                                </td>
                         </tr>
-                    `
-                )
-            })
+                        `
+                    )
+                })
+            }else{
+                res.fac_sub.forEach(function(e){
+                    $('.subject tbody').append(
+                        `
+                        <tr>
+                            <td>${e['subject']['subject_name']}
+                                <input type="hidden" value = "${e['subject']['subject_id']}"></td>
+                            <td ondrop="drop(event)" ondragover="allowDrop(event)" id = "fac_${e['faculty']['id']}">
+                                ${e['faculty']['faculty_name']}
+                                <input type="hidden">
+                                </td>
+                        </tr>
+                        
+                        `
+                    )
+                })
 
 
-            res.values_2.forEach(function(e){
-                $('.subject tbody').append(
-                    `<tr>
-                        <td>${e.subject_name}
-                            <input type="hidden" value = "${e.subject_id}"></td>
-                        <td ondrop="drop(event)" ondragover="allowDrop(event)" id = "sub_${e.subject_id}">
-                            <input type="hidden">
-                            </td>
-                    </tr>
-                    `
-                )
-            })
+                res.faculty.forEach(function(e){
+                    $('.faculty tbody').append(
+                        `<tr draggable = "true" ondragstart="drag(event)" id="fac_${e.id}">
+                            <td>${e.faculty_name}
+                                <input type="hidden"  value = "${e.id}">
+                                </td>
+                            </tr>
+                        `
+                    )
+                })
+            }
+            
+
+
+            
         }
         
         //faculty-->department, branch,semester,section
@@ -182,10 +338,10 @@ $('#generate').click(function(){
 })
    
 
-$('#save').click(function(){
-    branch = $('#branch').val();
-    section = $("#section").val();
-    semester = $("#semester").val();
+$('#saver').click(function(){
+    branche = $('#branch input').val();
+    section = $("#section input").val();
+    semester = $("#semester input").val();
     console.log(branch+","+section+","+semester);
     $('.subject tbody tr').each(function(){
         subject = $(this).children()[0].childNodes[1].value
@@ -202,7 +358,7 @@ $('#save').click(function(){
             url: "{% url 'get_info' %}",
             data: {
                 action: 'submit',
-                branch: branch,
+                branch: branche,
                 section: section,
                 semester: semester,
                 subject: subject,

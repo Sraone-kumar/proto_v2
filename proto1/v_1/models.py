@@ -112,8 +112,8 @@ class faculty_table(models.Model):
 
 class class_time_table(models.Model):
     id = AutoField(primary_key=True)
-    subject_id = models.ForeignKey(subjects_table, on_delete=CASCADE)
-    faculty_id = ForeignKey(faculty_table, on_delete=CASCADE)
+    subject_id = models.ForeignKey(subjects_table,null=True, on_delete=CASCADE)
+    faculty_id = ForeignKey(faculty_table,null=True, on_delete=CASCADE)
     weekday_id = ForeignKey(Week_table,on_delete=CASCADE)
     timing_id = ForeignKey(Timings_table,on_delete=CASCADE)
     Room_with_block = ForeignKey(Room_table,on_delete=CASCADE)
@@ -137,8 +137,8 @@ class lab_information_table(models.Model):
 
 class lab_time_table(models.Model):
     id = AutoField(primary_key=True)
-    lab = ForeignKey(lab_information_table,on_delete=CASCADE)
-    lab_course = ForeignKey(subjects_table,on_delete=CASCADE)
+    lab = ForeignKey(lab_information_table,on_delete=CASCADE,null=True)
+    lab_course = ForeignKey(subjects_table,on_delete=CASCADE,null=True)
     lab_faculty = ForeignKey(faculty_table,on_delete=CASCADE,null=True)
     week = ForeignKey(Week_table,on_delete=CASCADE)
     time = ForeignKey(Timings_table,on_delete=CASCADE)

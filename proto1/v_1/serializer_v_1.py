@@ -60,3 +60,10 @@ class LabTableSerializer(serializers.ModelSerializer):
     class Meta:
         model = lab_time_table
         fields = ('id','lab','lab_course','lab_faculty','no_of_hours','time','week')
+    
+class SubFacSerializer(serializers.ModelSerializer):
+    subject= SubjectsSerializer()
+    faculty = facultySerializer()
+    class Meta:
+        model = sub_fac_relation
+        fields = ('id','subject','faculty')
