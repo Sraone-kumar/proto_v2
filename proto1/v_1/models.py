@@ -118,8 +118,8 @@ class class_time_table(models.Model):
     timing_id = ForeignKey(Timings_table,on_delete=CASCADE)
     Room_with_block = ForeignKey(Room_table,on_delete=CASCADE)
     branch = ForeignKey(Branch_table,on_delete=CASCADE)
-    section = IntegerField()
-    semester = IntegerField()
+    section = ForeignKey(section_table,on_delete=CASCADE,default=None,null = True)
+    semester = ForeignKey(semester_table,on_delete=CASCADE,default=None,null=True)
 
 
 

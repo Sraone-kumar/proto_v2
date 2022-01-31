@@ -146,7 +146,7 @@ def insert_into_class_time_table(request):
     if not check_if_query.exists():
         fac_query.update(No_hrs_per_week = counter)
         # fac_hrs_update.save()
-        insert_query = class_time_table.objects.create(subject_id_id = subject,faculty_id_id = faculty,weekday_id_id = weekday,timing_id_id = timing,Room_with_block_id = room,branch_id = branch,section=section,semester = semester)
+        insert_query = class_time_table.objects.create(subject_id_id = subject,faculty_id_id = faculty,weekday_id_id = weekday,timing_id_id = timing,Room_with_block_id = room,branch_id = branch,section_id=section,semester_id = semester)
         insert_query.save()
     else:
 

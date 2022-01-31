@@ -16,7 +16,7 @@
     <a href="{% url 'lab_editor' %}">Editor</a>
     <a  href="{% url 'display'%}">Faculty</a>
     <a href="{% url 'student' %}">Student</a>
-    <a  href="{% url 'sub_fac' %}">Faculty Assigner</a>
+    <!-- <a  href="{% url 'sub_fac' %}">Faculty Assigner</a> -->
     <a class="current" href="{% url 'lab_display' %}">lab</a>
 
     <a href="{% url 'admin:index'%}">dashboard</a>
@@ -73,264 +73,456 @@
 </div>
 
 <div class="table_div">
-<table class = 'table' id='display_fac_table'>
-    <thead>
-        <th>date/time</th>
-        <th>9:30 - 10:30</th>
-        <th>10:30 - 11:20</th>
-        <th>11:20 - 12:10</th>
-        <th>12:10 - 1:00</th>
-        <th>Lunch_break</th>
-        <th>2:00 - 2:50</th>
-        <th>2:50 - 3:40</th>
-        <th>3:40 - 4:30</th>
-    </thead>
+    <table class = 'table' id='class_time_table'>
+        <thead>
+            <th>date/time</th>
+            <th>9:30 - 10:30</th>
+            <th>10:30 - 11:20</th>
+            <th>11:20 - 12:10</th>
+            <th>12:10 - 1:00</th>
+            <th>Lunch_break</th>
+            <th>2:00 - 2:50</th>
+            <th>2:50 - 3:40</th>
+            <th>3:40 - 4:30</th>
+        </thead>
 
-    <tbody>
-    <tr>
-        
-        <th class = "day" id="day_{{days.0.week_id}}"> Monday  </th>
-        <td class ="{{timings.0.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-        <span></span><span></span><span></span><br>
-        <span class="subject"></span>
-        </td>
-        <td class ="{{timings.1.timing_id}}"  ondrop = "drop(event)" ondragover="allowDrop(event)" >
-           <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-    </tr>
-    <tr>
-        <th class ="{{timings.0.timing_id}}" id = "day_{{days.1.week_id}}">Tuesday </th>
-        <td class ="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-           <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class ="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-    </tr>
-    <tr>
-        <th class = "day" id = "day_{{days.2.week_id}}">wednesday </th>
-        <td class="{{timings.0.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-        <td class="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+        <tbody>
+        <tr>
+            
+            <th class = "day"> Monday <input type="hidden" value = {{days.0.week_id}}> </th>
+            <td id='r_1_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+            <input type="hidden" value = "" >  
+            <input type="hidden" value = "" >
+            <input type="hidden" value = "">
+            <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+            <span class="sub"></span><br>
+            <span class="fac"></span><br>
+            </td>
+            <td id='r_1_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" > 
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_1_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" > 
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_1_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" > 
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_1_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" > 
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_1_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_1_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_1_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+        </tr>
+        <tr>
+            <th class = "day">Tuesday <input type="hidden" value = {{days.1.week_id}}> </th>
+            <td id='r_2_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_2_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_2_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_2_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_2_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_2_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_2_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_2_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+        </tr>
+        <tr>
+            <th class = "day" >wednesday <input type="hidden" value = {{days.2.week_id}}></th>
+            <td id='r_3_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+            <td id='r_3_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-           <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_3_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_3_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_3_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-           <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_3_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_3_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
-        </td>
-    </tr>
-    <tr>
-        <th class = "day" id = "day_{{days.3.week_id}}">Thursday  </th>
-        <td class="{{timings.0.timing_id}}"  ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_3_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+            </td>
+        </tr>
+        <tr>
+            <th class = "day">Thursday <input type="hidden" value = {{days.3.week_id}}> </th>
+            <td id='r_4_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_4_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-           <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_4_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_4_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_4_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_4_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_4_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_4_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-    </tr>
-    <tr>
-        <th class = "day" id="day_{{days.4.week_id}}">Friday <input type="hidden" value = {{days.4.week_id}}></th>
-        <td class="{{timings.0.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+        </tr>
+        <tr>
+            <th class = "day">Friday <input type="hidden" value = {{days.4.week_id}}></th>
+            <td id='r_5_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_5_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_5_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_5_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_5_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_5_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_5_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_5_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-    </tr>
-    <tr>
-        <th class = "day" id="day_{{days.5.week_id}}">Saturday </th>
-        <td class="{{timings.0.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+        </tr>
+        <tr>
+            <th class = "day">Saturday <input type="hidden" value = {{days.5.week_id}}></th>
+            <td id='r_6_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.1.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_6_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.2.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_6_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.3.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_6_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.4.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-           <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_6_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.5.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_6_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.6.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_6_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-        <td class="{{timings.7.timing_id}}" ondrop = "drop(event)" ondragover="allowDrop(event)" >
-            <span></span><span></span><span></span><br>
-            <span class="subject"></span>
+            </td>
+            <td id='r_6_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
 
-        </td>
-    </tr>
-    </tbody>
+            </td>
+        </tr>
+        </tbody>
 
-</table>
+    </table>
 </div>
 
 
@@ -483,7 +675,7 @@ $('#generate').click(function(){
     $.ajax({
 
         type: "GET",
-        url: "{% url 'get_info_bac' %}",
+        url: "{% url 'get_info_back' %}",
         data:{
             action: "display_lab_info",
             department: $('#department input').val(),
@@ -491,13 +683,14 @@ $('#generate').click(function(){
         },
 
         success: function(response){
+            console.log(response.values)
             response.values.forEach(function(e){
                 $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
                 $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
                 $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_name'])
                 // $("#r_"+e['week']+"_c_"+e['time']).empty();
                 $("#r_"+e['week']+"_c_"+e['time']).append(
-                    `<span class = "lab">${e['lab']['lab_name']}</span>`
+                    `<span class = "lab">${e['semester']['semester_number']}-${e['branch']['branch_name']}-${e['section']['section_number']}</span>`
                 )
 
             })

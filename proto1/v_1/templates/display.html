@@ -16,7 +16,7 @@
     <a href="{% url 'lab_editor' %}">Editor</a>
     <a class = "current" href="{% url 'display'%}">Faculty</a>
     <a href="{% url 'student' %}">Student</a>
-    <a href="{% url 'sub_fac' %}">Faculty Assigner</a>
+    <!-- <a href="{% url 'sub_fac' %}">Faculty Assigner</a> -->
     <a href="{% url 'lab_display' %}">lab</a>
     <a href="{% url 'admin:index'%}">dashboard</a>
     <a id = "logout" href="{% url 'logout' %}">logout</a>
@@ -487,9 +487,9 @@ $('#generate').click(function(){
 
         success: function(response){
             response.forEach(function(e){
-                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[0].innerHTML = e['semester']+"-"
+                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[0].innerHTML = e['semester']['semester_number']+"-"
                 $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[1].innerHTML = e['branch']['branch_name']
-                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[2].innerHTML = "-"+e['section']
+                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[2].innerHTML = "-"+e['section']['section_number']
                 $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[4].innerHTML = e['subject_id']['subject_name']
                 //console.log(e.weekday_id_id)
 

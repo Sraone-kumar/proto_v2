@@ -88,8 +88,10 @@ def get_info_back(request):
     if request.GET.get('action') == 'display_lab_info':
         dep = request.GET.get('department')
         lab = request.GET.get('lab')
-        query = lab_time_table.objects.filter(department_id_id = dep,lab_id = lab)
+        get_branch = Branch_table.objects.filter(department_id = dep).values('branch_id')
+        query = lab_time_table.objects.filter(branch_id = get_branch[0].get('branch_id'),lab_id = lab)
         seri_lab = LabTableSerializer(query,many = True)
+        # print(seri_lab.data)
         return Response({'values':seri_lab.data})
 
 @api_view(['GET'])
@@ -100,8 +102,8 @@ def check(request):
 
 
 def total_script(request):
-    time = list(Timings_table.objects.all().values());
-    weekdays = list(Week_table.objects.all().values());
+    time = list(Timings_table.objects.all().values())
+    weekdays = list(Week_table.objects.all().values())
     return render(request,'total_script.html',{'time':time,'week':weekdays})
 
 
