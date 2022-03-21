@@ -1,0 +1,30 @@
+{% extends 'admin/change_list.html' %}
+
+{% block object-tools %}
+
+<!-- <p>URL of this page: {{request.path}}</p> -->
+<input type="hidden" id="url" value = "{{request.path}}">
+
+<h4>upload information:</h4>
+{% load static %}
+<form id = 'fontsize-form' action="{% url 'uploader' %}" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    <input type="hidden" id = "action" name = "action" value="">
+    <input type="file" name="upload">
+    <button type="submit" id = "submit">upload</button>
+</form>
+
+{{ block.super }}
+
+
+{% block javascript %}
+
+<script>    
+
+document.querySelector("#action").value = document.querySelector('#url').value.split('/')[3];
+
+</script>
+
+{% endblock javascript %}
+
+{% endblock object-tools %}

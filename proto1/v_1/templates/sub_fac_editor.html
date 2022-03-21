@@ -268,13 +268,14 @@ $('#generate').click(function(){
         },
 
         success: function(res){
-            console.log(res.values_1)
-            console.log(res.values_2)
+            // console.log(res.values_1)
+            // console.log(res.values_2)
             console.log(res.sub_fac)
-
-
-            if(res.values_id !== undefined){
-                    res.values_1.forEach(function(e){
+            if(res.error!== undefined){
+                alert("Error fetching data")
+            }
+            else if(res.subjects !== undefined){
+                    res.faculty.forEach(function(e){
                     $('.faculty tbody').append(
                         `<tr draggable = "true" ondragstart="drag(event)" id="fac_${e.id}">
                             <td>${e.faculty_name}
@@ -285,7 +286,7 @@ $('#generate').click(function(){
                     )
                 })
                 
-                    res.values_2.forEach(function(e){
+                    res.subjects.forEach(function(e){
                     $('.subject tbody').append(
                         `<tr>
                             <td>${e.subject_name}
