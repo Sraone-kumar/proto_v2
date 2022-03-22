@@ -10,6 +10,8 @@ def uploadBasic(request):
     if(bool(request.FILES)):
         if(request.POST.get('action') == 'subjects_table'):
             subjects_upload(request.FILES['upload'])
+        if(request.POST.get('action') == 'faculty_table'):
+            faculty_upload(request.FILES['upload'])
 
     # print(request.path)
 
@@ -43,3 +45,29 @@ def subjects_upload(excel):
     ]
 
     models.subjects_table.objects.bulk_create(objs)
+
+
+def faculty_upload(excel):
+    pandasObj = pd.read_excel(excel)
+
+    uploader = uploadApi.Upload(models.faculty_table, pandasObj)
+
+    uploader.uploadChecker('faculty_name', 'faculty_name')
+    uploader.forienKeyConverter(models.Designation_table, 'designation_id')
+    uploader.forienKeyConverter(models.department_table, 'department_id')
+
+    row_iter = uploader.PandasObject.iterrows()
+    objs = [
+        models.faculty_table(
+            faculty_id=row['faculty_id'],
+            faculty_short_name=row['faculty_short_name'],
+            faculty_name=row['faculty_name'],
+            No_hrs_per_week=row['No_hrs_per_week'],
+            Designation_id=row['Designation_id'],
+            Department_id=row['Department_id']
+        )
+
+        for index, row in row_iter
+    ]
+
+    models.faculty_table.objects.bulk_create(objs)

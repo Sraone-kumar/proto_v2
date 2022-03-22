@@ -90,7 +90,7 @@ class Branch_table(models.Model):
 class subjects_table(models.Model):
     subject_id = AutoField(primary_key=True)
     subject_code = CharField(max_length=30)
-    #subject_short_name = charField(max_length = 30)
+    subject_short_name = CharField(max_length=30, null=True)
     subject_name = CharField(max_length=200)
     subject_credits = IntegerField()
     Elective_type = CharField(max_length=50)
@@ -104,7 +104,7 @@ class subjects_table(models.Model):
 class faculty_table(models.Model):
     id = AutoField(primary_key=True)
     faculty_id = IntegerField(unique=True)
-    #faculty_short_name = CharField(max_length=100)
+    faculty_short_name = CharField(max_length=100, null=True)
     faculty_name = CharField(max_length=100)
     No_hrs_per_week = IntegerField()
     Designation_id = models.ForeignKey(Designation_table, on_delete=CASCADE)
