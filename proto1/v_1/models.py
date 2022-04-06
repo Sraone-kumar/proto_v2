@@ -131,6 +131,7 @@ class class_time_table(models.Model):
 
 class lab_information_table(models.Model):
     lab_id = AutoField(primary_key=True)
+    lab_short_name = CharField(max_length=300, null=True)
     lab_name = CharField(max_length=300)
     lab_incharge = ForeignKey(faculty_table, on_delete=CASCADE)
     lab_assistant = ForeignKey(

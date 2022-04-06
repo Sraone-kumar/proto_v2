@@ -34,6 +34,7 @@ def subjects_upload(excel):
     objs = [
         models.subjects_table(
             subject_code=row['subject_code'],
+            subject_short_name=row['subject_short_name'],
             subject_name=row['subject_name'],
             subject_credits=row['subject_credits'],
             Elective_type=row['Elective_type'],
@@ -53,8 +54,12 @@ def faculty_upload(excel):
     uploader = uploadApi.Upload(models.faculty_table, pandasObj)
 
     uploader.uploadChecker('faculty_name', 'faculty_name')
-    uploader.forienKeyConverter(models.Designation_table, 'designation_id')
-    uploader.forienKeyConverter(models.department_table, 'department_id')
+    uploader.forienKeyConverter(
+        models.department_table, 'department_name', 'Department_id')
+    uploader.forienKeyConverter(
+        models.Designation_table, 'designation_name', 'Designation_id')
+
+    uploader.printer()
 
     row_iter = uploader.PandasObject.iterrows()
     objs = [

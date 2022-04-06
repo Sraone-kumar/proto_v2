@@ -245,6 +245,10 @@ def delete(request):
 # main_page....!!!!
 
 
+def HomePage(request):
+    return render(request, 'HomePage.html')
+
+
 def testCheck(request):
     timings = Timings_table.objects.all().values()
     days = Week_table.objects.all().values()
@@ -334,7 +338,7 @@ def login(request):
         print(uname)
         pwd = request.POST.get('password')
         if uname == 'admin' and pwd == "123456":
-            return redirect('lab_editor')
+            return redirect('Home_page')
         if uname:
             user = list(faculty_table.objects.filter(
                 faculty_name=uname).values('id'))
