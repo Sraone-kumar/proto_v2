@@ -16,10 +16,11 @@
 </select> {% endcomment %}
 
 <div class="navbar">
+<a href="{% url 'Home_page' %}">Home</a>
 <a class="current" href="{% url 'lab_editor' %}">Editor</a>
 <a  href="{% url 'display'%}">Faculty</a>
 <a href="{% url 'student' %}">Student</a>
-<!-- <a href="{% url 'sub_fac' %}">Faculty Assigner</a> -->
+<a href="{% url 'sub_fac' %}">Faculty Assigner</a>
 <a href="{% url 'lab_display' %}">lab</a>
 
 <a href="{% url 'admin:index' %}">dashboard</a>
@@ -604,14 +605,14 @@
         </table>
     </div>
     <div class="table-box-3">
-        <table class="table fac_sort_table">
+        <!-- <table class="table fac_sort_table">
             <thead>
                 <th id="fac_head">facutly</th>
                 <th id="fac_class_head">no of classes</th>
             </thead>
             <tbody>           
             </tbody>
-        </table>
+        </table> -->
     </div>
 
 </div>

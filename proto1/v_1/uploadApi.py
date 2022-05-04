@@ -12,7 +12,9 @@ class Upload:
             ModelObject, django.db.models.base.ModelBase), 'Argument is not of type django Model'
         assert isinstance(
             PandasObject, pd.core.frame.DataFrame), 'Argument is not of type pandas frame'
-        assert len(ModelObject._meta.get_fields()) != len(
+        print(len(ModelObject._meta.get_fields()) == len(
+            PandasObject))
+        assert len(ModelObject._meta.get_fields()) == len(
             PandasObject), 'Excel fields does not match Model fields'
 
         self.ModelObject = ModelObject

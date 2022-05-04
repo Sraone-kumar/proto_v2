@@ -131,6 +131,7 @@ class class_time_table(models.Model):
 
 class lab_information_table(models.Model):
     lab_id = AutoField(primary_key=True)
+    lab_short_name = CharField(max_length=300, null=True)
     lab_name = CharField(max_length=300)
     lab_incharge = ForeignKey(faculty_table, on_delete=CASCADE)
     lab_assistant = ForeignKey(
@@ -159,3 +160,11 @@ class Editors(models.Model):
     id = AutoField(primary_key=True)
     user = ForeignKey(faculty_table, on_delete=CASCADE)
     password = CharField(max_length=300)
+
+
+class Default_class_Room(models.Model):
+    id = AutoField(primary_key=True)
+    branch = ForeignKey(Branch_table, on_delete=CASCADE)
+    semester = ForeignKey(semester_table, on_delete=CASCADE)
+    section = ForeignKey(section_table, on_delete=CASCADE)
+    room = ForeignKey(Room_table, on_delete=CASCADE)

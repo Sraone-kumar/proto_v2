@@ -43,6 +43,8 @@ urlpatterns = [
 
 
     ############ pages urls(12-october-2021)..............current_working_versions..............#####################
+    # Home Page
+    path('Home', views.HomePage, name='Home_page'),
     # editor page
     path('editor_v3/', views.lab_editor, name='lab_editor'),
     # lab information display page

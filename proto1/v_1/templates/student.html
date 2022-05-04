@@ -17,12 +17,14 @@
 
 <div class="navbar">
 
+<a href="{% url 'Home_page' %}">Home</a>
+
 <a href="{% url 'lab_editor' %}">Editor</a>
 <a  href="{% url 'display'%}">Faculty</a>
 <a class = "current" href="{% url 'student' %}">Student</a>
 <a  href="{% url 'lab_display' %}">lab</a>
 
-<!-- <a href="{% url 'sub_fac' %}">Faculty Assigner</a> -->
+<a href="{% url 'sub_fac' %}">Faculty Assigner</a>
 <a href="{% url 'admin:index' %}">dashboard</a>
 
 </div>
@@ -76,6 +78,15 @@
 
 
 </div>
+
+<div class="container">
+    <h4 style="visibility: hidden;" >view:  </h4>  
+    <div class="select-box">
+    <button class='edit'>view</button>
+
+    </div>  
+</div>
+
 
 <!-- <div class="container">
 
@@ -132,6 +143,12 @@
 <select name="room" id="room_number"><option>select room number</option></select>
 <input type="text" placeholder="enter section" id = "section"> -->
 <div class="table_div row">
+    <div id="student_pre_info">
+        <div><h4>ACADEMIC YEAR 2021-2022:EVEN SEMESTER</h4></div>
+        <div><h4 id="sem_display">4 SEMESTER TIMETABLE</h4></div>
+        <div style="display: flex;flex-direction: row; justify-content: center;"><h4>B-TECH</h4><h4>Computer science and Engineering</h4></div>
+        <div style="display: flex;flex-direction: row; justify-content: center;">Room No: <h4>b-4 202</h4> class: <h4>4-cse-1</h4></div>
+    </div>
     <div class="table-box-1">
         <table class = 'table' id='class_time_table'>
             <thead>
@@ -584,16 +601,18 @@
 
         </table>
     </div>
-    <!-- <div class="table-box-2">
+    <div class="table-box-2">
         <table class="table relate_table">
             <thead>
+                <th>course short name</th>
                 <th>course</th>
+                <!-- <th>faculty short name</th> -->
                 <th>faculty</th>
             </thead>
             <tbody>           
             </tbody>
         </table>
-    </div> -->
+    </div>
     <!-- <div class="table-box-3">
         <table class="table lab_table">
             <thead>
@@ -603,13 +622,23 @@
             </tbody>
         </table>
     </div> -->
+    <div style="display: flex;flex-direction: row;margin-top: 50px;">
+    <h4 style="font-style: italic;">Faculty I/c,dept. Time Tables</h4>
+    
+    <h4 style="font-style: italic;">Faculty I/c, overall Time Tables</h4>
+
+    <h4 style="font-style: italic;">Head of the Department</h4>
+    <h4 style="font-style: italic;">Dean, AA</h4>
+    <h4 style="font-style: italic;">Princinpal</h4>
+
+
+
+
+    </div>
 </div>
 
-<div class="table-container-3">
-<!-- <div><button id = "save">save</button></div> -->
-<div><button class='edit'>view</button></div>
-<!-- <div><button id="delete">delete</button></div> -->
-</div>
+<!-- <div class="table-container-3">
+</div> -->
 
 
 
@@ -923,10 +952,13 @@ $('.edit').click(function(){
             res.sub_fac.forEach(function(e){
                 $('.relate_table tbody').append(
                     `<tr draggable = "true" ondragstart="drag(event)" id = "drag_${e['faculty']['id']}">
-                        <td>${e['subject']['subject_name']}
+                        <td>${e['subject']['subject_short_name']}
                             <input type = 'hidden' value = "${e['subject']['subject_id']}"
                             </td>
-                        <td>${e['faculty']['faculty_name']}
+                        <td>${e['subject']['subject_code']}: ${e['subject']['subject_name']}
+                            <input type = 'hidden' value = "${e['subject']['subject_id']}"
+                            </td>
+                        <td>${e['faculty']['faculty_short_name']}-${e['faculty']['faculty_name']}
                             <input type = 'hidden' value = "${e['faculty']['id']}"
                             </td>
                         </tr>`
@@ -938,8 +970,8 @@ $('.edit').click(function(){
             res.class.forEach(function(e){
                 // console.log(e['subject_id']['subject_name'])
                 if(e['subject_id']!=null){
-                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_name'])
-                    // $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_name'])
+                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_short_name'])
+                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_short_name'])
                 }
                 
 
@@ -949,10 +981,10 @@ $('.edit').click(function(){
                 console.log(e['lab_course']['subject_name'])
                 $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
                 $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
-                $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_name'])
+                $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_short_name'])
                 // $("#r_"+e['week']+"_c_"+e['time']).empty();
                 $("#r_"+e['week']+"_c_"+e['time']).append(
-                    `<span class = "lab">${e['lab']['lab_name']}</span>`
+                    `<span class = "lab">${e['lab']['lab_short_name']}</span>`
                 )
             })
 

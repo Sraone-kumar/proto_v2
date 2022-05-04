@@ -12,6 +12,7 @@
 
 
 <div class="navbar">
+    <a href="{% url 'Home_page' %}">Home</a>
 
     <a href="{% url 'lab_editor' %}">Editor</a>
     <a  href="{% url 'display'%}">Faculty</a>
@@ -75,6 +76,22 @@
     
     </div>
 
+    <div class="container">
+    
+        <h4>department for faculty: </h4>
+    
+        <div class="select-box" >
+            
+            <div class="options-container department"></div>
+            <div class = "selected" id = "department">
+                select deparment
+            </div>
+    
+        </div>
+    
+    
+    </div>
+
     <div class="container"><button id = "generate" >generate</button></div>
     <div class="container"> <button id= "saver">save</button>  </div>
       
@@ -95,9 +112,10 @@
             </tbody>
         </table>
     </div>
-    <div>
+    <div id="table_assign_faculty">
          <table class="table faculty">
-            <thead><th>Assign faculty</th></thead>
+            <thead>
+                <tr><th>Assign faculty</th></tr></thead>
             <tbody></tbody>
         </table>
     </div>
@@ -207,6 +225,61 @@ $('#semester').click(function(){
 })
 
 
+//load deparment scroll list
+
+
+  
+var loaded_department = false;
+
+
+$('#department').click(function(){
+    if(!loaded_department){
+
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action: 'scroll_list'},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.department').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.department_id}" name="category">
+                        <label for="${e.department_id}">${e.department_name}</label>
+                        </div>
+                        `
+                    )
+                })
+                loaded_department = true;
+                $('.department').addClass('active')
+                $('.department .option').click(function(){
+                    document.querySelector("#department").innerHTML = $(this).children('label').html()
+                    $('#department').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    $.ajax({
+                        
+                    })
+                    console.log("deept: "+$(this).children('input').val())
+
+                    $('.department').removeClass('active')
+                })
+
+                
+            }
+        })
+    }
+
+    // console.log("its is here")
+    $('.department').toggleClass('active')
+    
+    
+})
+
+
+
+
+
 loaded_section = false;
 $('#section').click(function(){
 
@@ -256,6 +329,12 @@ $('#section').click(function(){
 
 
 $('#generate').click(function(){
+
+
+
+    $('.subject tbody').empty();
+    $('.faculty tbody').empty();
+
     $.ajax({
 
         type: "GET",
@@ -275,6 +354,8 @@ $('#generate').click(function(){
                 alert("Error fetching data")
             }
             else if(res.subjects !== undefined){
+
+                console.log("here 1");
                     res.faculty.forEach(function(e){
                     $('.faculty tbody').append(
                         `<tr draggable = "true" ondragstart="drag(event)" id="fac_${e.id}">
@@ -292,13 +373,15 @@ $('#generate').click(function(){
                             <td>${e.subject_name}
                                 <input type="hidden" value = "${e.subject_id}"></td>
                             <td ondrop="drop(event)" ondragover="allowDrop(event)" id = "sub_${e.subject_id}">
-                                <input type="hidden">
+                                <input type="hidden" value = "null">
                                 </td>
                         </tr>
                         `
                     )
                 })
             }else{
+
+                console.log("here 2");
                 res.fac_sub.forEach(function(e){
                     $('.subject tbody').append(
                         `
@@ -307,7 +390,7 @@ $('#generate').click(function(){
                                 <input type="hidden" value = "${e['subject']['subject_id']}"></td>
                             <td ondrop="drop(event)" ondragover="allowDrop(event)" id = "fac_${e['faculty']['id']}">
                                 ${e['faculty']['faculty_name']}
-                                <input type="hidden">
+                                <input type="hidden" value = "null">
                                 </td>
                         </tr>
                         
@@ -344,15 +427,28 @@ $('#saver').click(function(){
     section = $("#section input").val();
     semester = $("#semester input").val();
     console.log(branch+","+section+","+semester);
+    counter = 0;
+
     $('.subject tbody tr').each(function(){
+        val = $(this).children()[1].childNodes[1].value;
+        if(val === "null"){
+            alert("please insert all values");
+            return false;
+        }
+        // console.log(val === "null");
+        // console.log("value is:"+$(this).children()[1].childNodes[1].value === "null");
+    });
+
+    $('.subject tbody tr').each(function(){
+        counter = counter+1;
         subject = $(this).children()[0].childNodes[1].value
         faculty = $(this).children()[1].childNodes[1].value
         //faculty = $('td ').children()
         // console.log(subject.childNodes[1].value)
         // console.log(faculty.childNodes[1].value)
 
-        console.log(subject)
-        console.log(faculty)
+        // console.log(subject)
+        // console.log(faculty === "null")
 
         $.ajax({
             type: "GET",
@@ -367,7 +463,7 @@ $('#saver').click(function(){
             },
 
             success: function(e){
-                alert('succesfully inserted')
+                // alert('succesfully inserted')
             }
 
         })
@@ -375,6 +471,15 @@ $('#saver').click(function(){
        // console.log(faculty)
     })
 
+    console.log("its the counter:"+counter);
+
+})
+
+
+$('#deparment').change(function(){
+    console.log("hello world");
+    dept = ('#department input').val()
+    console.log(dept)
 })
 
 

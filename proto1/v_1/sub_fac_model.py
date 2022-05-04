@@ -11,4 +11,4 @@ class sub_fac_relation(models.Model):
     section = ForeignKey(section_table, on_delete=CASCADE)
     semester = ForeignKey(semester_table, on_delete=CASCADE)
     subject = ForeignKey(subjects_table, on_delete=CASCADE)
-    faculty = ForeignKey(faculty_table, on_delete=CASCADE)
+    faculty = ForeignKey(faculty_table, on_delete=CASCADE, null=True)

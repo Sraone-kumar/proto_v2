@@ -53,6 +53,10 @@ def get_info(request):
 
 
 def submit_func(request):
+
+    print("looking through the memory")
+    return "fuck"
+
     branch = request.GET.get('branch')
     section = request.GET.get('section')
     semester = request.GET.get('semester')
