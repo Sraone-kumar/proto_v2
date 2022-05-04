@@ -167,4 +167,4 @@ class Default_class_Room(models.Model):
     branch = ForeignKey(Branch_table, on_delete=CASCADE)
     semester = ForeignKey(semester_table, on_delete=CASCADE)
     section = ForeignKey(section_table, on_delete=CASCADE)
-    room = ForeignKey(Room_table, on_delete=CASCADE)
+    room = ForeignKey(Room_table, on_delete=CASCADE, null=True)
