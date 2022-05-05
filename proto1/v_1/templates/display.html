@@ -12,24 +12,67 @@
 
 
 <div class="navbar">
+    <a href="{% url 'Home_page' %}">Home</a>
 
-    <a href="{% url 'editor_v2' %}">Editor</a>
+    <a href="{% url 'lab_editor' %}">Editor</a>
     <a class = "current" href="{% url 'display'%}">Faculty</a>
-    <a href="#students">Student</a>
-    <a href="#upload">Upload</a>
+    <a href="{% url 'student' %}">Student</a>
+    <a href="{% url 'sub_fac' %}">Faculty Assigner</a>
+    <a href="{% url 'lab_display' %}">lab</a>
+    <a href="{% url 'admin:index'%}">dashboard</a>
+    <a id = "logout" href="{% url 'logout' %}">logout</a>
+
     
 </div>
 
-<select name="department" id="department">
-<option value="">select department</option>
-</select>
+<div class="inputs">
 
-<select name="faculty" id="faculty">
-<option value="">select faculty</option>
-</select>
+    <!-- <div><select name="department" id="department">
+        <option value="">select department</option>
+    </select>
+    </div> -->
 
-<button id = "generate">Generate</button>
+    <div class="container department-box">
 
+        <h4>department: </h4>
+
+        <div class="select-box" >
+            
+            <div class="options-container department"></div>
+            <div class = "selected" id = "department">
+                select department
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <h4>faculty: </h4>
+
+        <div class="select-box" >
+            
+            <div class="options-container faculty"></div>
+            <div class = "selected" id = "faculty">
+                select faculty
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- <div><select name="faculty" id="faculty">
+    <option value="">select faculty</option>
+    </select>
+    </div>    -->
+    
+      
+    <div class="container" ><button id = "generate">Generate</button></div>
+    
+
+</div>
+
+<div class="table_div">
 <table class = 'table' id='display_fac_table'>
     <thead>
         <th>date/time</th>
@@ -288,9 +331,8 @@
     </tbody>
 
 </table>
+</div>
 
-
-</table>
 
 
 {% endblock content %}
@@ -300,45 +342,137 @@
 
 <script>
 
-$('#department').click(function(){
-    $(this).off('click');
+// $('#department').click(function(){
+//     $(this).off('click');
 
-    $.ajax({
-        type: "GET",
-        url: "{% url 'submit_info' %}",
-        data: {action: "scroll_list"},
-        success: function(response){
-            response.values.forEach(function(e){
-                $('#department').append(
-                    `<option value = "${e.department_id}">${e.department_name}</option>`
-                )
+//     $.ajax({
+//         type: "GET",
+//         url: "{% url 'submit_info' %}",
+//         data: {action: "scroll_list"},
+//         success: function(response){
+//             response.values.forEach(function(e){
+//                 $('#department').append(
+//                     `<option value = "${e.department_id}">${e.department_name}</option>`
+//                 )
                 
-            })
-        }
-    })
+//             })
+//         }
+//     })
 
-    $(this).change(function(){
-        $('#faculty').empty();
-        $('#faculty').append(
-            `<option>select faculty</option>`
-        )
+//     $(this).change(function(){
+//         $('#faculty').empty();
+//         $('#faculty').append(
+//             `<option>select faculty</option>`
+//         )
+//         $.ajax({
+//             type: "GET",
+//             url: "{% url 'submit_info' %}",
+//             data: {action: "faculty_and_subject",
+//                     department_id:$(this).val()
+//                     },
+//             success: function(res){
+//                 res.faculty.forEach(function(e){
+//                     $('#faculty').append(
+//                         `<option value="${e.id}">${e.faculty_name}</option>`
+//                     )
+//                 })
+//             }
+//         })
+//     })
+
+// })
+
+
+var loaded_department = false;
+var loaded_faculty = false;
+
+
+
+$('#department').click(function(){
+
+    loaded_faculty = false;
+    $('#faculty').html('select faculty');
+    $('.faculty').empty();
+
+
+    var options;
+    if(!loaded_department){
         $.ajax({
             type: "GET",
             url: "{% url 'submit_info' %}",
-            data: {action: "faculty_and_subject",
-                    department_id:$(this).val()
-                    },
+            data: {action: 'scroll_list'},
             success: function(res){
-                res.faculty.forEach(function(e){
-                    $('#faculty').append(
-                        `<option value="${e.id}">${e.faculty_name}</option>`
+                res.values.forEach(function(e){
+                    $('.department').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.department_id}" name="category">
+                        <label for="${e.department_id}">${e.department_name}</label>
+                        </div>
+                        `
                     )
                 })
+                loaded_department = true;
+                $('.department').addClass('active')
+                $('.department .option').click(function(){
+                    document.querySelector("#department").innerHTML = $(this).children('label').html()
+                    $('#department').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    $('.department').removeClass('active')
+                })
+
+                
+                
             }
         })
-    })
-
+    }
+    //console.log("its is here")
+    $('.department').toggleClass('active')
 })
+
+
+
+$('#faculty').click(function(){
+    console.log("department_id: "+$('#department input').val())
+    if(!loaded_faculty){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action: 'faculty_and_subject',
+                    department_id:$('#department input').val()},
+            success: function(res){
+                res.faculty.forEach(function(e){
+                    $('.faculty').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.id}" name="category">
+                        <label for="${e.id}">${e.faculty_name}</label>
+                        </div>
+                        `
+                    )
+                })
+                loaded_faculty = true;
+                $('.faculty').addClass('active')
+                $('.faculty .option').click(function(){
+                    document.querySelector("#faculty").innerHTML = $(this).children('label').html()
+                    $('#faculty').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    $('.faculty').removeClass('active')
+                })
+
+                
+                
+            }
+        })
+    }
+    //console.log("its is here")
+    $('.faculty').toggleClass('active')
+})
+
+
+
 
 $('#generate').click(function(){
     $(".table tbody tr td span").empty();
@@ -348,15 +482,15 @@ $('#generate').click(function(){
         url: "{% url 'check_view' %}",
         data:{
             action: "display_fac_table",
-            department: $('#department').val(),
-            faculty: $('#faculty').val()
+            department: $('#department input').val(),
+            faculty: $('#faculty input').val()
         },
 
         success: function(response){
             response.forEach(function(e){
-                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[0].innerHTML = e['semester']+"-"
+                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[0].innerHTML = e['semester']['semester_number']+"-"
                 $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[1].innerHTML = e['branch']['branch_name']
-                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[2].innerHTML = "-"+e['section']
+                $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[2].innerHTML = "-"+e['section']['section_number']
                 $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[4].innerHTML = e['subject_id']['subject_name']
                 //console.log(e.weekday_id_id)
 

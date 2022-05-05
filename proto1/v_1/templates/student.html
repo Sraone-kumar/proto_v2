@@ -1,0 +1,1229 @@
+{% extends 'base.html' %}
+
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+
+
+{% endblock style %}
+
+
+{% block content %}
+
+
+{% comment %} <select name="branch" id="branch_choose">
+<option>select branch</option>
+</select> {% endcomment %}
+
+<div class="navbar">
+
+<a href="{% url 'Home_page' %}">Home</a>
+
+<a href="{% url 'lab_editor' %}">Editor</a>
+<a  href="{% url 'display'%}">Faculty</a>
+<a class = "current" href="{% url 'student' %}">Student</a>
+<a  href="{% url 'lab_display' %}">lab</a>
+
+<a href="{% url 'sub_fac' %}">Faculty Assigner</a>
+<a href="{% url 'admin:index' %}">dashboard</a>
+
+</div>
+
+
+<div class="inputs">
+<div class= "container" >
+
+        <h4>branch: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container branch"></div>
+        <div class = "selected" id = "branch">
+            select branch
+        </div>
+
+    </div>
+    
+</div>
+
+
+<div class="container">
+
+    <h4>semester: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container semester"></div>
+        <div class = "selected" id = "semester">
+            select semester
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="container">
+
+    <h4>section: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container section"></div>
+        <div class = "selected" id = "section">
+            select section
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="container">
+    <h4 style="visibility: hidden;" >view:  </h4>  
+    <div class="select-box">
+    <button class='edit'>view</button>
+
+    </div>  
+</div>
+
+
+<!-- <div class="container">
+
+    <h4>block: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container block"></div>
+        <div class = "selected" id = "block">
+            select block
+        </div>
+
+    </div>
+
+
+</div> -->
+<!-- <div class="container">
+
+    <h4>room: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container room"></div>
+        <div class = "selected" id = "room">
+            room number
+        </div>
+
+    </div>
+
+</div> -->
+
+</div>
+
+<!-- <div class="container" id = 'department'>
+
+    <h4>department: </h4>
+
+    <div class="select-box" >
+        
+        <div class="options-container department"></div>
+        <div class = "selected" id = "room_select">
+            select department
+        </div>
+
+    </div>
+
+</div> -->
+
+
+
+
+<!-- <input type="text" placeholder = "enter semester" id = "semester">
+<select name="block" id="block_choose"><option >choose block</option></select>
+<select name="room" id="room_number"><option>select room number</option></select>
+<input type="text" placeholder="enter section" id = "section"> -->
+<div class="table_div row">
+    <div id="student_pre_info">
+        <div><h4>ACADEMIC YEAR 2021-2022:EVEN SEMESTER</h4></div>
+        <div><h4 id="sem_display">4 SEMESTER TIMETABLE</h4></div>
+        <div style="display: flex;flex-direction: row; justify-content: center;"><h4>B-TECH</h4><h4>Computer science and Engineering</h4></div>
+        <div style="display: flex;flex-direction: row; justify-content: center;">Room No: <h4>b-4 202</h4> class: <h4>4-cse-1</h4></div>
+    </div>
+    <div class="table-box-1">
+        <table class = 'table' id='class_time_table'>
+            <thead>
+                <th>date/time</th>
+                <th>9:30 - 10:30</th>
+                <th>10:30 - 11:20</th>
+                <th>11:20 - 12:10</th>
+                <th>12:10 - 1:00</th>
+                <th>Lunch_break</th>
+                <th>2:00 - 2:50</th>
+                <th>2:50 - 3:40</th>
+                <th>3:40 - 4:30</th>
+            </thead>
+
+            <tbody>
+            <tr>
+                
+                <th class = "day"> Monday <input type="hidden" value = {{days.0.week_id}}> </th>
+                <td id='r_1_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                <input type="hidden" value = "" >  
+                <input type="hidden" value = "" >
+                <input type="hidden" value = "">
+                <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                <span class="sub"></span><br>
+                <span class="fac"></span><br>
+                </td>
+                <td id='r_1_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" > 
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_1_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" > 
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_1_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" > 
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_1_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" > 
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_1_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_1_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_1_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+            </tr>
+            <tr>
+                <th class = "day">Tuesday <input type="hidden" value = {{days.1.week_id}}> </th>
+                <td id='r_2_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_2_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_2_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_2_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_2_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_2_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_2_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_2_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+            </tr>
+            <tr>
+                <th class = "day" >wednesday <input type="hidden" value = {{days.2.week_id}}></th>
+                <td id='r_3_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+                <td id='r_3_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_3_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_3_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_3_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_3_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_3_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_3_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+                </td>
+            </tr>
+            <tr>
+                <th class = "day">Thursday <input type="hidden" value = {{days.3.week_id}}> </th>
+                <td id='r_4_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_4_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_4_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_4_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_4_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_4_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_4_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_4_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+            </tr>
+            <tr>
+                <th class = "day">Friday <input type="hidden" value = {{days.4.week_id}}></th>
+                <td id='r_5_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_5_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_5_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_5_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_5_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_5_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_5_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_5_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+            </tr>
+            <tr>
+                <th class = "day">Saturday <input type="hidden" value = {{days.5.week_id}}></th>
+                <td id='r_6_c_1' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.0.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_6_c_2' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.1.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_6_c_3' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.2.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_6_c_4' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.3.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_6_c_5' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.4.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_6_c_6' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.5.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_6_c_7' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.6.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+                <td id='r_6_c_8' ondrop = "drop(event)" ondragover="allowDrop(event)" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "" >
+                    <input type="hidden" value = "">
+                    <input type="hidden" value = "{{timings.7.timing_id}}" class = "timing">
+                    <span class="sub"></span><br>
+                    <span class="fac"></span><br>
+
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div class="table-box-2">
+        <table class="table relate_table">
+            <thead>
+                <th>course short name</th>
+                <th>course</th>
+                <!-- <th>faculty short name</th> -->
+                <th>faculty</th>
+            </thead>
+            <tbody>           
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="table-box-3">
+        <table class="table lab_table">
+            <thead>
+                <th>laboratory</th>
+            </thead>
+            <tbody>           
+            </tbody>
+        </table>
+    </div> -->
+    <div style="display: flex;flex-direction: row;margin-top: 50px;">
+    <h4 style="font-style: italic;">Faculty I/c,dept. Time Tables</h4>
+    
+    <h4 style="font-style: italic;">Faculty I/c, overall Time Tables</h4>
+
+    <h4 style="font-style: italic;">Head of the Department</h4>
+    <h4 style="font-style: italic;">Dean, AA</h4>
+    <h4 style="font-style: italic;">Princinpal</h4>
+
+
+
+
+    </div>
+</div>
+
+<!-- <div class="table-container-3">
+</div> -->
+
+
+
+  
+
+
+{% endblock content %}
+
+
+{% block javascript %}
+
+<script>
+
+
+
+
+const branch = document.querySelector("#branch");
+const branch_container = document.querySelector(".branch");
+var loaded_branch = false;
+
+
+branch.addEventListener("click",()=>{
+    var options;
+    if(!loaded_branch){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action:'scroll_list_branch'},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.branch').append(
+                        `<div class= "option">
+                        <input type="radio" class="radio" value="${e.branch_id}" name="category">
+                        <label for="${e.branch_id}">${e.branch_name}</label>
+                        </div>
+                        `
+                    )
+                    
+                })
+
+                loaded_branch = true;
+                options = document.querySelectorAll(".branch .option")
+                options.forEach(o=>{
+                    o.addEventListener("click",()=>{
+                        branch.innerHTML = o.querySelector('label').innerHTML;
+                        //console.log(o.querySelector('input').value)
+                        $('#branch').append(
+                            `<input type="hidden" value = "${o.querySelector('input').value}" >`
+                        )
+                        //$('#branch input').value = o.querySelector('input').value;
+                        //console.log($('#branch input').value)
+
+                        //console.log($('.selected').children('input').values)
+                        branch_container.classList.remove("active");
+                    })
+                })
+                
+            }
+
+        })
+    }
+    branch_container.classList.toggle("active")
+})
+
+var loaded_semester = false;
+
+
+$('#semester').click(function(){
+    var options;
+    if(!loaded_semester){
+        $.ajax({
+            type: "GET",
+            url: "{% url 'submit_info' %}",
+            data: {action: 'scroll_list_semester'},
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.semester').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.semester_id}" name="category">
+                        <label for="${e.semester_id}">${e.semester_number}</label>
+                        </div>
+                        `
+                    )
+                })
+                loaded_semester = true;
+                $('.semester').addClass('active')
+                $('.semester .option').click(function(){
+                    document.querySelector("#semester").innerHTML = $(this).children('label').html()
+                    $('#semester').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    $('.semester').removeClass('active')
+                })
+
+                
+                
+            }
+        })
+    }
+    //console.log("its is here")
+    $('.semester').toggleClass('active')
+})
+
+
+var block_value;
+var loaded_block = false;
+loaded_room = false;
+
+
+$('#block').click(function(){
+
+    if(!loaded_block){
+
+    $.ajax({
+
+        type: "GET",
+        url : "{% url 'submit_info' %}",
+        data: {
+            action : "scroll_list_block"
+        },
+
+        success: function(res){
+            res.values.forEach(function(e){
+                $('.block').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.block_id}" name="category">
+                        <label for="${e.block_id}">${e.block_name}</label>
+                        </div>
+                        `
+                    )
+            })
+
+            loaded_block = true;
+            $('.block').addClass('active')
+            $('.block .option').click(function(){
+                loaded_room = false;
+                document.querySelector("#block").innerHTML = $(this).children('label').html()
+                $('#block').append(     
+                    `<input type="hidden" value = "${$(this).children('input').val()}">`
+                )
+                block_value = $(this).children('input').val();
+                $('.block').removeClass('active')
+            })
+
+        }
+
+
+    })
+
+    }
+
+    $('.block').toggleClass('active')
+
+})
+
+
+
+$('#room').click(function(){
+    
+    if(block_value == ''){
+        alert("choose block");
+        return
+    }
+
+    if(!loaded_room){
+        $('.room').empty();
+    
+    $.ajax({
+        type: "GET",
+        url: "{% url 'submit_info'%}",
+        data: {
+                action : "scroll_list_room",
+                block_id : block_value
+        },
+
+        success: function(res){
+            res.values.forEach(function(e){
+                $('.room').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.room_id}" name="category">
+                        <label for="${e.room_id}">${e.class_number}</label>
+                        </div>
+                        `
+                    )
+            })
+
+            loaded_room = true;
+            $('.room').addClass('active')
+            $('.room .option').click(function(){
+                document.querySelector("#room").innerHTML = $(this).children('label').html()
+                $('#room').append(     
+                    `<input type="hidden" value = "${$(this).children('input').val()}">`
+                )
+                $('.room').removeClass('active')
+            })
+        }
+
+
+
+    })
+    }
+    $('.room').toggleClass('active')
+
+})
+
+loaded_section = false;
+$('#section').click(function(){
+
+    if(!loaded_section){
+        $.ajax({
+
+            type: "GET",
+            url:"{% url 'submit_info' %}",
+            data: {
+                action: 'scroll_list_section',
+            },
+
+            success: function(res){
+                res.values.forEach(function(e){
+                    $('.section').append(
+                        `
+                        <div class= "option">
+                        <input type="radio" class="radio" value="${e.section_id}" name="category">
+                        <label for="${e.section_id}">${e.section_number}</label>
+                        </div>
+                        `
+                    )
+                })
+
+                loaded_section = true;
+                $('.section').addClass('active')
+                $('.section .option').click(function(){
+                    loaded_room = false;
+                    document.querySelector("#section").innerHTML = $(this).children('label').html()
+                    $('#section').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
+                    )
+                    block_value = $(this).children('input').val();
+                    $('.section').removeClass('active')
+                })
+            }
+
+
+        })
+    }
+
+    $('.section').toggleClass('active');
+})
+
+
+
+$('.edit').click(function(){
+    $('#class_time_table tbody tr td').show();
+    $('#class_time_table tbody tr').find('td').attr('colspan',1);
+    $('#class_time_table tbody tr td').find('.lab').remove()
+    $('#class_time_table tbody tr td').find('.fac').empty()
+    $('#class_time_table tbody tr td').find('.sub').empty()
+
+
+    // $('#class_time_table tbody').remove();
+    // $('#class_time_table').append(table_store);
+    $('.relate_table tbody').empty();
+    $('.lab_table tbody').empty();
+    $('.fac_sort_table tbody').empty();
+
+    branch_get = $('#branch input').val()
+    semester = $('#semester input').val()
+    section = $('#section input').val()
+
+
+    $.ajax({
+        type:'GET',
+        url:"{% url 'get_info' %}",
+        data:{
+            action:"fac_sort_info",
+            branch:branch_get,
+        },
+        success:function(res){
+            res.values.forEach(function(e){
+                    $('.fac_sort_table tbody').append(
+                    `
+                    <tr>
+                        <td>${e.faculty_name}</td>
+                        <td>${e.No_hrs_per_week}</td>
+                        </tr>
+                    `
+                )
+            })
+            
+        }
+    })
+
+    console.log(branch_get+","+semester+","+section)
+    $.ajax({
+        type: 'GET',
+        url: "{% url 'get_info_back' %}",
+        data:{
+            action: 'get_fac_relation',
+            branch : branch_get,
+            semester : semester,
+            section : section,
+        },
+
+        success: function(res){
+
+
+            
+            res.sub_fac.forEach(function(e){
+                $('.relate_table tbody').append(
+                    `<tr draggable = "true" ondragstart="drag(event)" id = "drag_${e['faculty']['id']}">
+                        <td>${e['subject']['subject_short_name']}
+                            <input type = 'hidden' value = "${e['subject']['subject_id']}"
+                            </td>
+                        <td>${e['subject']['subject_code']}: ${e['subject']['subject_name']}
+                            <input type = 'hidden' value = "${e['subject']['subject_id']}"
+                            </td>
+                        <td>${e['faculty']['faculty_short_name']}-${e['faculty']['faculty_name']}
+                            <input type = 'hidden' value = "${e['faculty']['id']}"
+                            </td>
+                        </tr>`
+                )
+
+
+            })
+
+            res.class.forEach(function(e){
+                // console.log(e['subject_id']['subject_name'])
+                if(e['subject_id']!=null){
+                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_short_name'])
+                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_short_name'])
+                }
+                
+
+            })
+
+            res.lab_time_table.forEach(function(e){
+                console.log(e['lab_course']['subject_name'])
+                $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
+                $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
+                $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_short_name'])
+                // $("#r_"+e['week']+"_c_"+e['time']).empty();
+                $("#r_"+e['week']+"_c_"+e['time']).append(
+                    `<span class = "lab">${e['lab']['lab_short_name']}</span>`
+                )
+            })
+
+            res.lab.forEach(function(e){
+                console.log(e)
+                
+                $('.lab_table tbody').append(
+                    `<tr>
+                        <td>${e.lab_name}
+                            <input type='hidden' value = "${e.lab_id}">
+                            </td>    
+                    </tr>`
+                )
+            })
+
+
+            $('.lab_table tbody tr td').click(function(){
+                firstElement.attr('colspan',count);
+                firstElement.prevAll().slice(0,count-1).hide();
+                console.log(firstElement.children('.sub'))
+                console.log($(this).html())
+                //firstElement.children('.sub').html($(this).html())
+                firstElement.append(
+                    `<span class = 'lab'>${$(this).html()}</span>`
+                )
+                firstElement.removeClass('selectunit')
+            })
+
+
+        }
+
+        
+    })
+
+    //ajax call to load fac_sort
+   
+})
+
+
+$('#save').click(function(){
+
+    branche = $('#branch input').val();
+    semester = $('#semester input').val();
+    block = $("#block input").val();
+    room = $("#room input").val();
+    section = $("#section input").val();
+
+    //row = $('#class_time_table tbody').children().length
+    //column = $('#class_time_table tbody tr').children().length
+
+    //console.log("row: "+row)
+    //console.log("column: "+column)
+
+    console.log("branch: "+branche+" semester: "+semester+" block: "+block+" room: "+ room+" section: "+section)
+    $('#class_time_table tbody tr').each(function(){
+        day = $('th input',this).val()
+        $('td',this).each(function(){
+            if($(this).attr('colspan')>1){
+                action = 'insert_lab';
+                lab = $('.lab',this).children('input').val();
+                no_of_hours = $(this).attr('colspan')
+            }else{
+                action = 'insert';
+            }
+            inputs = $(this).children()
+            if(inputs[0].value === "edited"){
+                // console.log("1:"+inputs('.fac'))
+                console.log($('.fac',this).children('input').val())
+                console.log("lab: "+lab)
+
+                
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'submit_info' %}",
+                    data: {
+                        action : action,
+                        branch : branche,
+                        semester : semester,
+                        block : block,
+                        room : room,
+                        section : section,
+                        day : day,
+                        subject : inputs[1].value,
+                        faculty : inputs[2].value,
+                        timing : inputs[3].value,
+                        lab: lab,
+                        no_of_hours:no_of_hours
+                    },
+
+                    success: function(res){
+                        alert("succesfuly updated")
+                    } 
+                })
+            }
+        })
+    })
+    
+    
+
+})
+
+
+</script>
+
+
+<script>
+
+function allowDrop(ev){
+    ev.preventDefault();
+}
+
+function drag(ev){
+    ev.dataTransfer.setData("one",ev.target.id);
+}
+
+function drop(ev){
+    event.preventDefault();
+    id =  ev.dataTransfer.getData("one")
+    //parent_val = $('#'+id).parent().parent().attr('id')
+    lis = $('#'+ev.target.id).children()
+    lis_get = $('#'+id).children();
+    //console.log(lis_get[0])
+    console.log(lis)
+    lis[0].value = "edited"
+    //$('#'+ev.target.id).text(lis_get[1].innerHTML)
+    
+        lis[1].value = lis_get[0].childNodes[1].value
+        lis[4].innerHTML = lis_get[0].innerHTML 
+
+        lis[2].value = lis_get[1].childNodes[1].value
+        lis[6].innerHTML = lis_get[1].innerHTML
+
+    
+    //console.log(lis_get)
+    //console.log(lis_get[0].innerHTML)
+    //console.log(lis_get[1].innerHTML)
+    //console.log(lis_get[2].innerHTML)
+
+    //ids of dragging elements
+    //val_id = $('#'+id).children()[0].id
+    //val_name = $('#'+id).children()[1].id
+    //val_val = $('#'+id).children()[2].id
+    //ids of input elements...
+    
+    //input_id_id = lis[0].id
+    //input_name_id = lis[1].id
+    //input_val_id = lis[2].id
+    //tranfer of data using ids
+    //$('#'+input_id_id).val($('#'+val_id).text())
+    //$('#'+input_name_id).val($('#'+val_name).text())
+    //$('#'+input_val_id).val($('#'+val_val).text())
+    //$('#'+ev.target.id).text($('#'+val_name).text())
+
+
+
+    
+    //console.log($('#'+id).children()[1].id)
+    //console.log($('#'+val).text())
+    
+    //console.log(lis[0])
+    //console.log(lis[1])
+    //console.log(lis[2])
+
+
+}
+
+function dragstart_handler(ev){
+    ev.dataTransfer.dropEffect = "copy";
+}
+
+
+</script>
+<script>
+    var isRow = false;
+    var row;
+    var firstElement;
+    var count = 0;
+    $('#class_time_table tbody tr td').click(function(){
+        console.log("here");
+        if(firstElement == null){
+            firstElement = $(this);
+            console.log(firstElement.index())
+            firstElement.addClass('selectunit');
+            count++;
+            console.log(count)
+        }else{
+            if(firstElement.parent().index() === $(this).parent().index() && $(this).index() === firstElement.index()+1 && count<3){
+                console.log($(this).index())
+                console.log(firstElement.index()+1)
+
+                count++;
+                firstElement = $(this);
+                firstElement.addClass('selectunit');
+
+            }else{
+                $('.table').find('.selectunit').removeClass('selectunit');
+                firstElement = $(this);
+                count = 1;
+                firstElement.addClass('selectunit');
+            }
+        }
+        
+    })
+
+    $(document).click((event) => {
+    if (!$(event.target).closest('.table').length) {
+        // the click occured outside '#element'
+        //alert('outside');
+        $('.table').find('.selectunit').removeClass('selectunit');
+        count = 0;
+    }       
+    });
+   
+   
+</script>
+
+<script>
+//delete script
+$('#delete').click(function(){
+    console.log("colspan"+firstElement.prop('colSpan'))
+    if(firstElement.prop('colSpan') === 1){
+
+    }else{
+        firstElement.attr('colspan',1);
+        firstElement.children('.lab').remove();
+        prevEle1 = firstElement.clone();
+        prevEle1.removeAttr('id')
+        //console.log("value: "+ )
+        prevEle1.children()[3].value = firstElement.children()[3].value -1;
+        prevEle2 = prevEle1.clone();
+        prevEle2.removeAttr('id')
+        prevEle2.children()[3].value = prevEle1.children()[3].value -1;
+        firstElement.before(prevEle2);
+        firstElement.before(prevEle1);
+
+    }
+    console.log(firstElement.prop('colSpan'));
+})
+
+</script>
+
+{% endblock javascript %}

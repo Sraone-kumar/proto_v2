@@ -1,0 +1,119 @@
+@font-face {font-family: "Microsoft Tai Le"; src: url("//db.onlinewebfonts.com/t/ff43e14bdcc67883fbd7a6f6223920cc.eot");}
+
+
+body{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/* .menu-bar{
+    width: 100%;
+    height: 30px;
+    background: #3585aa;
+    
+} */
+
+
+
+.back{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-direction: column;
+    /* text-align: center; */
+    /* margin-left: 10%; */
+    /* width: 80%; */
+    height: 100%;
+    background-color:rgba(190, 190, 190, 0.45);
+}
+
+.Circle{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* margin-top: 15%; */
+    width: 370px;
+    height: 370px;
+    background-color: rgb(46, 167, 197);
+    border-radius: 50%;
+    transition: all 0.2s;
+
+}
+
+.form{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.Circle:hover {
+    width: 420px;
+    height: 420px;
+    /* margin-top: 14%; */
+}
+
+
+p{
+    display: inline-block;
+    color:#ffffff;
+    margin-top: 120px;
+    margin-bottom: 0px;
+    font-size: 60px;
+    font-family: "Microsoft Tai Le Regular";
+
+}
+
+.input{
+    width: 200px;
+    margin: 10px;
+    /* margin-bottom: 7px; */
+    height: 25px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    /* padding-left: 10px; */
+    color: #181515;
+    font-size: 15px;
+    text-align: center;
+}
+
+#login
+{
+    width: 100px;
+    margin: 10px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    color: #ffffff;
+    background-color: #181515;
+    font-size: 15px;
+    font-family:"Microsoft Tai Le";
+    outline: none;
+}
+
+
+#ender{
+    display: flex;
+    justify-content: center;
+    /* display: inline-block; */
+    text-align: center;
+    /* border-top: 0.5px solid #181515; */
+    position: relative;
+    /* margin-left: 10%; */
+    /* width: 80%; */
+    width: 100%;
+    height: 25px;
+    padding-top: 5px;
+    background-color: #3585aa;
+    
+    
+}
+
+#end
+{ 
+    
+    font-family:"Microsoft Tai Le";
+    font-size: 13px;
+    color: white;
+    /* padding-top: 5px; */
+}

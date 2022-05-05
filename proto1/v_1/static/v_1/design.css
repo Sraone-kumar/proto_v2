@@ -12,7 +12,7 @@ body{
     background: #3585aa;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     overflow:hidden;
     width: 100%;
 
@@ -30,6 +30,13 @@ body{
     padding: 14px 16px;
     font-size: 15px;
     text-decoration: none;
+}
+
+/* a of logout */
+#logout{
+    /* align-self: flex-end; */
+    /* justify-self: self-end; */
+    margin-left: auto;
 }
 
 h4{
@@ -156,21 +163,17 @@ h4{
 
 
 
-.table_div{
-    /* position: absolute; 
-    top: 100px; */
-    /* position: absolute;
-    top: 20%; */
+/* .table_div{
     margin-left: 10px;
     margin-top: 6%;
-}
+} */
 
 /* .semester{
     width:170px;
 } */
 
 /* save button */
-#save,.edit,#check{
+#save,.edit,#check,#delete,#generate,#saver{
     border-style: none;
     width: 70px;
     height: 30px;
@@ -180,29 +183,38 @@ h4{
     font-size: small;
     margin-left: 15px;
     float: left;
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
 
-#save:hover,.edit:hover{
+/* saver is from faculty_assing page save button */
+#generate,#saver{  
+    width: 100px;
+    margin-top: 25px;
+    height: 32px;
+}
+
+#save:hover,.edit:hover,#delete:hover,#generate:hover,#saver:hover{
     background-color: #b5e7ff;
     color: black;
+    
 }
 
 
-#department>.select-box{
-    width: 200px;
+.department-box .select-box{
+    width: 270px;
 }
 
-#department{
+/* #department{
     float: right;
     margin-right: 15%;
     margin-top: 20px;
 
-}
+} */
 
-.relate_table{
+/* .relate_table{
     margin-top: 18px;
     margin-left: 80px;
-}
+} */
 
 
 
