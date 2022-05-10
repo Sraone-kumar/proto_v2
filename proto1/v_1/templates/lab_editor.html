@@ -3,6 +3,7 @@
 {% block style %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+<link rel="stylesheet" href="{% static 'v_1/expstyle.css' %}">
 
 
 {% endblock style %}
@@ -585,7 +586,7 @@
 
         </table>
     </div>
-    <div class="table-box-2">
+    {% comment %} <div class="table-box-2">
         <table class="table relate_table">
             <thead>
                 <th>course</th>
@@ -603,8 +604,8 @@
             <tbody>           
             </tbody>
         </table>
-    </div>
-    <div class="table-box-3">
+    </div> {% endcomment %}
+    <div class="table-box-4">
         <!-- <table class="table fac_sort_table">
             <thead>
                 <th id="fac_head">facutly</th>
@@ -613,6 +614,112 @@
             <tbody>           
             </tbody>
         </table> -->
+        <div class="container">
+            <div class="button_container">
+                <button id="add_class" class="buttons">Add Class</button>
+                <button id="add_lab" class="buttons">Add lab</button>
+                <button id="add_empty" class="buttons">Manual Class</button>
+            </div>
+        
+            <div id="class_info" class="addele" style="display: none;">
+                <h4>subject and faculty:</h4>
+                
+                <select name="sub_fac" id="sub_fac">
+                    <option value="select">select</option>
+                    <option value="select">databaseManagement(srk)</option>
+                    <option value="select">java(raghu)</option>
+                </select>
+                <h4>Class Type:</h4>
+                <form >
+                    <div class="wrapper">
+                        <input type="radio" name="select" id="option-1" checked>
+                        <input type="radio" name="select" id="option-2">
+                        <label for="option-1" class="option option-1">
+                            <div class="dot"></div>
+                            <span>Regular</span>
+                            </label>
+                        <label for="option-2" class="option option-2">
+                            <div class="dot"></div>
+                            <span>Tutorial</span>
+                        </label>
+                    </div>
+                    
+                </form>
+                
+                <h4>Room No: </h4>
+                <select name="block" id="block">
+                    <option value="select">select</option>
+                    <option value="select">B-1</option>
+                    <option value="select">B-2</option>
+                    <option value="select">B-3</option>
+                </select>
+                <select name="room" id="room">
+                    <option value="select">select</option>
+                    <option value="select">201</option>
+                    <option value="select">202</option>
+                    <option value="select">203</option>
+                </select>
+        
+                <h4>Choose Batch(optional): </h4>
+                
+                    <div class="wrapper1">
+                        <input type="radio" name="select" id="option-3" checked>
+                        <input type="radio" name="select" id="option-4">
+                        <label for="option-3" class="option option-3">
+                        <div class="dot"></div>
+                            <span>b1</span>
+                            </label>
+                        <label for="option-4" class="option option-4">
+                        <div class="dot"></div>
+                            <span>b2</span>
+                        </label>
+                    </div>
+        
+                
+                
+        
+                
+                <div><button class="buttons">ok</button></div>
+        
+            </div>
+            <div id="lab_info" class='addele' style="display:none">
+                <h4>subject and faculty:</h4>
+                <select name="sub_fac" id="sub_fac">
+                    <option value="select">select</option>
+                    <option value="select">webtechnologies()</option>
+                    <option value="select">java(raghu)</option>
+                </select>
+                <h4>Lab: </h4>
+                <select name="lab" id="lab">
+                    <option value="select">select</option>
+                    <option value="select">B-1</option>
+                    <option value="select">B-2</option>
+                    <option value="select">B-3</option>
+                </select>
+            </div>
+            <div id="manual_info" class="addele" style="display: none">
+                <h4>Manual</h4>
+                <div class="manual-element">
+                    <input type="text" name="manual type" id="manual-type">
+                </div>
+                <h4>Choose Batch(optional): </h4>
+                <form>
+                    <div class="wrapper2">
+                        <input type="radio" name="select" id="option-5" checked>
+                        <input type="radio" name="select" id="option-6">
+                        <label for="option-5" class="option option-5">
+                        <div class="dot"></div>
+                            <span>b1</span>
+                            </label>
+                        <label for="option-6" class="option option-6">
+                        <div class="dot"></div>
+                            <span>b2</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
     </div>
 
 </div>
@@ -1263,6 +1370,25 @@ $("#fac_class_head").click(function(){
     sortTable(f_nm,n);
 });
 </script>
-
+<script>
+    $("#add_class").click(function () {
+        $("#class_info").show("slow");
+        
+        $("#lab_info").hide("slow");
+        $("#manual_info").hide("slow");
+    });
+    $("#add_lab").click(function () {
+        $("#lab_info").show("slow");
+        
+        $("#class_info").hide("slow");
+        $("#manual_info").hide("slow");
+    });
+    $("#add_empty").click(function () {
+        $("#manual_info").show("slow");
+        
+        $("#lab_info").hide("slow");
+        $("#class_info").hide("slow");
+    });
+</script>
 
 {% endblock javascript %}
