@@ -1,8 +1,33 @@
+from operator import mod
+from pyexpat import model
 from django.db.models import fields
+from numpy import block
 from rest_framework import serializers
 
 from .sub_fac_model import sub_fac_relation
-from .models import Block_table, Designation_table, department_table, class_time_table, Branch_table, faculty_table, section_table, semester_table, subjects_table, lab_information_table, lab_time_table
+from .models import Block_table, Designation_table, department_table, class_time_table, Branch_table, faculty_table, section_table, semester_table, subjects_table, lab_information_table, lab_time_table, Default_class_Room, Room_table
+
+
+class BlockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Block_table
+        fields = ('block_id', 'block_name')
+
+
+class RoomSerializer(serializers.ModelSerializer):
+    block_id = BlockSerializer()
+
+    class Meta:
+        model = Room_table
+        fields = ('room_id', 'class_number', 'block_id')
+
+
+class DefaultClassRoomNumberSerializer(serializers.ModelSerializer):
+    room = RoomSerializer()
+
+    class Meta:
+        model = Default_class_Room
+        fields = ('room',)
 
 
 class SectionSerializer(serializers.ModelSerializer):
@@ -15,12 +40,6 @@ class SemesterSerializer(serializers.ModelSerializer):
     class Meta:
         model = semester_table
         fields = ('semester_id', 'semester_number')
-
-
-class BlockSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Block_table
-        fields = ('block_name',)
 
 
 class BranchSerializer(serializers.ModelSerializer):
@@ -54,7 +73,7 @@ class ClassTableSerializer(serializers.ModelSerializer):
     class Meta:
         model = class_time_table
         fields = ('weekday_id', 'timing_id', 'semester',
-                  'branch', 'section', 'subject_id', 'faculty_id')
+                  'branch', 'section', 'subject_id', 'faculty_id', 'class_type', 'batch')
 
 
 class fac_relationSerializer(serializers.ModelSerializer):

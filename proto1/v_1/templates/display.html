@@ -487,13 +487,31 @@ $('#generate').click(function(){
         },
 
         success: function(response){
-            response.forEach(function(e){
+            response.class.forEach(function(e){
                 $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[0].innerHTML = e['semester']['semester_number']+"-"
                 $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[1].innerHTML = e['branch']['branch_name']
                 $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[2].innerHTML = "-"+e['section']['section_number']
                 $("#day_"+e['weekday_id']).siblings("."+e['timing_id']).children()[4].innerHTML = e['subject_id']['subject_name']
                 //console.log(e.weekday_id_id)
 
+            })
+
+            response.lab.forEach(function(e){
+                $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
+                    $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
+                    // $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_name'])
+                    // $("#r_"+e['week']+"_c_"+e['time']).empty();
+                    $("#r_"+e['week']+"_c_"+e['time']).append(
+                        `
+                        <div>
+                        <span>${e['lab_course']['subject_name']}</span><br>
+                        <span class = "lab">${e['lab']['lab_name']}</span>
+                        <span >${e['semester']['semester_number']}-${e['branch']['branch_name']}-${e['section']['section_number']}</span>
+
+
+                        </div>
+                        `
+                    )
             })
         }
 

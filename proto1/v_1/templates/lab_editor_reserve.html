@@ -3,8 +3,6 @@
 {% block style %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'v_1/design.css' %}">
-<link rel="stylesheet" href="{% static 'v_1/expstyle.css' %}">
-
 
 
 {% endblock style %}
@@ -587,7 +585,7 @@
 
         </table>
     </div>
-    <!-- <div class="table-box-2">
+    <div class="table-box-2">
         <table class="table relate_table">
             <thead>
                 <th>course</th>
@@ -596,8 +594,8 @@
             <tbody>           
             </tbody>
         </table>
-    </div> -->
-    <!-- <div class="table-box-3">
+    </div>
+    <div class="table-box-3">
         <table class="table lab_table">
             <thead>
                 <th>laboratory</th>
@@ -605,208 +603,16 @@
             <tbody>           
             </tbody>
         </table>
-    </div> -->
-    <div class="table-box-4">
-        <div class="container">
-            <div class="button_container">
-                <button id="add_class" class="buttons">Add Class</button>
-                <button id="add_lab" class="buttons">Add lab</button>
-                <button id="add_empty" class="buttons">Manual Class</button>
-            </div>
-    
-            <div id="class_info" class="addele" style="display: none;">
-                <!-- <div class="inputs"> -->
-                    <!-- <h4>subject and faculty:</h4> -->
-                    <div class="container">
-
-                        <h4>subject and faculty: </h4>
-                    
-                        <div class="select-box" style="width: 250px;">
-                            
-                            <div class="options-container subject_faculty" ></div>
-                            <div class = "selected" id = "subject_faculty">
-                                select subject and faculty
-                            </div>
-                    
-                        </div>
-                    
-                    
-                    </div>
-                
-                
-                <form >
-                    <h4>Class Type:</h4>
-                    <div class="wrapper classtype" >
-                        <input type="hidden" value="">
-                        <input type="radio" name="select"  id="option-1" checked>
-                        <input type="radio" name="select"  id="option-2">
-                        <label for="option-1" class="option option-1">
-                            <div class="dot"></div>
-                            <span>Regular</span>
-                            </label>
-                        <label for="option-2" class="option option-2">
-                            <div class="dot"></div>
-                            <span>Tutorial</span>
-                        </label>
-                    </div>
-                    
-                </form>
-                <div style="display: flex;flex-direction: row;">
-                  <div class="container">
-
-                    <h4>block: </h4>
-                
-                    <div class="select-box" >
-                        
-                        <div class="options-container block_2"></div>
-                        <div class = "selected" id = "block_2">
-                            select block
-                        </div>
-                
-                    </div>
-                
-                
-                </div>
-                <div class="container">
-                
-                    <h4>room: </h4>
-                
-                    <div class="select-box" >
-                        
-                        <div class="options-container room_2"></div>
-                        <div class = "selected" id = "room_2">
-                            room number
-                        </div>
-                
-                    </div>
-                
-                </div>  
-                </div>
-                
-    
-                <h4>Choose Batch(optional): </h4>
-                <form>
-                    <div class="wrapper1 batchtype">
-                        <input type="hidden" value="">
-                        <input type="radio" name="select" id="option-3" checked>
-                        <input type="radio" name="select" id="option-4">
-                        <input type="radio" name="select" id="option-5">
-                        <label for="option-3" class="option option-3">
-                        <div class="dot"></div>
-                            <span>B1</span>
-                            </label>
-                        <label for="option-4" class="option option-4">
-                        <div class="dot"></div>
-                            <span>B2</span>
-                        </label>
-                        <label for="option-5" class="option option-5">
-                        <div class="dot"></div>
-                            <span>All</span>
-                        </label>
-                    </div>
-                </form>
-                <!-- </div> -->
-                
-    
-                
-                <div><button class="buttons" id="add_ok_class">ok</button></div>
-    
-            </div>
-            <div id="lab_info" class='addele' style="display:none">
-                
-                <div class="container">
-
-                    <h4>subject and faculty: </h4>
-                
-                    <div class="select-box" style="width: 250px;">
-                        
-                        <div class="options-container subject_faculty_lab" ></div>
-                        <div class = "selected" id = "subject_faculty_lab">
-                            select subject and faculty
-                        </div>
-                
-                    </div>
-                
-                
-                </div>
-
-                <div class="container">
-
-                    <h4>Additional faculty: </h4>
-                
-                    <div class="select-box" style="width: 250px;">
-                        
-                        <div class="options-container additional_faculty" ></div>
-                        <div class = "selected" id = "additional_faculty">
-                            select additional faculty
-                        </div>
-                
-                    </div>
-                
-                
-                </div>
-                {% comment %} <select name="sub_fac" id="sub_fac">
-                    <option value="select">select</option>
-                    <option value="select">webtechnologies()</option>
-                    <option value="select">java(raghu)</option>
-                </select>
-                <h4>Lab: </h4> {% endcomment %}
-                
-                <div class="container">
-
-                    <h4>Lab: </h4>
-            
-                    <div class="select-box" >
-                        
-                        <div class="options-container labe"></div>
-                        <div class = "selected" id = "labe">
-                            select lab
-                        </div>
-            
-                    </div>
-                </div>
-                {% comment %} <select name="lab" id="lab">
-                    <option value="select">select</option>
-                    <option value="select">B-1</option>
-                    <option value="select">B-2</option>
-                    <option value="select">B-3</option>
-                </select> {% endcomment %}
-                <div><button class="buttons" id="add_ok_lab">ok</button></div>
-
-            </div>
-            <div id="manual_info" class="addele" style="display: none">
-                <h4>Manual</h4>
-                <div class="manual-element">
-                    <input type="text" name="manual type" id="manual-type">
-                </div>
-                <form>
-                    <h4>Choose Batch(optional): </h4>
-                    <div class="wrapper2 batchtype_lab">
-                        <input type="radio" name="select" id="option-6" checked>
-                        <input type="radio" name="select" id="option-7">
-                        <input type="radio" name="select" id="option-8">
-                        <label for="option-6" class="option option-6">
-                        <div class="dot"></div>
-                            <span>B1</span>
-                            </label>
-                        <label for="option-7" class="option option-7">
-                        <div class="dot"></div>
-                            <span>B2</span>
-                        </label>
-                        <label for="option-8" class="option option-8">
-                            <div class="dot"></div>
-                            <span>All</span>
-                        </label>
-                    </div>
-                    <div class="buttons" id="add_ok_manual" style="text-align:center;">ok</div>
-                </form>
-                </div>
-    
-        </div>
-
-
-        
-
+    </div>
+    <div class="table-box-3">
+        <!-- <table class="table fac_sort_table">
+            <thead>
+                <th id="fac_head">facutly</th>
+                <th id="fac_class_head">no of classes</th>
+            </thead>
+            <tbody>           
+            </tbody>
+        </table> -->
     </div>
 
 </div>
@@ -861,14 +667,10 @@ branch.addEventListener("click",()=>{
                 options = document.querySelectorAll(".branch .option")
                 options.forEach(o=>{
                     o.addEventListener("click",()=>{
-                        // branch.innerHTML = o.querySelector('label').innerHTML;
+                        branch.innerHTML = o.querySelector('label').innerHTML;
                         //console.log(o.querySelector('input').value)
-                        $('#branch').empty()
                         $('#branch').append(
-                            
-                            `
-                            <span>${o.querySelector('label').innerHTML}</span>
-                            <input type="hidden" value = "${o.querySelector('input').value}" >`
+                            `<input type="hidden" value = "${o.querySelector('input').value}" >`
                         )
                         //$('#branch input').value = o.querySelector('input').value;
                         //console.log($('#branch input').value)
@@ -889,12 +691,6 @@ var loaded_semester = false;
 
 
 $('#semester').click(function(){
-    if($('#branch input').val() == undefined)
-    {
-        alert('please select branch first')
-        return;
-    }
-
     var options;
     if(!loaded_semester){
         $.ajax({
@@ -915,14 +711,9 @@ $('#semester').click(function(){
                 loaded_semester = true;
                 $('.semester').addClass('active')
                 $('.semester .option').click(function(){
-                    // document.querySelector("#semester").innerHTML = $(this).children('label').html()
-                    $('#semester').empty()
-                    $('#semester').append(  
-
-                        
-                        `
-                        <span>${$(this).children('label').html()}</span>
-                        <input type="hidden" value = "${$(this).children('input').val()}">`
+                    document.querySelector("#semester").innerHTML = $(this).children('label').html()
+                    $('#semester').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
                     )
                     $('.semester').removeClass('active')
                 })
@@ -943,10 +734,6 @@ loaded_room = false;
 
 
 $('#block').click(function(){
-
-    // if(confirm('do you want to assign or change the class room') == true){
-
-    // }
 
     if(!loaded_block){
 
@@ -974,12 +761,9 @@ $('#block').click(function(){
             $('.block').addClass('active')
             $('.block .option').click(function(){
                 loaded_room = false;
-                // document.querySelector("#block").innerHTML = $(this).children('label').html()
-                $('#block').empty()
+                document.querySelector("#block").innerHTML = $(this).children('label').html()
                 $('#block').append(     
-                    `
-                    <span>${$(this).children('label').html()}</span>
-                    <input type="hidden" value = "${$(this).children('input').val()}">`
+                    `<input type="hidden" value = "${$(this).children('input').val()}">`
                 )
                 block_value = $(this).children('input').val();
                 $('.block').removeClass('active')
@@ -1031,13 +815,9 @@ $('#room').click(function(){
             loaded_room = true;
             $('.room').addClass('active')
             $('.room .option').click(function(){
-                // document.querySelector("#room").innerHTML = $(this).children('label').html()
-                $('#room').empty()
-                $('#room').append(
-
-                    `
-                    <span>${$(this).children('label').html()}</span>
-                    <input type="hidden" value = "${$(this).children('input').val()}">`
+                document.querySelector("#room").innerHTML = $(this).children('label').html()
+                $('#room').append(     
+                    `<input type="hidden" value = "${$(this).children('input').val()}">`
                 )
                 $('.room').removeClass('active')
             })
@@ -1052,16 +832,7 @@ $('#room').click(function(){
 })
 
 loaded_section = false;
-branch_sem_sec_updated = false;
 $('#section').click(function(){
-
-    if($('#semester input').val() == undefined)
-    {
-        alert('please select semester first')
-        return;
-    }
-
-
 
     if(!loaded_section){
         $.ajax({
@@ -1088,71 +859,13 @@ $('#section').click(function(){
                 $('.section').addClass('active')
                 $('.section .option').click(function(){
                     loaded_room = false;
-                    // document.querySelector("#section").innerHTML = $(this).children('label').html()
-                    $('#section').empty()
-                    $('#section').append(   
-                          
-                        `
-                        <span>${$(this).children('label').html()}</span>
-                        <input type="hidden" value = "${$(this).children('input').val()}">`
+                    document.querySelector("#section").innerHTML = $(this).children('label').html()
+                    $('#section').append(     
+                        `<input type="hidden" value = "${$(this).children('input').val()}">`
                     )
                     block_value = $(this).children('input').val();
                     $('.section').removeClass('active')
-                    
-
-
-                            $.ajax({
-
-                                type: "GET",
-                                url:"{% url 'default_room_get' %}",
-                                data: {
-                                    branch:$('#branch input').val(),
-                                    semester:$('#semester input').val(),
-                                    section:$('#section input').val(),
-                                },
-                                success:function(res){
-                                    res.values.forEach(function(e)
-                                    {
-                                        // alert("yeee its here")
-                                        console.log("one:"+e['room'])
-                                        console.log("two:"+e['room']['block_id']['block_name'])
-                                        $('#block').empty()
-                                        $('#block').append(
-                                            `<span>${e['room']['block_id']['block_name']}</span>`
-                                        )
-                                        $('#room').empty()
-                                        $('#room').append(
-                                            `<span>${e['room']['class_number']}</span>`
-                                        )
-                                    })
-                                    
-                                }
-                                
-                            })
-                    
-
-
-                    
                 })
-
-                // branch_sem_sec_updated = true;
-                //     if(branch_sem_sec_updated)
-                //     {
-                //         $.ajax({
-
-                //                 type: "GET",
-                //                 url:"{% url 'default_room_get' %}",
-                //                 data: {
-                //                     branch:$('#branch input').val(),
-                //                     semester:$('#semester input').val(),
-                //                     section:$('#section input').val(),
-                //                 },
-                //                 success:function(e){
-                //                     alert("yeee its here")
-                //                 }
-                                
-                //             })
-                //     }
             }
 
 
@@ -1160,9 +873,6 @@ $('#section').click(function(){
     }
 
     $('.section').toggleClass('active');
-
-    
-
 })
 
 
@@ -1174,8 +884,6 @@ $('.edit').click(function(){
     $('#class_time_table tbody tr td').find('.lab').remove()
     $('#class_time_table tbody tr td').find('.fac').empty()
     $('#class_time_table tbody tr td').find('.sub').empty()
-    $('#class_time_table tbody tr td').find('div').remove()
-
 
 
     // $('#class_time_table tbody').remove();
@@ -1244,70 +952,35 @@ $('.edit').click(function(){
             res.class.forEach(function(e){
                 // console.log(e['subject_id']['subject_name'])
                 if(e['subject_id']!=null){
-                    // $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_name'])
+                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_name'])
                     // $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_name'])
-                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).append(
-                        `<div>
-                            <input type="hidden" class = 'read_or_write_check' value="not_edited">
-                            <span>${e['subject_id']['subject_short_name']}</span>
-                            
-                            </div>`
-                    )
                 }
                 
 
             })
 
             res.lab_time_table.forEach(function(e){
-                if(e['lab_course']!=null)
-                {
-                    console.log(e['lab_course']['subject_name'])
-                    $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
-                    $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
-                    // $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_name'])
-                    // $("#r_"+e['week']+"_c_"+e['time']).empty();
-                    $("#r_"+e['week']+"_c_"+e['time']).append(
-                        `
-                        <div>
-                        <input type="hidden" class = 'read_or_write_check' value="not_edited">
-                        <span>${e['lab_course']['subject_name']}</span><br>
-                        <span class = "lab">${e['lab']['lab_name']}</span>
-                        </div>
-                        `
-                    )
-                }
-                
+                console.log(e['lab_course']['subject_name'])
+                $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
+                $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
+                $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_name'])
+                // $("#r_"+e['week']+"_c_"+e['time']).empty();
+                $("#r_"+e['week']+"_c_"+e['time']).append(
+                    `<span class = "lab">${e['lab']['lab_name']}</span>`
+                )
             })
-            // loaded_lab = false;
-            // $('#labe').click(function(){
-            //     // alert("this is clicked labe!!")
-            //     if(!loaded_lab)
-            //     {res.lab.forEach(function(e){
-            //     $('.labe').append(
-            //         `
-            //         <div class= "option">
-            //         <input type="radio" class="radio" value="${e.lab_id}" name="category">
-            //         <label for="${e.lab_id}">${e.lab_name}</label>
-            //         </div>
-            //         `
-            //     )
-            //     loaded_lab = true;
-            //     $('.labe').addClass('active')
-            //         $('.labe .option').click(function(){
-            //             // document.querySelector("#labe").innerHTML = $(this).children('label').html()
-            //             $('#labe').empty()
-            //             $('#labe').append(
 
-            //                 `
-            //                 <span>${$(this).children('label').html()}</span>
-            //                 <input type="hidden" value = "${$(this).children('input').val()}">`
-            //             )
-            //             $('.labe').removeClass('active')
-            //         })
-            // })}
+            res.lab.forEach(function(e){
+                console.log(e)
                 
-            // })
-            
+                $('.lab_table tbody').append(
+                    `<tr>
+                        <td>${e.lab_name}
+                            <input type='hidden' value = "${e.lab_id}">
+                            </td>    
+                    </tr>`
+                )
+            })
 
 
             $('.lab_table tbody tr td').click(function(){
@@ -1340,7 +1013,6 @@ $('#save').click(function(){
     room = $("#room input").val();
     section = $("#section input").val();
 
-
     //row = $('#class_time_table tbody').children().length
     //column = $('#class_time_table tbody tr').children().length
 
@@ -1354,101 +1026,43 @@ $('#save').click(function(){
         $('td',this).each(function(){
             if($(this).attr('colspan')>1){
                 action = 'insert_lab';
-                lab = $(this).children('div').children('.lab_val_input').val();
+                lab = $('.lab',this).children('input').val();
                 no_of_hours = $(this).attr('colspan')
             }else{
                 action = 'insert';
                 no_of_hours = $(this).attr('colspan')
 
             }
-            timing = $(this).children()[3].value
-            count_of_divs = $('div',this).length
-            console.log("count_of_divs"+count_of_divs)
+            inputs = $(this).children()
+            if(inputs[0].value === "edited"){
+                // console.log("1:"+inputs('.fac'))
+                console.log($('.fac',this).children('input').val())
+                console.log("lab: "+lab)
 
-            if(count_of_divs == 2){
-                inputs = $(this).children('.div_1')
-                inputs_1 = $(this).children('.div_2')
-                input_check = $('.div_1 .read_or_write_check',this).val()
-                input_check_1 = $('.div_2 .read_or_write_check',this).val()
-
-                if(input_check == 'edited' && input_check_1 == 'edited')
-                {
-                    $.ajax({
+                
+                $.ajax({
                     type: "GET",
                     url: "{% url 'submit_info' %}",
                     data: {
                         action : action,
-                        number_of_inserts:2,
                         branch : branche,
                         semester : semester,
-                        block : inputs.children('.block_val_input').val(),
-                        room : inputs.children('.room_val_input').val(),
+                        block : block,
+                        room : room,
                         section : section,
                         day : day,
-                        subject : inputs.children('.subject_val_input').val(),
-                        faculty : inputs.children('.faculty_val_input').val(),
-                        timing : timing,
+                        subject : inputs[1].value,
+                        faculty : inputs[2].value,
+                        timing : inputs[3].value,
                         lab: lab,
-                        no_of_hours:no_of_hours,
-                        class:inputs.children('.class_val_input').val(),
-                        batch: inputs.children('.batch_val_input').val(),
-
-                        block_1:inputs_1.children('.block_val_input').val(),
-                        room_1:inputs_1.children('.room_val_input').val(),
-                        subject_1: inputs_1.children('.subject_val_input').val(),
-                        faculty_1: inputs_1.children('.faculty_val_input').val(),
-                        class_1: inputs_1.children('.class_val_input').val(),
-                        batch_1:inputs_1.children('.batch_val_input').val()
+                        no_of_hours:no_of_hours
                     },
 
                     success: function(res){
                         alert("succesfuly updated")
                     } 
                 })
-                }
-                console.log('mama you are here')
-                
-                
-            }else{
-
-                // console.log("1:"+inputs('.fac'))
-                inputs = $(this).children('div')
-                input_check = $('div .read_or_write_check',this).val()
-                if(input_check == 'edited'){
-                    console.log("input_check_here:"+input_check)
-                    $.ajax({
-                        type: "GET",
-                        url: "{% url 'submit_info' %}",
-                        data: {
-                            action : action,
-                            number_of_inserts:1,
-                            branch : branche,
-                            semester : semester,
-                            block : inputs.children('.block_val_input').val(),
-                            room : inputs.children('.room_val_input').val(),
-                            section : section,
-                            day : day,
-                            subject : inputs.children('.subject_val_input').val(),
-                            faculty : inputs.children('.faculty_val_input').val(),
-                            timing : timing,
-                            lab: lab,
-                            no_of_hours:no_of_hours,
-                            extra_faculty:inputs.children('.extra_val_input').val(),
-                            time_1:inputs.children('.prev_time_close_val_input').val(),
-                            time_2:inputs.children('.prev_time_far_val_input').val(),
-                            class:inputs.children('.class_val_input').val(),
-                            batch: inputs.children('.batch_val_input').val(),
-                        },
-
-                        success: function(res){
-                            alert("succesfuly updated")
-                        } 
-                    })
-                }
             }
-            // console.log(input_check)
-
-            
         })
     })
     
@@ -1534,7 +1148,7 @@ function dragstart_handler(ev){
         // the click occured outside '#element'
         //alert('outside');
         $('.table').find('.selectunit').removeClass('selectunit');
-        // count = 0;
+        count = 0;
     }       
     });
    
@@ -1594,7 +1208,6 @@ $('#delete').click(function(){
             firstElement.find('.fac').empty();
             firstElement.attr('colspan',1);
             firstElement.find('.lab').remove();
-            firstElement.find('div').remove();
 
         }
     }else{
@@ -1651,607 +1264,5 @@ $("#fac_class_head").click(function(){
 });
 </script>
 
-
-<script>
-// script to load information from the selected to the table 11-05-2022
-var loaded_subject_faculty = false;
-// var loaded_semester = false;
-
-
-$('#subject_faculty').click(function(){
-    var options;
-    if(!loaded_subject_faculty){
-        $.ajax({
-            type: "GET",
-            url: "{% url 'get_info_back' %}",
-            data: {
-                action:'get_fac_relation',
-                branch : branch_get,
-                semester : semester,
-                section : section,
-            },
-            success: function(res){
-                res.sub_fac.forEach(function(e){
-                    $('.subject_faculty').append(
-                        `
-                        <div class= "option">
-                        <input type="radio" class="radio" value= name="category">
-                        <input type="hidden" class="subject_val" value = "${e['subject']['subject_id']}">
-                        <input type="hidden" class="faculty_val" value = "${e['faculty']['id']}">
-
-                        <label for="${e['subject']['subject_id']}">${e['subject']['subject_name']} - ${e['faculty']['faculty_name']}</label>
-                        </div>
-                        `
-                    )
-                })
-                loaded_subject_faculty = true;
-                $('.subject_faculty').addClass('active')
-                $('.subject_faculty .option').click(function(){
-                    // document.querySelector("#subject_faculty").innerHTML = $(this).children('label').html()
-                    $('#subject_faculty').empty()
-                    $('#subject_faculty').append(     
-                        `
-                        <span>${$(this).children('label').html()}</span>
-                        <input type="hidden" value = "${$(this).children()[1].value}">
-                        <input type="hidden" value = "${$(this).children()[2].value}">
-                        
-                        
-                        `
-
-                    )
-                    $('.subject_faculty').removeClass('active')
-                })
-
-                
-                
-            }
-        })
-    }
-    //console.log("its is here")
-    $('.subject_faculty').toggleClass('active')
-})
-
-
-var loaded_block_2=false;
-var block_value_2
-var loaded_room_2=false;
-$('#block_2').click(function(){
-
-if(!loaded_block_2){
-
-$.ajax({
-
-    type: "GET",
-    url : "{% url 'submit_info' %}",
-    data: {
-        action : "scroll_list_block"
-    },
-
-    success: function(res){
-        res.values.forEach(function(e){
-            $('.block_2').append(
-                    `
-                    <div class= "option">
-                    <input type="radio" class="radio" value="${e.block_id}" name="category">
-                    <label for="${e.block_id}">${e.block_name}</label>
-                    </div>
-                    `
-                )
-        })
-
-        loaded_block_2 = true;
-        $('.block_2').addClass('active')
-        $('.block_2 .option').click(function(){
-            loaded_room_2 = false;
-            // document.querySelector("#block_2").innerHTML = $(this).children('label').html()
-            $('#block_2').empty()
-            $('#block_2').append(     
-                `
-                <span>${$(this).children('label').html()}</span>
-                <input type="hidden" value = "${$(this).children('input').val()}">`
-            )
-            block_value_2 = $(this).children('input').val();
-            $('.block_2').removeClass('active')
-        })
-
-    }
-
-
-})
-
-}
-
-$('.block_2').toggleClass('active')
-
-})
-
-
-
-$('#room_2').click(function(){
-
-if(block_value_2 == ''){
-    alert("choose block");
-    return
-}
-
-if(!loaded_room_2){
-    $('.room_2').empty();
-
-$.ajax({
-    type: "GET",
-    url: "{% url 'submit_info'%}",
-    data: {
-            action : "scroll_list_room",
-            block_id : block_value_2
-    },
-
-    success: function(res){
-        res.values.forEach(function(e){
-            $('.room_2').append(
-                    `
-                    <div class= "option">
-                    <input type="radio" class="radio" value="${e.room_id}" name="category">
-                    <label for="${e.room_id}">${e.class_number}</label>
-                    </div>
-                    `
-                )
-        })
-
-        loaded_room_2 = true;
-        $('.room_2').addClass('active')
-        $('.room_2 .option').click(function(){
-            // document.querySelector("#room_2").innerHTML = $(this).children('label').html()
-            $('#room_2').empty()
-            $('#room_2').append(     
-                `
-                <span>${$(this).children('label').html()}</span>
-                <input type="hidden" value = "${$(this).children('input').val()}">`
-            )
-            $('.room_2').removeClass('active')
-        })
-    }
-
-
-
-})
-}
-$('.room_2').toggleClass('active')
-
-})
-
-
-
-
-
-
-</script>
-
-<script>
-
-    $('.classtype .option').click(function(e){
-        $('.classtype').children('input').val( $(this).children('span').html())
-    })
-
-    $('.batchtype .option').click(function(e){
-        $('.batchtype').children('input').val($(this).children('span').html())
-    })
-
-    $('#add_ok_class').click(function(){
-
-        if(firstElement.find('.read_or_write_check').val() == "not_edited" )
-        {
-            if(confirm('this class space has previously assigned do you want to re-assing?')==true){
-                firstElement.children('div').remove()
-                $('#delete').click()
-                subject= $('#subject_faculty').children()[1].value
-                faculty = $('#subject_faculty').children()[2].value
-                // batch = $(".batchtype").children('hidden').val()
-                // classe = $(".classtype").children('hidden').val()
-                var block_of;
-                var block_name;
-                var room_of;
-                var room_name;
-
-                if($('#block_2 input').val() == ''){
-                block_of = $('#block input').val()
-                block_name = $('#block span').html()
-
-                }else{
-                    block_of = $('#block_2 input').val()
-                block_name = $('#block_2 span').html()
-
-                }
-
-                if($('#room_2 input').val() == ''){
-                room_of = $('#room input').val()
-                room_name = $('#room span').html()
-
-                }else{
-                    room_of = $('#room_2 input').val()
-                room_name = $('#room_2 span').html()
-
-                }
-
-                batche = $('.batchtype').children('input').val()
-                classe = $('.classtype').children('input').val()
-                var div_count;
-                console.log("subject-"+subject+"-"+faculty+"-batch-"+batche+"-classe-"+classe+"-block_of-"+block_of+"-room_of-"+room_of)
-                if(firstElement.children('div').length == 0)
-                {
-                    div_count = 'div_1' 
-                }else if(firstElement.children('div').length == 1){
-                    div_count = 'div_2'
-                }
-
-                console.log("bro_div_count: "+div_count)
-                firstElement.append(
-                    `
-                    <div class = ${div_count}>
-                        <span>${$('#subject_faculty span').html()}
-                        </span>
-                        <span>${block_name}-${room_name}
-                        </span>
-                        <span>${classe}</span>
-                        <span>${batche}</span>
-
-                        <input type = "hidden" class='subject_val_input' value = "${subject}">
-                        <input type = "hidden"  class='block_val_input' value = "${block_of}">
-                        <input type = "hidden"  class='room_val_input' value = "${room_of}">
-                        <input type = "hidden"  class='faculty_val_input' value = "${faculty}">
-                        <input type = "hidden"  class='class_val_input' value = "${classe}">
-                        <input type = "hidden"  class='batch_val_input' value = "${batche}">
-                        <input type = "hidden" class ='read_or_write_check' value = "edited">
-
-
-
-
-                        </div>
-                    `
-                )
-
-                $("#class_info").hide("slow");
-
-            }
-        }else{
-            subject= $('#subject_faculty').children()[1].value
-                faculty = $('#subject_faculty').children()[2].value
-                // batch = $(".batchtype").children('hidden').val()
-                // classe = $(".classtype").children('hidden').val()
-                var block_of;
-                var block_name;
-                var room_of;
-                var room_name;
-
-                if($('#block_2 input').val() == ''){
-                block_of = $('#block input').val()
-                block_name = $('#block span').html()
-
-                }else{
-                    block_of = $('#block_2 input').val()
-                block_name = $('#block_2 span').html()
-
-                }
-
-                if($('#room_2 input').val() == ''){
-                room_of = $('#room input').val()
-                room_name = $('#room span').html()
-
-                }else{
-                    room_of = $('#room_2 input').val()
-                room_name = $('#room_2 span').html()
-
-                }
-
-                batche = $('.batchtype').children('input').val()
-                classe = $('.classtype').children('input').val()
-
-                console.log("subject-"+subject+"-"+faculty+"-batch-"+batche+"-classe-"+classe+"-block_of-"+block_of+"-room_of-"+room_of)
-                    var div_count;
-                    if(firstElement.children('div').length == 0)
-                    {
-                        div_count = 'div_1' 
-                    }else if(firstElement.children('div').length == 1){
-                        div_count = 'div_2'
-                    }
-                firstElement.append(
-                    `
-                    <div class = ${div_count}>
-                        <span>${$('#subject_faculty span').html()}
-                        </span>
-                        <span>${block_name}-${room_name}
-                        </span>
-                        <span>${classe}</span>
-                        <span>${batche}</span>
-
-                        <input type = "hidden" class='subject_val_input' value = "${subject}">
-                        <input type = "hidden"  class='block_val_input' value = "${block_of}">
-                        <input type = "hidden"  class='room_val_input' value = "${room_of}">
-                        <input type = "hidden"  class='faculty_val_input' value = "${faculty}">
-                        <input type = "hidden"  class='class_val_input' value = "${classe}">
-                        <input type = "hidden"  class='batch_val_input' value = "${batche}">
-                        <input type = "hidden" class ='read_or_write_check' value = "edited">
-
-
-
-
-                        </div>
-                    `
-                )
-
-                $("#class_info").hide("slow");
-        }
-
-
-
-
-    })
-
-    $('#add_ok_lab').click(function(){
-
-        if(firstElement.find('.read_or_write_check').val() == "not_edited" )
-        {
-            alert('here macha')
-        }
-
-        firstElement.children('div').remove()
-
-        subject = $('#subject_faculty_lab').children()[1].value
-        faculty = $('#subject_faculty_lab').children()[2].value
-        lab = $('#labe input').val()
-        extra_fac = $('#additional_faculty input').val()
-
-        
-        prev_time_close = firstElement.prev().find('.timing').val()
-        prev_week = firstElement.siblings('th').children('input').val()
-        
-        firstElement.append(
-            `<div>
-                        <span>${$('#subject_faculty_lab span').html()}
-                        </span>
-                        <span>${$('#labe span').html()}</span>
-                        <input type = "hidden" class='subject_val_input' value = "${subject}">
-                        <input type = "hidden"  class='faculty_val_input' value = "${faculty}">
-                        <input type = "hidden"  class='lab_val_input' value = "${lab}">
-                        <input type = "hidden"  class='extra_val_input' value = "${extra_fac}">
-                        <input type = "hidden"  class='prev_time_close_val_input' value = "${prev_time_close}">
-
-
-
-                        <input type = "hidden" class ='read_or_write_check' value = "edited">
-
-
-
-
-                        </div>`
-        )
-
-        if(count == 3)
-        {   
-            prev_time_far = firstElement.prev().find('.timing').val()
-            firstElement.find('div').append(
-                `
-                <input type = "hidden"  class='prev_time_far_val_input' value = "${prev_time_far}">
-                
-                
-                `
-            )
-        }
-        
-    })
-
-    $('#add_ok_manual').click(function(){
-
-        if($('#manual-type').val() == ''){
-            alert('please enter the class')
-        }
-
-        text_input = $('#manual-type').val()
-        firstElement.append(
-            `
-            <div>
-                
-                <span>${text_input}</span>
-                <input type = 'hidden' value = ${text_input}>
-                </div>
-
-            `
-        )
-    })
-
-    var loaded_subject_faculty_lab = false;
-
-    $('#subject_faculty_lab').click(function(){
-        var options;
-        if(!loaded_subject_faculty_lab){
-            $.ajax({
-                type: "GET",
-                url: "{% url 'get_info_back' %}",
-                data: {
-                    action:'get_fac_relation',
-                branch : branch_get,
-                semester : semester,
-                section : section,
-
-                },
-                success: function(res){
-                    res.sub_fac.forEach(function(e){
-                        $('.subject_faculty_lab').append(
-                            `
-                            <div class= "option">
-                            <input type="radio" class="radio" value= name="category">
-                            <input type="hidden" class="subject_val" value = "${e['subject']['subject_id']}">
-                            <input type="hidden" class="faculty_val" value = "${e['faculty']['id']}">
-    
-                            <label for="${e['subject']['subject_id']}">${e['subject']['subject_name']} - ${e['faculty']['faculty_name']}</label>
-                            </div>
-                            `
-                        )
-                    })
-                    loaded_subject_faculty_lab = true;
-                    $('.subject_faculty_lab').addClass('active')
-                    $('.subject_faculty_lab .option').click(function(){
-                        // document.querySelector("#subject_faculty_lab").innerHTML = $(this).children('label').html()
-                        $('#subject_faculty_lab').append(     
-                            `
-                            <span>${$(this).children('label').html()}</span>
-                            <input type="hidden" value = "${$(this).children()[1].value}">
-                            <input type="hidden" value = "${$(this).children()[2].value}">
-                            
-                            
-                            `
-    
-                        )
-                        $('.subject_faculty_lab').removeClass('active')
-                    })
-    
-                    
-                    
-                }
-            })
-        }
-        //console.log("its is here")
-        $('.subject_faculty_lab').toggleClass('active')
-    })
-    var loaded_faculty = false;
-    $('#additional_faculty').click(function(){
-        // console.log("department_id: "+$('#department input').val())
-        console.log("its clicked macha")
-        if(!loaded_faculty){
-            $.ajax({
-                type: "GET",
-                url: "{% url 'submit_info' %}",
-                data: {action: 'get_additional_faculty',
-                        branch:$('#branch input').val()},
-                success: function(res){
-                    res.values.forEach(function(e){
-                        $('.additional_faculty').append(
-                            `
-                            <div class= "option">
-                            <input type="radio" class="radio" value="${e.id}" name="category">
-                            <label for="${e.id}">${e.faculty_name}</label>
-                            </div>
-                            `
-                        )
-                    })
-                    loaded_faculty= true;
-                    $('.additional_faculty').addClass('active')
-                    $('.additional_faculty .option').click(function(){
-                        // document.querySelector("#lab").innerHTML = $(this).children('label').html()
-                        $('#additional_faculty').empty()
-                        $('#additional_faculty').append(     
-                            `
-                            <span>${$(this).children('label').html()}</span>
-                            <input type="hidden" value = "${$(this).children('input').val()}">`
-                        )
-                        $('.additional_faculty').removeClass('active')
-                    })
-    
-                    
-                    
-                }
-            })
-        }
-        //console.log("its is here")
-        $('.additional_faculty').toggleClass('active')
-    })
-
-
-
-    var loaded_lab = false;
-    $('#labe').click(function(){
-        // console.log("department_id: "+$('#department input').val())
-        console.log("its clicked macha two")
-        if(!loaded_lab){
-            $.ajax({
-                type: "GET",
-                url: "{% url 'submit_info' %}",
-                data: {action: 'get_additional_lab',
-                        branch:$('#branch input').val()},
-                success: function(res){
-
-                    console.log("not called macha")
-                    res.values.forEach(function(e){
-                        $('.labe').append(
-                            `
-                            <div class= "option">
-                            <input type="radio" class="radio" value="${e.lab_id}" name="category">
-                            <label for="${e.lab_id}">${e.lab_name}</label>
-                            </div>
-                            `
-                        )
-                    })
-                    loaded_lab = true;
-                    $('.labe').addClass('active')
-                    $('.labe .option').click(function(){
-                        // document.querySelector("#lab").innerHTML = $(this).children('label').html()
-                        $('#labe').empty()
-                        $('#labe').append(     
-                            `
-                            <span>${$(this).children('label').html()}</span>
-                            <input type="hidden" value = "${$(this).children('input').val()}">`
-                        )
-                        $('.labe').removeClass('active')
-                    })
-    
-                    
-                    
-                }
-            })
-        }
-        //console.log("its is here")
-        $('.labe').toggleClass('active')
-    })
-    
-   
-</script>
-
-<script>
-    //add classes lab and manual expansion script
-
-
-    $("#add_class").click(function () {
-
-        
-        if(firstElement == null){
-            alert("please select an element")
-            return;
-        }
-
-        if(firstElement.children('div').length >=2)
-        {
-            alert("maximum classes limit is reached please delete and add the classes");   
-        }
-
-        $("#class_info").show("slow");
-        
-        $("#lab_info").hide("slow");
-        $("#manual_info").hide("slow");
-    });
-    $("#add_lab").click(function () {
-
-        if(count < 2 && firstElement.attr('colspan')<2){
-            alert("please select an element more than 1")
-            return;
-        }
-        firstElement.attr('colspan',count);
-        firstElement.prevAll().slice(0,count-1).hide();
-        $("#lab_info").show("slow");
-        
-        $("#class_info").hide("slow");
-        $("#manual_info").hide("slow");
-    });
-    $("#add_empty").click(function () {
-        $("#manual_info").show("slow");
-        
-        $("#lab_info").hide("slow");
-        $("#class_info").hide("slow");
-    });
-
-    $(".classtype .option").click(function(e){
-        $(this).children("span").html()
-        console.log($(this).children("span").html())
-
-    })
-</script>
 
 {% endblock javascript %}

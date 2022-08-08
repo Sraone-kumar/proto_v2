@@ -7,15 +7,47 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from v_1 import data_loader
 
-from .serializer_v_1 import BranchSerializer, ClassTableSerializer, LabTableSerializer, SubFacSerializer, SubjectsSerializer, fac_relationSerializer, facultySerializer
+from .serializer_v_1 import BranchSerializer, ClassTableSerializer, DefaultClassRoomNumberSerializer, LabTableSerializer, SubFacSerializer, SubjectsSerializer, fac_relationSerializer, facultySerializer
 
 from .sub_fac_model import sub_fac_relation
 
-from .models import Branch_table, Timings_table, Week_table, class_time_table, faculty_table, lab_information_table, lab_time_table, subjects_table
+from .models import Branch_table, Default_class_Room, Timings_table, Week_table, class_time_table, faculty_table, lab_information_table, lab_time_table, subjects_table
 
 
 def sub_fac(request):
     return render(request, 'sub_fac_editor.html')
+
+
+def submit_func(request):
+
+    branch = request.GET.get('branch')
+    section = request.GET.get('section')
+    semester = request.GET.get('semester')
+    subject = request.GET.get('subject')
+    faculty = request.GET.get('faculty')
+
+    check_if = sub_fac_relation.objects.only('id').filter(
+        branch_id_id=branch, section_id=section, semester_id=semester, subject_id=subject, id=faculty)
+    if not check_if.exists():
+        insert = sub_fac_relation.objects.create(
+            branch_id_id=branch, section_id=section, semester_id=semester, subject_id=subject, faculty_id=faculty)
+        insert.save()
+        print('success')
+    else:
+        print('something went wrong')
+    return "success"
+
+
+@api_view(['GET'])
+def get_default_room(request):
+    branch = request.GET.get('branch')
+    semester = request.GET.get('semester')
+    section = request.GET.get('section')
+    query = Default_class_Room.objects.filter(
+        branch=branch, section=section, semester=semester)
+    default_room_serializer = DefaultClassRoomNumberSerializer(
+        query, many=True)
+    return Response({"values": default_room_serializer.data})
 
 
 @api_view(["GET"])
@@ -50,29 +82,6 @@ def get_info(request):
     print("its here")
     return JsonResponse({"error": "dont know what"})
     # {'values_1':faculty,'values_2':courses}
-
-
-def submit_func(request):
-
-    print("looking through the memory")
-    return "fuck"
-
-    branch = request.GET.get('branch')
-    section = request.GET.get('section')
-    semester = request.GET.get('semester')
-    subject = request.GET.get('subject')
-    faculty = request.GET.get('faculty')
-
-    check_if = sub_fac_relation.objects.only('id').filter(
-        branch_id_id=branch, section_id=section, semester_id=semester, subject_id=subject, id=faculty)
-    if not check_if.exists():
-        insert = sub_fac_relation.objects.create(
-            branch_id_id=branch, section_id=section, semester_id=semester, subject_id=subject, faculty_id=faculty)
-        insert.save()
-        print('success')
-    else:
-        print('something went wrong')
-    return "success"
 
 
 @api_view(['GET'])

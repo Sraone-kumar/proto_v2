@@ -61,7 +61,8 @@ urlpatterns = [
     path('editor_v4_replica', views_2.total_script, name='editor_v4_prototype'),
 
 
-
+    # get default room url
+    path('get/ajax/default_room', views_2.get_default_room, name='default_room_get'),
 
 
     # login and logout......

@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
+.selected {
+    background: rgb(46, 167, 197);
+}
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+  
+.buttons {
+    border-style: none;
+    width: 100px;
+    height: 30px;
+    background: rgb(46, 167, 197);
+    border-radius: 20px;
+    color: white;
+    font-size: small;
+    margin-left: 15px;
+    /* float: left; */
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+  
+.buttons:hover {
+    background-color: #b5e7ff;
+    color: black;
+}
+  
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper, .wrapper1,.wrapper2{
+    display: inline-flex;
+    /*background: #fff;*/
+    height: 30px;
+    width: 200px;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    padding: 20px 15px;
+    /*box-shadow: 5px 5px 30px rgba(0,0,0,0.2);*/
+  }
+  .wrapper .option, .wrapper1 .option, .wrapper2 .option{
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 12 10px;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
+  }
+  .wrapper .option .dot, .wrapper1 .option .dot,.wrapper2 .option .dot{
+    height: 12px;
+    width: 12px;
+    background: #d9d9d9;
+    border-radius: 50%;
+    position: relative;
+  }
+  .wrapper .option .dot::before, .wrapper1 .option .dot::before,.wrapper2 .option .dot::before{
+    position: absolute;
+    content: "";
+    top: 3.25px;
+    left: 2.75px;
+    width: 6px;
+    height: 6px;
+    background: #d9d9d9;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+  }
+  input[type="radio"]{
+    display: none;
+  }
+  #option-1:checked:checked ~ .option-1,
+  #option-2:checked:checked ~ .option-2,
+  #option-3:checked:checked ~ .option-3,
+  #option-4:checked:checked ~ .option-4,
+  #option-5:checked:checked ~ .option-5,
+  #option-6:checked:checked ~ .option-6,
+  #option-7:checked:checked ~ .option-7,
+  #option-8:checked:checked ~ .option-8{
+    border-color: rgb(46, 167, 197);
+    background: rgb(46, 167, 197);
+  }
+  #option-1:checked:checked ~ .option-1 .dot,
+  #option-2:checked:checked ~ .option-2 .dot,
+  #option-3:checked:checked ~ .option-3 .dot,
+  #option-4:checked:checked ~ .option-4 .dot,
+  #option-5:checked:checked ~ .option-5 .dot,
+  #option-6:checked:checked ~ .option-6 .dot,
+  #option-7:checked:checked ~ .option-7 .dot,
+  #option-8:checked:checked ~ .option-8 .dot{
+    background: #fff;
+  }
+  #option-1:checked:checked ~ .option-1 .dot::before,
+  #option-2:checked:checked ~ .option-2 .dot::before,
+  #option-3:checked:checked ~ .option-3 .dot::before,
+  #option-4:checked:checked ~ .option-4 .dot::before,
+  #option-5:checked:checked ~ .option-5 .dot::before,
+  #option-6:checked:checked ~ .option-6 .dot::before,
+  #option-7:checked:checked ~ .option-7 .dot::before,
+  #option-8:checked:checked ~ .option-8 .dot::before{
+    opacity: 1;
+    transform: scale(1);
+  }
+  .wrapper .option span,
+  .wrapper1 .option span,
+  .wrapper2 .option span{
+    font-size: small;
+    color: #808080;
+  }
+  #option-1:checked:checked ~ .option-1 span,
+  #option-2:checked:checked ~ .option-2 span,
+  #option-3:checked:checked ~ .option-3 span,
+  #option-4:checked:checked ~ .option-4 span,
+  #option-5:checked:checked ~ .option-5 span,
+  #option-6:checked:checked ~ .option-6 span,
+  #option-7:checked:checked ~ .option-7 span,
+  #option-8:checked:checked ~ .option-8 span{
+    color: #fff;
+  }
+

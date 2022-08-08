@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import lab_information_table, lab_time_table, subjects_table, Designation_table, department_table, faculty_table, class_time_table, Timings_table, Block_table, Week_table, Room_table, Branch_table, semester_table, section_table, Editors
+from .models import Default_class_Room, Manual_class_room, lab_information_table, lab_time_table, subjects_table, Designation_table, department_table, faculty_table, class_time_table, Timings_table, Block_table, Week_table, Room_table, Branch_table, semester_table, section_table, Editors
 from .sub_fac_model import sub_fac_relation
 
 
@@ -17,8 +17,10 @@ class subAdmin(admin.ModelAdmin):
 
 
 class classAdmin(admin.ModelAdmin):
-    list_display = ('subject_id', 'faculty_id', 'branch',
+    list_display = ('subject_id', 'faculty_id', 'branch', 'weekday_id', 'timing_id',
                     'section', 'semester', 'Room_with_block')
+    search_fields = ('weekday_id_id__week_name', 'timing_id')
+    list_filter = ('weekday_id',)
 
 
 class subFacAdmin(admin.ModelAdmin):
@@ -32,6 +34,15 @@ class LabFacAdmin(admin.ModelAdmin):
 
 class EditorsAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'password')
+
+
+class DefaultClassRoomAdmin(admin.ModelAdmin):
+    list_display = ('id', 'branch', 'semester', 'section', 'room')
+
+
+class ManualClassAdmin(admin.ModelAdmin):
+    list_display = ('id', 'branch', 'semester', 'section',
+                    'weekday', 'timing', 'manual_class', 'no_of_hours')
 
 
 admin.site.register(subjects_table, subAdmin)
@@ -50,4 +61,6 @@ admin.site.register(sub_fac_relation, subFacAdmin)
 admin.site.register(lab_information_table)
 admin.site.register(lab_time_table, LabFacAdmin)
 admin.site.register(Editors, EditorsAdmin)
+admin.site.register(Default_class_Room, DefaultClassRoomAdmin)
+admin.site.register(Manual_class_room, ManualClassAdmin)
 # Register your models here.

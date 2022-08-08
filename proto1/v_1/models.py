@@ -1,3 +1,4 @@
+from calendar import weekday
 from statistics import mode
 from django.db import models
 from django.db.models.deletion import CASCADE
@@ -127,6 +128,8 @@ class class_time_table(models.Model):
                          default=None, null=True)
     semester = ForeignKey(
         semester_table, on_delete=CASCADE, default=None, null=True)
+    batch = CharField(max_length=150, default=None, null=True)
+    class_type = CharField(max_length=150, default=None, null=True)
 
 
 class lab_information_table(models.Model):
@@ -148,8 +151,12 @@ class lab_time_table(models.Model):
     lab = ForeignKey(lab_information_table, on_delete=CASCADE, null=True)
     lab_course = ForeignKey(subjects_table, on_delete=CASCADE, null=True)
     lab_faculty = ForeignKey(faculty_table, on_delete=CASCADE, null=True)
+    extra_faculty = CharField(max_length=150, null=True)
     week = ForeignKey(Week_table, on_delete=CASCADE)
     time = ForeignKey(Timings_table, on_delete=CASCADE)
+    time_1 = IntegerField(null=True)
+    time_2 = IntegerField(null=True)
+
     branch = ForeignKey(Branch_table, on_delete=CASCADE)
     section = ForeignKey(section_table, on_delete=CASCADE)
     semester = ForeignKey(semester_table, on_delete=CASCADE)
@@ -168,3 +175,14 @@ class Default_class_Room(models.Model):
     semester = ForeignKey(semester_table, on_delete=CASCADE)
     section = ForeignKey(section_table, on_delete=CASCADE)
     room = ForeignKey(Room_table, on_delete=CASCADE, null=True)
+
+
+class Manual_class_room(models.Model):
+    id = AutoField(primary_key=True)
+    branch = ForeignKey(Branch_table, on_delete=CASCADE)
+    semester = ForeignKey(semester_table, on_delete=CASCADE)
+    section = ForeignKey(section_table, on_delete=CASCADE)
+    timing = ForeignKey(Timings_table, on_delete=CASCADE)
+    weekday = ForeignKey(Week_table, on_delete=CASCADE)
+    no_of_hours = IntegerField()
+    manual_class = CharField(max_length=150)

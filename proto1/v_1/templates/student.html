@@ -144,10 +144,10 @@
 <input type="text" placeholder="enter section" id = "section"> -->
 <div class="table_div row">
     <div id="student_pre_info">
-        <div><h4>ACADEMIC YEAR 2021-2022:EVEN SEMESTER</h4></div>
-        <div><h4 id="sem_display">4 SEMESTER TIMETABLE</h4></div>
-        <div style="display: flex;flex-direction: row; justify-content: center;"><h4>B-TECH</h4><h4>Computer science and Engineering</h4></div>
-        <div style="display: flex;flex-direction: row; justify-content: center;">Room No: <h4>b-4 202</h4> class: <h4>4-cse-1</h4></div>
+        <div style="display:flex;flex-direction:row"><h4>ACADEMIC YEAR 2021-2022:<h4 id="semester_dis" ></h4>SEMESTER</h4></div>
+        <div style="display:flex;flex-direction:row"><h4 id="sem_display"> <h4 id="sem_num"></h4> - SEMESTER TIMETABLE</h4></div>
+        <div style="display: flex;flex-direction: row; justify-content: center;"><h4>B-TECH</h4><h4 id="department_dis">COMPUTER SCIENCE ENGINEERING</h4></div>
+        <div style="display: flex;flex-direction: row; justify-content: center;">Room No: <h4 id="room_dis">b-4 202</h4> class: <h4 id="class_dis">4-CSE-1</h4></div>
     </div>
     <div class="table-box-1">
         <table class = 'table' id='class_time_table'>
@@ -686,7 +686,8 @@ branch.addEventListener("click",()=>{
                         branch.innerHTML = o.querySelector('label').innerHTML;
                         //console.log(o.querySelector('input').value)
                         $('#branch').append(
-                            `<input type="hidden" value = "${o.querySelector('input').value}" >`
+                            `<input type="hidden" value = "${o.querySelector('input').value}" >
+                            `
                         )
                         //$('#branch input').value = o.querySelector('input').value;
                         //console.log($('#branch input').value)
@@ -970,22 +971,39 @@ $('.edit').click(function(){
             res.class.forEach(function(e){
                 // console.log(e['subject_id']['subject_name'])
                 if(e['subject_id']!=null){
-                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_short_name'])
-                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_short_name'])
+                    // $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.sub').html(e['subject_id']['subject_short_name'])
+                    // $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).children('.fac').html(e['faculty_id']['faculty_short_name'])
+
+                    $("#r_"+e['weekday_id']+"_c_"+e['timing_id']).append(
+                        `<div>
+                            <span>${e['subject_id']['subject_short_name']}</span>
+                            <span>${e['faculty_id']['faculty_short_name']}</span>
+                            </div>`
+                    )
+
                 }
                 
 
             })
 
             res.lab_time_table.forEach(function(e){
-                console.log(e['lab_course']['subject_name'])
-                $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
-                $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
-                $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_short_name'])
-                // $("#r_"+e['week']+"_c_"+e['time']).empty();
-                $("#r_"+e['week']+"_c_"+e['time']).append(
-                    `<span class = "lab">${e['lab']['lab_short_name']}</span>`
-                )
+                if(e['lab_course']!=null)
+                {
+                    console.log(e['lab_course']['subject_name'])
+                    $("#r_"+e['week']+"_c_"+e['time']).attr('colspan',e['no_of_hours'])
+                    $("#r_"+e['week']+"_c_"+e['time']).prevAll().slice(0,e['no_of_hours']-1).hide()
+                    // $("#r_"+e['week']+"_c_"+e['time']).children('.sub').html(e['lab_course']['subject_name'])
+                    // $("#r_"+e['week']+"_c_"+e['time']).empty();
+                    $("#r_"+e['week']+"_c_"+e['time']).append(
+                        `
+                        <div>
+                        <input type="hidden" class = 'read_or_write_check' value="not_edited">
+                        <span>${e['lab_course']['subject_name']}</span><br>
+                        <span class = "lab">${e['lab']['lab_name']}</span>
+                        </div>
+                        `
+                    )
+                }
             })
 
             res.lab.forEach(function(e){
@@ -1020,6 +1038,16 @@ $('.edit').click(function(){
     })
 
     //ajax call to load fac_sort
+    //$('#semester_dis').html($("#semester").html())
+    $('#sem_num').html($('#semester').html())
+    if ($('#semester input').val()%2==0){
+        $('#semester_dis').html("EVEN")    
+    }
+    else{
+        $('#semester_dis').html("ODD")
+    }
+    //$('#deparment_dis').html($('#branch'))
+    $('#class_dis').html($('#semester'.html()+"-"+$('#branch').html()+"-"+$('#section').html()))
    
 })
 
