@@ -3,6 +3,7 @@
 {% block style %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'v_1/design.css' %}">
+<link rel="stylesheet" href="{% static 'v_1/expstyle.css' %}">
 
 
 {% endblock style %}
@@ -587,11 +588,114 @@
             <th>faculty</th>
         </thead>
         <tbody>
+
+</div>
+<div class="container">
+    <div class="button_container">
+        <button id="add_class" class="buttons">Add Class</button>
+        <button id="add_lab" class="buttons">Add lab</button>
+        <button id="add_empty" class="buttons">Manual Class</button>
+    </div>
+
+    <div id="class_info" class="addele" style="display: none;">
+        <h4>subject and faculty:</h4>
+        
+        <select name="sub_fac" id="sub_fac">
+            <option value="select">select</option>
+            <option value="select">databaseManagement(srk)</option>
+            <option value="select">java(raghu)</option>
+        </select>
+        <h4>Class Type:</h4>
+        <form >
+            <div class="wrapper">
+                <input type="radio" name="select" id="option-1" checked>
+                <input type="radio" name="select" id="option-2">
+                <label for="option-1" class="option option-1">
+                    <div class="dot"></div>
+                    <span>Regular</span>
+                    </label>
+                <label for="option-2" class="option option-2">
+                    <div class="dot"></div>
+                    <span>Tutorial</span>
+                </label>
+            </div>
             
-        </tbody>
-    </table>
+        </form>
+        
+        <h4>Room No: </h4>
+        <select name="block" id="block">
+            <option value="select">select</option>
+            <option value="select">B-1</option>
+            <option value="select">B-2</option>
+            <option value="select">B-3</option>
+        </select>
+        <select name="room" id="room">
+            <option value="select">select</option>
+            <option value="select">201</option>
+            <option value="select">202</option>
+            <option value="select">203</option>
+        </select>
+
+        <h4>Choose Batch(optional): </h4>
+        
+            <div class="wrapper1">
+                <input type="radio" name="select" id="option-3" checked>
+                <input type="radio" name="select" id="option-4">
+                <label for="option-3" class="option option-3">
+                <div class="dot"></div>
+                    <span>b1</span>
+                    </label>
+                <label for="option-4" class="option option-4">
+                <div class="dot"></div>
+                    <span>b2</span>
+                </label>
+            </div>
+
+        
+        
+
+        
+        <div><button class="buttons">ok</button></div>
+
+    </div>
+    <div id="lab_info" class='addele' style="display:none">
+        <h4>subject and faculty:</h4>
+        <select name="sub_fac" id="sub_fac">
+            <option value="select">select</option>
+            <option value="select">webtechnologies()</option>
+            <option value="select">java(raghu)</option>
+        </select>
+        <h4>Lab: </h4>
+        <select name="lab" id="lab">
+            <option value="select">select</option>
+            <option value="select">B-1</option>
+            <option value="select">B-2</option>
+            <option value="select">B-3</option>
+        </select>
+    </div>
+    <div id="manual_info" class="addele" style="display: none">
+        <h4>Manual</h4>
+        <div class="manual-element">
+            <input type="text" name="manual type" id="manual-type">
+        </div>
+        <h4>Choose Batch(optional): </h4>
+        <div class="wrapper">
+            <input type="radio" name="select" id="option-1" checked>
+            <input type="radio" name="select" id="option-2">
+            <label for="option-1" class="option option-1">
+            <div class="dot"></div>
+                <span>b1</span>
+                </label>
+            <label for="option-2" class="option option-2">
+            <div class="dot"></div>
+                <span>b2</span>
+            </label>
+        </div>
+        
+    </div>
+
 </div>
-</div>
+{% comment %}  {% endcomment %}
 
 <div>
 <div><button id = "save">save</button></div>

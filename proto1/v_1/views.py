@@ -166,8 +166,7 @@ def insert_into_class_time_table(request):
     faculty = request.GET.get('faculty')
     print('faculty ', faculty)
     fac_query = faculty_table.objects.filter(id=faculty)
-    counter = 1 + list(fac_query.values('No_hrs_per_week')
-                       )[0].get('No_hrs_per_week')
+    counter = 1 + list(fac_query.values('No_hrs_per_week')[0].get('No_hrs_per_week'))  # type: ignore
 
     block = request.GET.get('block')
     room = request.GET.get('room')
@@ -281,6 +280,7 @@ def insert_into_class_time_table(request):
 
     else:
 
+<<<<<<< HEAD
         print("subject: {},faculty: {} ,weekday: {} , block: {}, room: {},branch: {}, section: {}, semester: {}, timing:{}, batch:{}, classtype:{}".format(
             subject, faculty, weekday, block, room, branch, section, semester, timing, batch, classtype))
 
@@ -311,6 +311,24 @@ def insert_into_class_time_table(request):
             fac_query.update(No_hrs_per_week=counter)
             class_time_table.objects.filter(id=check_if_query.values()[0]['id']).update(
                 subject_id_id=subject, faculty_id_id=faculty, Room_with_block=room, batch=batch, class_type=classtype)
+=======
+        if check_if_query.values('faculty_id')[0].get('faculty_id') != None:
+            prevFac_id = class_time_table.objects.filter(
+                branch=branch, section=section, semester=semester).values('faculty_id')
+            prevFac = faculty_table.objects.filter(
+                id=list(prevFac_id)[0].get('faculty_id'))
+            prevFac_count = list(prevFac.values('No_hrs_per_week'))[
+                0].get('No_hrs_per_week')
+            if list(fac_query.values('id'))[0].get('id') != prevFac_id:
+                prevFac_count -= 1  # type: ignore
+                counter -= 1
+                prevFac.update(No_hrs_per_week=prevFac_count)
+        # counter -= 1
+
+        fac_query.update(No_hrs_per_week=counter)
+        class_time_table.objects.filter(id=check_if_query.values()[0]['id']).update(
+            subject_id_id=subject, faculty_id_id=faculty)
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
 
     return "success"
 
@@ -354,7 +372,7 @@ def insert_into_lab_time_table(request):
     return "success lab"
 
 
-def delete(request):
+def delete(request):  # type: ignore
     branch = request.GET.get('branch')
     section = request.GET.get('section')
     semester = request.GET.get('semester')
@@ -373,7 +391,7 @@ def delete(request):
                 id=fac_id[0].get('faculty_id'))
             # print(updateCount.values('id','faculty_id','faculty_name'))
             updateCount.update(No_hrs_per_week=abs(
-                1-updateCount.values('No_hrs_per_week')[0].get('No_hrs_per_week')))
+                1-updateCount.values('No_hrs_per_week')[0].get('No_hrs_per_week')))  # type: ignore
             # print(fac_id)
 
             # delete at last otherwise values will change..
@@ -395,6 +413,64 @@ def delete(request):
 def HomePage(request):
     return render(request, 'HomePage.html')
 
+    lab = request.GET.get('lab')
+    no_of_hours = request.GET.get('no_of_hours')
+    subject = request.GET.get('subject')
+    faculty = request.GET.get('faculty')
+    
+
+    # block = request.GET.get('block')
+    # room = request.GET.get('room')
+  # compulsary for queriying...below values.......
+    weekday = request.GET.get('day')
+    branch = request.GET.get('branch')
+    section = request.GET.get('section')
+    semester = request.GET.get('semester')
+    timing = request.GET.get('timing')
+
+    print("subject: {},faculty: {} ,weekday: {},branch: {}, section: {}, semester: {}, timing:{}".format(subject,faculty,weekday,branch,section,semester,timing))
+
+    check_if_query = lab_time_table.objects.only('id').filter(branch = branch,section = section,semester = semester,week = weekday,time=timing)
+    if not check_if_query.exists():
+            insert_query = lab_time_table.objects.create(lab_id = lab,lab_course_id = subject,lab_faculty_id = faculty,week_id = weekday,time_id = timing,branch_id = branch,section_id=section,semester_id = semester,no_of_hours=no_of_hours)
+            insert_query.save()
+    else:
+        lab_time_table.objects.filter(id = check_if_query.values()[0]['id']).update(lab_id = lab,lab_course_id = subject,lab_faculty_id = faculty)
+
+    return "success"
+
+
+def delete(request):
+    branch = request.GET.get('branch')
+    section = request.GET.get('section')
+    semester = request.GET.get('semester')
+    time = request.GET.get('time')
+    week = request.GET.get('week')
+    print(branch,section,semester,time,week)
+    if request.GET.get('action') == "delete_class":
+        
+        queryDelete = class_time_table.objects.filter(branch = branch,section = section,semester = semester,timing_id_id = time,weekday_id_id = week )
+        print(queryDelete)
+        if queryDelete.exists():
+            fac_id = queryDelete.values('faculty_id')
+            # print(fac_id)
+            updateCount = faculty_table.objects.filter(id = fac_id[0].get('faculty_id'))
+            # print(updateCount.values('id','faculty_id','faculty_name'))
+            updateCount.update(No_hrs_per_week = abs(1-updateCount.values('No_hrs_per_week')[0].get('No_hrs_per_week')))  # type: ignore
+            # print(fac_id)
+
+            #delete at last otherwise values will change..
+            queryDelete.update(subject_id_id = None,faculty_id_id = None)
+            
+        
+        # updateCount = faculty_table.objects.filter(id = class_time_table.objects.filter(branch = branch,section = section,semester = semester,timing_id_id = time,weekday_id_id = week ).values('faculty_id')[0].get('faculty_id'))
+    elif request.GET.get('action') == "delete_lab":
+        queryDelete = lab_time_table.objects.filter(branch = branch,section = section,semester = semester,time_id= time,week_id = week ).update(lab_id = None,lab_course_id = None,lab_faculty_id = None)
+        
+        
+    # print(list(queryDelete))
+
+    return JsonResponse({"task":"success"})
 
 def testCheck(request):
     timings = Timings_table.objects.all().values()
@@ -437,12 +513,17 @@ def student_display(request):
     return render(request, 'student.html', val)
 
 
-def lab_display(request):
+def lab_display(request):  # type: ignore
     timings = Timings_table.objects.all().values()
     days = Week_table.objects.all().values()
     val = {"timings": timings, "days": days}
     return render(request, 'lab_display.html', val)
 
+def lab_display(request):
+    timings =Timings_table.objects.all().values()
+    days = Week_table.objects.all().values()
+    val = {"timings":timings,"days":days}
+    return render(request,'lab_display.html',val)
 
 def display_tables(request):
     if 'user' not in request.session:
@@ -479,7 +560,8 @@ def check_view(request):
 
 
 def styling_check(request):
-    return render(request, 'styling_check.html')
+    return render(request,'styling_check.html')
+
 
 
 def login(request):
@@ -499,7 +581,7 @@ def login(request):
             request.session['user'] = uname
             return redirect('lab_editor')
         else:
-            return HTTPResponse('Please enter valid username')
+            return HTTPResponse('Please enter valid username')  # type: ignore
 
     return render(request, 'Login.html')
 
@@ -510,3 +592,4 @@ def logout(request):
     except:
         return redirect('login')
     return redirect('login')
+

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
 .selected {
+<<<<<<< HEAD
     background: rgb(46, 167, 197);
 }
 .custom-select {
@@ -60,6 +61,13 @@
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+=======
+    background: aqua;
+}
+  
+.container {
+    display: flex;
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
 }
   
 .buttons {
@@ -85,7 +93,11 @@
     flex-direction: column;
 }
 
+<<<<<<< HEAD
 .wrapper, .wrapper1,.wrapper2{
+=======
+.wrapper, .wrapper1{
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
     display: inline-flex;
     /*background: #fff;*/
     height: 30px;
@@ -96,7 +108,11 @@
     padding: 20px 15px;
     /*box-shadow: 5px 5px 30px rgba(0,0,0,0.2);*/
   }
+<<<<<<< HEAD
   .wrapper .option, .wrapper1 .option, .wrapper2 .option{
+=======
+  .wrapper .option, .wrapper1 .option{
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
     background: #fff;
     height: 100%;
     width: 100%;
@@ -106,18 +122,30 @@
     margin: 0 10px;
     border-radius: 50px;
     cursor: pointer;
+<<<<<<< HEAD
     padding: 12 10px;
     border: 2px solid lightgrey;
     transition: all 0.3s ease;
   }
   .wrapper .option .dot, .wrapper1 .option .dot,.wrapper2 .option .dot{
+=======
+    padding: 0 10px;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
+  }
+  .wrapper .option .dot, .wrapper1 .option .dot{
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
     height: 12px;
     width: 12px;
     background: #d9d9d9;
     border-radius: 50%;
     position: relative;
   }
+<<<<<<< HEAD
   .wrapper .option .dot::before, .wrapper1 .option .dot::before,.wrapper2 .option .dot::before{
+=======
+  .wrapper .option .dot::before, .wrapper1 .option .dot::before{
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
     position: absolute;
     content: "";
     top: 3.25px;
@@ -136,44 +164,61 @@
   #option-1:checked:checked ~ .option-1,
   #option-2:checked:checked ~ .option-2,
   #option-3:checked:checked ~ .option-3,
+<<<<<<< HEAD
   #option-4:checked:checked ~ .option-4,
   #option-5:checked:checked ~ .option-5,
   #option-6:checked:checked ~ .option-6,
   #option-7:checked:checked ~ .option-7,
   #option-8:checked:checked ~ .option-8{
+=======
+  #option-4:checked:checked ~ .option-4{
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
     border-color: rgb(46, 167, 197);
     background: rgb(46, 167, 197);
   }
   #option-1:checked:checked ~ .option-1 .dot,
   #option-2:checked:checked ~ .option-2 .dot,
   #option-3:checked:checked ~ .option-3 .dot,
+<<<<<<< HEAD
   #option-4:checked:checked ~ .option-4 .dot,
   #option-5:checked:checked ~ .option-5 .dot,
   #option-6:checked:checked ~ .option-6 .dot,
   #option-7:checked:checked ~ .option-7 .dot,
   #option-8:checked:checked ~ .option-8 .dot{
+=======
+  #option-4:checked:checked ~ .option-4 .dot{
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
     background: #fff;
   }
   #option-1:checked:checked ~ .option-1 .dot::before,
   #option-2:checked:checked ~ .option-2 .dot::before,
   #option-3:checked:checked ~ .option-3 .dot::before,
+<<<<<<< HEAD
   #option-4:checked:checked ~ .option-4 .dot::before,
   #option-5:checked:checked ~ .option-5 .dot::before,
   #option-6:checked:checked ~ .option-6 .dot::before,
   #option-7:checked:checked ~ .option-7 .dot::before,
   #option-8:checked:checked ~ .option-8 .dot::before{
+=======
+  #option-4:checked:checked ~ .option-4 .dot::before{
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
     opacity: 1;
     transform: scale(1);
   }
   .wrapper .option span,
+<<<<<<< HEAD
   .wrapper1 .option span,
   .wrapper2 .option span{
+=======
+  .wrapper1 .option span{
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
     font-size: small;
     color: #808080;
   }
   #option-1:checked:checked ~ .option-1 span,
   #option-2:checked:checked ~ .option-2 span,
   #option-3:checked:checked ~ .option-3 span,
+<<<<<<< HEAD
   #option-4:checked:checked ~ .option-4 span,
   #option-5:checked:checked ~ .option-5 span,
   #option-6:checked:checked ~ .option-6 span,
@@ -182,3 +227,8 @@
     color: #fff;
   }
 
+=======
+  #option-4:checked:checked ~ .option-4 span{
+    color: #fff;
+  }
+>>>>>>> 340ae9dd337d72e3234f330401a7ff4e655d0c0b
