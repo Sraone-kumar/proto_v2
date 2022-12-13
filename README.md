@@ -128,6 +128,17 @@ Major points to remember:
 3. <strong>Any one can make the contributions</strong>, please fork the project and feel free to make the pull requests.
 4. <strong>HIGH IMPORTANCE: </strong> This project is not production ready!! There are many validations, security implementations that needs to be made before officially using it.
 
+<strong>PASSWORDS AND DATA</strong>
+1. The default login for <b>login page</b> is <strong>UserName: </strong>admin, <b>Password: </b>123456
+2. The default login for <b>dashboard</b> is <strong>UserName: </strong>root, <b>Password: </b>123456
+3. Go through the dashboard tables one by one observe the columns
+4. Some tables data can be directly uploaded using <b>csv files</b> in that case the column length and order of the columns should be strictly maintained. If possible try to keep the headings same as the one displayed.
+5. you can pretty much delete update and do whatever CRUD operations in this dashboard.<br>
+However <b>NOTE: </b> do not directly change the following tables:<br>
+    a. class_time_tables<br>
+    b. lab_time_tables<br>
+    c. Manual_class_rooms<br>
+
 <!-- CONSTRIBUTING -->
 
 ## Contributing
@@ -144,6 +155,18 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- CONTACT -->
+## Contact
+
+Name - [@sraone-kumar](https://github.com/Sraone-kumar/) -gmail: b18cs094@kitsw.ac.in
+
+Project Link: [https://github.com/Sraone-kumar/proto_v2](https://github.com/Sraone-kumar/proto_v2)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 
 
