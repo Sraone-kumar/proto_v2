@@ -124,7 +124,7 @@ To host the project in pythonanywhere follow this [tutorial](https://www.youtube
 <b>NOTE: </b> This project is still under development and testing phase and a lot of changes can be made in the future as per the requirements
 Major points to remember:
 1. As this project is just a <strong>prototype</strong>, play through it and see the different features that it provides.
-2. There may be some features that may be not working properly, please be patient as that will be fixed in the feature.
+2. There may be some features that may be not working properly, please be patient as that will be fixed in the future.
 3. <strong>Any one can make the contributions</strong>, please fork the project and feel free to make the pull requests.
 4. <strong>HIGH IMPORTANCE: </strong> This project is not production ready!! There are many validations, security implementations that needs to be made before officially using it.
 
